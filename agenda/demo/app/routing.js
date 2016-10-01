@@ -25,7 +25,13 @@ angular.module('demoApp')
         .state('myForm', {
             url : '/my-form',
             controller : 'demoFormCtrl',
-            templateUrl : "pages/demoform/demoFormView.html"
+            templateUrl : "pages/notification/demoFormView.html"
+        })
+
+        .state('notification', {
+            url : '/notification',
+            controller: 'notificationCtrl',
+            templateUrl : 'pages/notification/notificationView.html'
         })
 
 

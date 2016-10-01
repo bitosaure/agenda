@@ -9,5 +9,11 @@
   "description" : "Example how to use a form",
   "icon"        : "bug_report",
   "state"       : "myForm"
+},
+{
+  "name"        : "Notification",
+  "description" : "Route Notification. Show all user's notifications",
+  "icon"        : "email",
+  "state"       : "notification"
 }
 ]
