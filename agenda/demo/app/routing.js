@@ -22,10 +22,10 @@ angular.module('demoApp')
             templateUrl : "pages/demoEditor/demoEditorView.html"
         })
 
-        .state('myForm', {
-            url : '/my-form',
-            controller : 'demoFormCtrl',
-            templateUrl : "pages/notification/demoFormView.html"
+        .state('calendrier', {
+            url : '/calendrier',
+            controller : 'calendrierCtrl',
+            templateUrl : "pages/calendrier/calendrierView.html"
         })
 
         .state('notification', {

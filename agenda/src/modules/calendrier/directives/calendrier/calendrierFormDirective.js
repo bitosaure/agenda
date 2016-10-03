@@ -8,6 +8,8 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 user        : '=',
                 callback    : '=?'
             },link : function(scope){
+                scope.eventSources = [];
+                
 
                 /**
                  * 
