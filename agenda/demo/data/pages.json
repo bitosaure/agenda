@@ -15,5 +15,11 @@
   "description" : "Route Notification. Show all user's notifications",
   "icon"        : "email",
   "state"       : "notification"
-}
+},
+  {
+    "name"        : "Calendrier",
+    "description" : "Voici notre calendrier",
+    "icon"        : "email",
+    "state"       : "calendrier"
+  }
 ]
