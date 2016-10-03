@@ -13,6 +13,7 @@ angular.module('demoApp')
         $scope.showCode = function(){
             $scope.displayCode = !$scope.displayCode;
         };
+        
 
         /**
          * Page description
