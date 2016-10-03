@@ -1,7 +1,5 @@
 'use strict';
 
-'use strict';
-
 angular.module('demoApp')
     .controller('notificationCtrl', function($scope,$mdDialog){
 
