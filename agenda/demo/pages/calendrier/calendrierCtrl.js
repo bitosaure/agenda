@@ -4,9 +4,16 @@
 'use strict';
 
 angular.module('demoApp')
-    .controller('calendrierCtrl', function($scope){
+    .controller('calendrierCtrl', function($scope,$filter,$http,$q){
 
-        $scope.eventSources = [];
+        $scope.eventSources = [
+        ];
+
+
+
+
+
+
         
         
         // ----------------------------------------------------------------------------------------------------
