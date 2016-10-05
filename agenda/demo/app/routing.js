@@ -25,13 +25,18 @@ angular.module('demoApp')
         .state('calendrier', {
             url : '/calendrier',
             controller : 'calendrierCtrl',
-            templateUrl : "pages/calendrier/calendrierView.html"
+            templateUrl : "pages/calendrier/eventView.html"
         })
 
         .state('notification', {
             url : '/notification',
             controller: 'notificationCtrl',
             templateUrl : 'pages/notification/notificationView.html'
+        })
+        .state('event', {
+            url : '/event',
+            controller: 'eventCtrl',
+            templateUrl : 'pages/event/eventView.html'
         })
 
 

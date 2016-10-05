@@ -21,5 +21,11 @@
     "description" : "Voici notre calendrier",
     "icon"        : "email",
     "state"       : "calendrier"
+  },
+  {
+    "name"        : "Event",
+    "description" : "Evenements",
+    "icon"        : "event",
+    "state"       : "event"
   }
 ]
