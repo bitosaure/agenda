@@ -1,4 +1,3 @@
-<div flex-gt-sm="50" flex>
 
     <md-toolbar layout="row" class="md-hue-3">
         <div class="md-toolbar-tools">
@@ -9,9 +8,16 @@
     <md-content>
         <md-list flex>
 
-            <md-subheader class="md-no-sticky">Unreaded Notification</md-subheader>
 
-                <md-list-item class="md-2-line" ng-repeat="notification in notifications" ng-if="notification.dateRead == ''">
+            <md-subheader class="md-no-sticky">
+                <div layout="row"  layout-align="space-between center">
+                    <div>Unreaded Notification</div>
+                    <div><md-button class="md-primary" ng-click="changeVisibility(true)"><span ng-if="showUnreaded">Hide</span><span ng-if="!showUnreaded">Show</span></md-button></div>
+                </div>
+            </md-subheader>
+
+
+                <md-list-item class="md-2-line" ng-show="showUnreaded" ng-repeat="notification in notifications" ng-if="notification.dateRead == ''">
                     <img ng-src="https://cdn3.iconfinder.com/data/icons/mail-call/2126/envelopefancy-128.png" class="md-avatar" alt="" />
                     <div class="md-list-item-text">
                         <h3>{{notification.text}}</h3>
@@ -24,8 +30,15 @@
             <md-divider></md-divider>
 
 
-            <md-subheader class="md-no-sticky">Readed Notification</md-subheader>
-                <md-list-item class="md-2-line" ng-repeat="notification in notifications" ng-if="notification.dateRead != ''">
+            <md-subheader class="md-no-sticky">
+                <div layout="row"  layout-align="space-between center">
+                    <div>Readed Notification</div>
+                    <div><md-button class="md-primary" ng-click="changeVisibility(false)"><span ng-if="showReaded">Hide</span><span ng-if="!showReaded">Show</span></md-button></div>
+                </div>
+            </md-subheader>
+
+
+                <md-list-item class="md-2-line" ng-show="showReaded" ng-repeat="notification in notifications" ng-if="notification.dateRead != ''">
                     <img ng-src="https://cdn3.iconfinder.com/data/icons/mail-call/2126/envelopeopen-128.png" class="md-avatar" alt="" />
                     <div class="md-list-item-text">
                         <h3>{{notification.text}}</h3>
@@ -38,6 +51,3 @@
 </div>
 
 <md-divider></md-divider>
-
-
-</div>
