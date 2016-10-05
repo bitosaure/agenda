@@ -36,6 +36,13 @@ angular.module('eklabs.angularStarterPack.notification')
                         "dateSend" : "28/09/2016 11:56",
                         "recipient" : "Florian",
                         "text" : "Bienvenue sur AgenMiage !"
+                    },
+                    {
+                        "sender" : "",
+                        "dateRead" : "28/10/2016 12:22",
+                        "dateSend" : "28/10/2016 11:56",
+                        "recipient" : "Mickael",
+                        "text" : "Mickael est sur agenda !"
                     }
                 ];
 
