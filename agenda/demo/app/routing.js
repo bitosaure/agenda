@@ -25,7 +25,7 @@ angular.module('demoApp')
         .state('calendrier', {
             url : '/calendrier',
             controller : 'calendrierCtrl',
-            templateUrl : "pages/calendrier/eventView.html"
+            templateUrl : "pages/calendrier/calendrierView.html"
         })
 
         .state('notification', {

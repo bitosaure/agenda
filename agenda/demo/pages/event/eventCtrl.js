@@ -6,8 +6,7 @@
 angular.module('demoApp')
     .controller('eventCtrl', function($scope,$filter,$http,$q){
 
-        $scope.eventSources = [
-        ];
+        
 
 
 
