@@ -42,6 +42,21 @@
 
             <md-divider></md-divider>
 
+            <md-subheader class="md-no-sticky"> Readed notification </md-subheader>
+
+             <input type="text" ngmodel="test2"></p>
+             <ng-list-item class="md-2-line" ng-repeat="notification in notifications | filter : test2" ng-if="notification".dataRead !=''">
+
+             <img ng-src="https...." class="md-avatar" alt="" />
+                  <div class="md-list-item-text">
+                <h3>{{notification.text}}</h3>
+                <p><span ng-if="notification.sender != ''"> de {{ notification.sender}},</span> Le {{notification.dataSend | date :format :t </p>
+
+             </div>
+            </ng-list-item>
+
+
+
 
             <md-subheader class="md-no-sticky">
                 <div layout="row"  layout-align="space-between center">
