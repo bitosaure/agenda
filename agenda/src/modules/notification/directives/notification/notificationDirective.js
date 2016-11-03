@@ -8,6 +8,26 @@ angular.module('eklabs.angularStarterPack.notification')
 
             },link : function(scope){
 
+                scope.showUnreaded = true;
+                scope.showReaded = false;
+
+                scope.changeVisibility = function(b) {
+
+                    //Si b est égal à true, on se focalise sur les notifications non vue
+                    if(b){
+                        if(scope.showUnreaded)
+                            scope.showUnreaded = false;
+                        else
+                            scope.showUnreaded = true;
+                    }else{
+                        if(scope.showReaded)
+                            scope.showReaded = false;
+                        else
+                            scope.showReaded = true;
+                    }
+
+                };
+
                 scope.notifications = [
                     {
                         "sender" : "Bitosaur",
@@ -36,6 +56,13 @@ angular.module('eklabs.angularStarterPack.notification')
                         "dateSend" : "28/09/2016 11:56",
                         "recipient" : "Florian",
                         "text" : "Bienvenue sur AgenMiage !"
+                    },
+                    {
+                        "sender" : "",
+                        "dateRead" : "28/10/2016 12:22",
+                        "dateSend" : "28/10/2016 11:56",
+                        "recipient" : "Mickael",
+                        "text" : "Mickael est sur agenda !"
                     }
                 ];
 
