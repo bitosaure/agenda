@@ -1,25 +1,18 @@
 
-    <md-toolbar layout="row" class="md-hue-3">
-        <div class="md-toolbar-tools">
-            <span>Notifications</span>
-        </div>
+    <md-toolbar class="md-accent">
+        <h2 class="md-toolbar-tools">
+            <span flex>Notifications</span>
+
+            <md-input-container>
+                <input ng-model="query">
+                <md-icon md-svg-icon="material-design:search" aria-label="search"></md-icon>
+            </md-input-container>
+        </h2>
+
     </md-toolbar>
 
     <md-content>
         <md-list flex>
-
-            <md-subheader class="md-no-sticky"> UnReaded notification </md-subheader>
-
-            <input type="text" ngmodel="test2"></p>
-            <ng-list-item class="md-2-line" ng-repeat="notification in notifications | filter : test2" ng-if="notification".dataRead ==''">
-
-                <img ng-src="https...." class="md-avatar" alt="" />
-                <div class="md-list-item-text">
-                    <h3>{{notification.text}}</h3>
-                    <p><span ng-if="notification.sender != ''"> de {{ notification.sender}},</span> Le {{notification.dataSend | date :format :t </p>
-
-                </div>
-            </ng-list-item>
 
 
             <md-subheader class="md-no-sticky">
@@ -29,10 +22,9 @@
                 </div>
             </md-subheader>
 
-
-                <md-list-item class="md-2-line" ng-show="showUnreaded" ng-repeat="notification in notifications" ng-if="notification.dateRead == ''">
+                <md-list-item class="md-2-line" ng-show="showUnreaded" ng-repeat="notification in notifications  | filter : query" ng-if="notification.dateRead == ''">
                     <img ng-src="https://cdn3.iconfinder.com/data/icons/mail-call/2126/envelopefancy-128.png" class="md-avatar" alt="" />
-                    <b class="md-list-item-text">
+                    <div class="md-list-item-text">
                        <b><h3>{{notification.text}}</h3></b>
                         <p><span ng-if="notification.sender != ''">De {{notification.sender}}, </span>Le {{notification.dateSend | date : format : timezone}}</p>
                     </div>
@@ -41,21 +33,6 @@
 
 
             <md-divider></md-divider>
-
-            <md-subheader class="md-no-sticky"> Readed notification </md-subheader>
-
-             <input type="text" ngmodel="test2"></p>
-             <ng-list-item class="md-2-line" ng-repeat="notification in notifications | filter : test2" ng-if="notification".dataRead !=''">
-
-             <img ng-src="https...." class="md-avatar" alt="" />
-                  <div class="md-list-item-text">
-                <h3>{{notification.text}}</h3>
-                <p><span ng-if="notification.sender != ''"> de {{ notification.sender}},</span> Le {{notification.dataSend | date :format :t </p>
-
-             </div>
-            </ng-list-item>
-
-
 
 
             <md-subheader class="md-no-sticky">
@@ -66,7 +43,7 @@
             </md-subheader>
 
 
-                <md-list-item class="md-2-line" ng-show="showReaded" ng-repeat="notification in notifications" ng-if="notification.dateRead != ''">
+                <md-list-item class="md-2-line" ng-show="showReaded" ng-repeat="notification in notifications  | filter : query" ng-if="notification.dateRead != ''">
                     <img ng-src="https://cdn3.iconfinder.com/data/icons/mail-call/2126/envelopeopen-128.png" class="md-avatar" alt="" />
                     <div class="md-list-item-text">
                         <h3>{{notification.text}}</h3>
