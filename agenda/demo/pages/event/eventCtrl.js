@@ -23,7 +23,7 @@ angular.module('demoApp')
             /**
              * Default
              */
-            case       : 'Default Case',
+            case       : 'Liste des événements',
             options    : undefined,
             json       : undefined,
             callback   : undefined,
@@ -32,7 +32,7 @@ angular.module('demoApp')
             /**
              * Case JSON
              */
-            case       : 'Case inject Json',
+            case       : 'Afficher un événement',
             options    : undefined,
             json       : {"hello" : "world"},
             callback   : undefined,
@@ -42,7 +42,7 @@ angular.module('demoApp')
             /**
              * Callback active
              */
-            case       : 'Case Callback and Function',
+            case       : 'Créer un événement',
             options    : undefined,
             json       : undefined,
             callback   : {

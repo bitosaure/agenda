@@ -12,20 +12,6 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 var d = date.getDate();
                 var m = date.getMonth();
                 var y = date.getFullYear();
-                scope.eventSources =[];
-                scope.eventSource = {
-                    url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-                    className: 'gcal-event',           // an option!
-                    currentTimezone: 'America/Chicago' // an option!
-                };
-                /*
-                scope.eventsF = function (start, end, timezone, callback) {
-                    var s = new Date(start).getTime() / 1000;
-                    var e = new Date(end).getTime() / 1000;
-                    var m = new Date(start).getMonth();
-                    var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
-                    callback(events);
-                };*/
 
                 scope.calEventsExt = {
                     color: '#f00',
@@ -43,6 +29,8 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     {title: 'Birthday Party',start: new Date(2016, 11, 25+ 1, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
                     {title: 'Click for Google',start: new Date(2016, 11, 28),end: new Date(2016, 11, 29),url: 'http://google.com/'}
                 ];
+                scope.eventSources= [scope.events];
+
                 scope.changeTo = 'French';
 
                 /* Change View */

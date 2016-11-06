@@ -8,14 +8,14 @@ gen_docs.disable
 test.disable
 regression/temp*.html
 performance/temp*.html
-/.idea/workspace.xml
+.idea/workspace.xml
 *~
 *.swp
 angular.js.tmproj
 /node_modules/
 bower_components/
 angular.xcodeproj
-/.idea
+.idea
 *.iml
 .agignore
 .lvimrc
