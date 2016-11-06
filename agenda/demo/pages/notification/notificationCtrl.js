@@ -3,7 +3,75 @@
 angular.module('demoApp')
     .controller('notificationCtrl', function($scope,$mdDialog){
 
+        // ----------------------------------------------------------------------------------------------------
+        // ---- PARAMS CATALOGUE
+        // ----------------------------------------------------------------------------------------------------
 
+        $scope.params = [{
+            /**
+             * Default
+             */
+            case       : 'Default Case',
+            options    : undefined,
+            json       : undefined,
+            callback   : undefined,
+            listeners  : undefined
+        },{
+            /**
+             * Case JSON
+             */
+            case       : 'Case inject Json',
+            options    : undefined,
+            json       : {"hello" : "world"},
+            callback   : undefined,
+            listeners  : undefined
+
+        },{
+            /**
+             * Callback active
+             */
+            case       : 'Case Callback and Function',
+            options    : undefined,
+            json       : undefined,
+            callback   : {
+                valid : function(json){
+                    displayCode('Callback : valid',json);
+                }
+            },
+            listeners  : {
+                onError : function(errors){
+                    displayCode('Listeners : onError',errors,true);
+                }
+            }
+        }];
+
+        $scope.chooseParams = function(index){
+            // --- Define current status
+            $scope.myOptions    = $scope.params[index].options;
+            $scope.myJson       = $scope.params[index].json;
+            $scope.myCallback   = $scope.params[index].callback;
+            $scope.myListener   = $scope.params[index].listeners;
+
+            $scope.index          = index;
+            $scope.refresh        = moment().valueOf();
+            $scope.haveResult     = false;
+        };
+
+        // --- Init
+        $scope.chooseParams(0);
+
+        // --- Update result viewer
+        var displayCode = function(from,code,isError){
+
+            $scope.haveResult   = true;
+
+            $scope.result       = {
+                code : code,
+                isError : isError,
+                title : from
+            };
+        };
+        
         // ----------------------------------------------------------------------------------------------------
         // ---- DISPLAY CODE MODE
         // ----------------------------------------------------------------------------------------------------
