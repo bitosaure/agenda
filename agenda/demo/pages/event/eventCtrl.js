@@ -4,7 +4,15 @@
 'use strict';
 
 angular.module('demoApp')
-    .controller('calendrierCtrl', function($scope,$filter,$http,$q){
+    .controller('eventCtrl', function($scope,$filter,$http,$q){
+
+        
+
+
+
+
+
+
         
         
         // ----------------------------------------------------------------------------------------------------
@@ -17,7 +25,6 @@ angular.module('demoApp')
              */
             case       : 'Default Case',
             options    : undefined,
-            eventSources : undefined,
             json       : undefined,
             callback   : undefined,
             listeners  : undefined
@@ -27,13 +34,7 @@ angular.module('demoApp')
              */
             case       : 'Case inject Json',
             options    : undefined,
-            eventSources: [
-                {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
-                {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
-                {title: 'Birthday Party',start: new Date(2016, 11, 25+ 1, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
-                {title: 'Click for Google',start: new Date(2016, 11, 28),end: new Date(2016, 11, 29),url: 'http://google.com/'}
-            ],
-            //json       : {"hello" : "world"},
+            json       : {"hello" : "world"},
             callback   : undefined,
             listeners  : undefined
 
@@ -55,10 +56,9 @@ angular.module('demoApp')
                 }
             }
         }];
-        console.log($scope);
+
         $scope.chooseParams = function(index){
             // --- Define current status
-            $scope.events       = $scope.params[index].eventSources;
             $scope.myOptions    = $scope.params[index].options;
             $scope.myJson       = $scope.params[index].json;
             $scope.myCallback   = $scope.params[index].callback;
@@ -83,15 +83,6 @@ angular.module('demoApp')
                 title : from
             };
         };
-        $scope.events = [];
-        $scope.events.push([
-            {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
-            {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
-            {title: 'Birthday Party',start: new Date(2016, 11, 25+ 1, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
-            {title: 'Click for Google',start: new Date(2016, 11, 28),end: new Date(2016, 11, 29),url: 'http://google.com/'}
-        ]);
-        //console.log($scope.events);
-        //console.log($scope.params);
         // ----------------------------------------------------------------------------------------------------
         // ---- DISPLAY CODE MODE
         // ----------------------------------------------------------------------------------------------------
@@ -107,16 +98,16 @@ angular.module('demoApp')
          * @type {{title: string, icon: string, haveCodeSource: boolean}}
          */
         $scope.page         = {
-            title : 'directive calendrier',
+            title : 'directive json-editor',
             haveCodeSource : true,
             code : [{
-                link : 'pages/calendrier/code/directive.html',
+                link : 'pages/demoEditor/code/directive.html',
                 language : 'html',
-                title : 'Code HTML de la directive calendrier'
+                title : 'Code HTML de la directive demo-json-editor'
             },{
-                link : 'pages/calendrier/code/contract.json',
+                link : 'pages/demoEditor/code/contract.json',
                 language : 'json',
-                title : 'Params available for the directive calendrier'
+                title : 'Params available for the directive demo-json-editor'
             }]
         };
 

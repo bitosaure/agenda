@@ -1,67 +1,58 @@
-<div flex-gt-sm="50" flex>
 
-    <md-toolbar layout="row" class="md-hue-3">
-        <div class="md-toolbar-tools">
-            <span>Notification</span>
-        </div>
+    <md-toolbar class="md-accent">
+        <h2 class="md-toolbar-tools">
+            <span flex>Notifications</span>
+
+            <md-input-container>
+                <input ng-model="query">
+                <md-icon md-svg-icon="material-design:search" aria-label="search"></md-icon>
+            </md-input-container>
+        </h2>
+
     </md-toolbar>
 
     <md-content>
         <md-list flex>
 
-            <md-subheader class="md-no-sticky">Unreaded Notification</md-subheader>
 
-            <a href="#" style="text-decoration: none;">
-                <md-list-item class="md-2-line">
+            <md-subheader class="md-no-sticky">
+                <div layout="row"  layout-align="space-between center">
+                    <div>Unreaded Notification</div>
+                    <div><md-button class="md-primary" ng-click="changeVisibility(true)"><span ng-if="showUnreaded">Hide</span><span ng-if="!showUnreaded">Show</span></md-button></div>
+                </div>
+            </md-subheader>
+
+                <md-list-item class="md-2-line" ng-show="showUnreaded" ng-repeat="notification in notifications  | filter : query" ng-if="notification.dateRead == ''">
                     <img ng-src="https://cdn3.iconfinder.com/data/icons/mail-call/2126/envelopefancy-128.png" class="md-avatar" alt="" />
                     <div class="md-list-item-text">
-                        <h3>Bitosaur vous invite à rejoindre un évènement</h3>
-                        <p>Le membre Bitosaur vous invite à rejoindre l'évènement "DM de Web"</p>
+                       <b><h3>{{notification.text}}</h3></b>
+                        <p><span ng-if="notification.sender != ''">De {{notification.sender}}, </span>Le {{notification.dateSend | date : format : timezone}}</p>
                     </div>
                 </md-list-item>
-            </a>
 
-            <a href="#" style="text-decoration: none;">
-                <md-list-item class="md-2-line">
-                    <img ng-src="https://cdn3.iconfinder.com/data/icons/mail-call/2126/envelopefancy-128.png" class="md-avatar" alt="" />
-                    <div class="md-list-item-text">
-                        <h3>Eddie vous invite à rejoindre un évènement</h3>
-                        <p>Le membre Eddie vous invite à rejoindre l'évènement "BBQ chez moi"</p>
-                    </div>
-                </md-list-item>
-            </a>
-
-            <a href="#" style="text-decoration: none;">
-                <md-list-item class="md-2-line">
-                    <img ng-src="https://cdn3.iconfinder.com/data/icons/mail-call/2126/envelopefancy-128.png" class="md-avatar" alt="" />
-                    <div class="md-list-item-text">
-                        <h3>Emilie vous invite à rejoindre un évènement</h3>
-                        <p>Le membre Emilie vous invite à rejoindre l'évènement "Nouvel an !!!"</p>
-                    </div>
-                </md-list-item>
-            </a>
 
 
             <md-divider></md-divider>
 
 
-            <md-subheader class="md-no-sticky">Readed Notification</md-subheader>
-            <a href="#" style="text-decoration: none;">
-                <md-list-item class="md-2-line">
+            <md-subheader class="md-no-sticky">
+                <div layout="row"  layout-align="space-between center">
+                    <div>Readed Notification</div>
+                    <div><md-button class="md-primary" ng-click="changeVisibility(false)"><span ng-if="showReaded">Hide</span><span ng-if="!showReaded">Show</span></md-button></div>
+                </div>
+            </md-subheader>
+
+
+                <md-list-item class="md-2-line" ng-show="showReaded" ng-repeat="notification in notifications  | filter : query" ng-if="notification.dateRead != ''">
                     <img ng-src="https://cdn3.iconfinder.com/data/icons/mail-call/2126/envelopeopen-128.png" class="md-avatar" alt="" />
                     <div class="md-list-item-text">
-                        <h3>Bienvenue sur AgenMiage</h3>
-                        <p>Nous vous souhaitons la bienvenue sur AgenMiage !</p>
+                        <h3>{{notification.text}}</h3>
+                        <p><span ng-if="notification.sender != ''">De {{notification.sender}}, </span>Le {{notification.dateSend | date : format : timezone}}</p>
                     </div>
                 </md-list-item>
-            </a>
-
 
         </md-list>
     </md-content>
 </div>
 
 <md-divider></md-divider>
-
-
-</div>

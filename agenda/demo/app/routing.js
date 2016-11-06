@@ -22,16 +22,21 @@ angular.module('demoApp')
             templateUrl : "pages/demoEditor/demoEditorView.html"
         })
 
-        .state('myForm', {
-            url : '/my-form',
-            controller : 'demoFormCtrl',
-            templateUrl : "pages/notification/demoFormView.html"
+        .state('calendrier', {
+            url : '/calendrier',
+            controller : 'calendrierCtrl',
+            templateUrl : "pages/calendrier/calendrierView.html"
         })
 
         .state('notification', {
             url : '/notification',
             controller: 'notificationCtrl',
             templateUrl : 'pages/notification/notificationView.html'
+        })
+        .state('event', {
+            url : '/event',
+            controller: 'eventCtrl',
+            templateUrl : 'pages/event/eventView.html'
         })
 
 

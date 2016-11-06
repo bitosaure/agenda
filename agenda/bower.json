@@ -7,7 +7,6 @@
     "url": "https://github.com/Kiwouz/eklabs.angularStarterPack"
   },
   "dependencies": {
-
     "angular": "~1.5.8",
     "jquery": "~2.1",
     "moment": "~2.11.1",
@@ -17,7 +16,8 @@
     "angular-ui-ace": "bower",
     "angular-local-storage": "~0.2.2",
     "ng-file-upload": "~9.0.7",
-    "angular-ui-calendar": "^1.0.2"
+    "angular-ui-calendar": "^1.0.2",
+    "material-calendar": "^0.2.14"
   },
   "devDependencies": {
     "angular-ui-router": "~0.2.15",

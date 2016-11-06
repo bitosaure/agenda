@@ -13,6 +13,7 @@ angular.module('demoApp')
         $scope.showCode = function(){
             $scope.displayCode = !$scope.displayCode;
         };
+        
 
         /**
          * Page description
@@ -40,5 +41,11 @@ angular.module('demoApp')
         $scope.fullScreen = function(){
             $scope.hideParams = !$scope.hideParams;
         };
+
+
+        /**
+         *
+         *
+         */
 
     });
