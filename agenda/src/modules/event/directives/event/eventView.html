@@ -1,7 +1,7 @@
-<form name="event" ng-submit="actions.onValid(myUser)">
+
 
     <div layout="column" >
-        <md-input-container >
+        <!--<md-input-container >
             <label>FirstName</label>
             <input name="name" ng-model="myUser.firstname" />
         </md-input-container>
@@ -9,14 +9,13 @@
         <md-input-container >
             <label>LastName</label>
             <input name="name" ng-model="myUser.lastname" />
-        </md-input-container>
+        </md-input-container>-->
+        <md-list ng-init="myStyle={'margin-bottom': '20px'}; isBlured = true">
+            <md-list-item ng-repeat="i in [1, 2, 3, 4, 5, 6, 7]" class="md-2-line" md-colors="isBlured === true ? {backgroundColor: 'default-primary-700'} : {backgroundColor: 'grey'}" ng-style="myStyle" ng-mouseover="isBlured = false" ng-mouseleave="isBlured = true">
+                <div class="md-list-item-text">
+                    <h3>Test Event {{i}}</h3>
+                    <p>30 Septembre 2016 15h50 - 2 Octobre 2016 12h00</p>
+                </div>
+            </md-list-item>
+        </md-list>
     </div>
-
-
-    <md-button type="submit">
-        <md-icon md-svg-src="material-design:done"></md-icon>
-        Valider
-    </md-button>
-
-
-</form>
