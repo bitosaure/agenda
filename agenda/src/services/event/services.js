@@ -2,6 +2,7 @@
 
 angular.module('eklabs.angularStarterPack.event')
     .service("eventService", function(params){
+
         this.createEvent = function(params){};
         this.updateEvent = function(params){};
         this.deleteEvent = function(params){};
@@ -12,4 +13,5 @@ angular.module('eklabs.angularStarterPack.event')
         this.acceptInvitation = function(params){};
         this.refuseInvitation = function(params){};
         this.getEvent = function(params){};
+        
 });
