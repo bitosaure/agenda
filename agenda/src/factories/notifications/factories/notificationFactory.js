@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eklabs.angularStarterPack.notifications')
+angular.module('eklabs.angularStarterPack.notification')
     .factory('notifications', function(eventObj) {
         return {
             "sender": eventObj.sender,
