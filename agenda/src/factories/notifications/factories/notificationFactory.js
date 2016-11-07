@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.notification')
-    .factory('notifications', function(eventObj) {
+    .factory('notification', function(notifObj) {
         return {
-            "sender": eventObj.sender,
-            "dateRead" : eventObj.dateRead,
-            "dateSend" : eventObj.dateSend,
-            "location" : eventObj.location,
-            "recipient" : eventObj.recipient,
-            "text" : eventObj.text,
+            "sender": notifObj.sender,
+            "dateRead" : notifObj.dateRead,
+            "dateSend" : notifObj.dateSend,
+            "location" : notifObj.location,
+            "recipient" : notifObj.recipient,
+            "text" : notifObj.text,
         }
     });
