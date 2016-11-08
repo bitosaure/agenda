@@ -8,6 +8,11 @@ angular.module('eklabs.angularStarterPack')
         return {
             get: function (name) {
                 return parameters[name];
+            },
+            getCalendar : function() {
+                //return parameters[calendarDev]; // Config pour la dev
+                return parameters[calendar]; // Config de prod
             }
+            
         }
     }]);
