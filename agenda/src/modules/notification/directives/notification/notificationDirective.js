@@ -28,7 +28,7 @@ angular.module('eklabs.angularStarterPack.notification')
 
                 };
 
-                scope.notifications = notification.loadNotifications();
+                scope.notifications = notification.getNotifications();
 
 
             }
