@@ -44,6 +44,12 @@ angular.module('demoApp')
             case       : 'Case Callback and Function',
             options    : undefined,
             json       : undefined,
+            eventSources: [
+                {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
+                {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
+                {title: 'Birthday Party',start: new Date(2016, 11, 25+ 1, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
+                {title: 'Click for Google',start: new Date(2016, 11, 28),end: new Date(2016, 11, 29),url: 'http://google.com/'}
+            ],
             callback   : {
                 valid : function(json){
                     displayCode('Callback : valid',json);
@@ -58,6 +64,7 @@ angular.module('demoApp')
         console.log($scope);
         $scope.chooseParams = function(index){
             // --- Define current status
+
             $scope.events       = $scope.params[index].eventSources;
             $scope.myOptions    = $scope.params[index].options;
             $scope.myJson       = $scope.params[index].json;
@@ -67,6 +74,7 @@ angular.module('demoApp')
             $scope.index          = index;
             $scope.refresh        = moment().valueOf();
             $scope.haveResult     = false;
+            console.log($scope.events);
         };
 
         // --- Init
@@ -83,13 +91,7 @@ angular.module('demoApp')
                 title : from
             };
         };
-        $scope.events = [];
-        $scope.events.push([
-            {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
-            {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
-            {title: 'Birthday Party',start: new Date(2016, 11, 25+ 1, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
-            {title: 'Click for Google',start: new Date(2016, 11, 28),end: new Date(2016, 11, 29),url: 'http://google.com/'}
-        ]);
+
         //console.log($scope.events);
         //console.log($scope.params);
         // ----------------------------------------------------------------------------------------------------
