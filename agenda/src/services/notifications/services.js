@@ -5,7 +5,7 @@ angular.module('demoApp')
 
         this.loadNotifications = function () {
 
-            $http.get('http://91.134.241.60:3080/ressources/Event/notification').then(function(response){
+            $http.get('91.134.241.60:3080/ressources/Event/notification').then(function(response){
                 return response.data;
             });
 
