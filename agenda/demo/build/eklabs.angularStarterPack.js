@@ -579,7 +579,7 @@ angular.module('eklabs.angularStarterPack.notification')
 
                 };
 
-                scope.notifications = notification.loadNotifications();
+                scope.notifications = notification.getNotifications();
 
 
             }
@@ -730,45 +730,61 @@ angular.module('eklabs.angularStarterPack.event')
 angular.module('demoApp')
     .service('notification', function() {
 
-        this.loadNotifications = function () {
-            return [
-                {
-                    "sender" : "Bitosaur",
-                    "dateRead" : "",
-                    "dateSend" : "03/10/2016 02:33",
-                    "recipient" : "Florian",
-                    "text" : "Bitosaur vous invite à rejoindre l'évènement 'DM de Web'"
-                },
-                {
-                    "sender" : "Eddie",
-                    "dateRead" : "",
-                    "dateSend" : "02/10/2016 16:01",
-                    "recipient" : "Florian",
-                    "text" : "Eddie vous invite à rejoindre l'évènement 'BBQ chez moi'"
-                },
-                {
-                    "sender" : "Emilie",
-                    "dateRead" : "",
-                    "dateSend" : "01/10/2016 08:56",
-                    "recipient" : "Florian",
-                    "text" : "Emilie vous invite à rejoindre l'évènement 'Nouvel an'"
-                },
-                {
-                    "sender" : "",
-                    "dateRead" : "28/09/2016 12:22",
-                    "dateSend" : "28/09/2016 11:56",
-                    "recipient" : "Florian",
-                    "text" : "Bienvenue sur AgenMiage !"
-                },
-                {
-                    "sender" : "",
-                    "dateRead" : "28/10/2016 12:22",
-                    "dateSend" : "28/10/2016 11:56",
-                    "recipient" : "Mickael",
-                    "text" : "Mickael est sur agenda !"
-                }
-            ];
+        this.getNotifications = function () {
+            $http.get('91.134.241.60:3080/ressources/Event/notification').then(function(response){
+                return response.data;
+            });
+        };
+
+        this.readNotification = function(idNotif) {
+            $http.post('91.134.241.60:3080/ressources/Event/notification/'+idNotif).then(function(response){
+                return response.data;
+            });
+        };
+
+
+
+
+
+
+
+    });
+/**
+ * Created by maximer on 06/11/16.
+ */
+
+'use strict';
+
+angular.module('eklabs.angularStarterPack.event')
+    .factory('event', function(eventObj) {
+    return {
+        "name": eventObj.name,
+        "image" : eventObj.image,
+        "description" : eventObj.description,
+        "location" : eventObj.location,
+        "startDate" : eventObj.startDate,
+        "endDate" : eventObj.endDate,
+        "organizer" : eventObj.organizer,
+        "eventStatus" : eventObj.eventStatus,
+        "attendee" : eventObj.attendee,
+        "visibility" : eventObj.visibility
+    }
+});
+
+/**
+ * Created by maximer on 03/10/16.
+ */
+
+'use strict';
+
+angular.module('eklabs.angularStarterPack.notification')
+    .factory('notification', function(notifObj) {
+        return {
+            "sender": notifObj.sender,
+            "dateRead" : notifObj.dateRead,
+            "dateSend" : notifObj.dateSend,
+            "location" : notifObj.location,
+            "recipient" : notifObj.recipient,
+            "text" : notifObj.text,
         }
-
-
     });

@@ -2,7 +2,7 @@ angular.module('eklabs.angularStarterPack').run(['$templateCache', function($tem
   'use strict';
 
   $templateCache.put('eklabs.angularStarterPack/modules/calendrier/directives/calendrier/calendrierFormView.html',
-    "<div ui-calendar=\"uiConfig.calendar\" class=\"span8 calendar\" ng-model=\"eventSources\" class=\"calendar-container\"></div>\r" +
+    "<div ui-calendar=\"uiConfig.calendar\" class=\"span8 calendar\" ng-model=\"eventSources\" ></div>\r" +
     "\n" +
     "<li ng-repeat=\"e in eventSources\">\r" +
     "\n" +
