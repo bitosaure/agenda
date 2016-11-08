@@ -8,41 +8,87 @@
   "startDate" : "25/11/2016 16H00",
   "endDate" : "25/11/2016 18H00",
   "organizer" : {
-                  "@context" : "http://Schema.org/",
-                  "@type" : "Person",
-                  "email" : "maxime.ravoisier@yahoo.fr",
-                  "familyName" : "Ravoisier",
-                  "givenName" : "Maxime",
-                  "birthDate" : "10/12/1992",
-                  "address" : "44 rue benoit malon, 92800 Puteaux",
-                  "telephone" : "0683919143"
-                },
+    "@context" : "http://Schema.org/",
+    "@type" : "Person",
+    "email" : "maxime.ravoisier@yahoo.fr",
+    "familyName" : "Ravoisier",
+    "givenName" : "Maxime",
+    "birthDate" : "10/12/1992",
+    "address" : "44 rue benoit malon, 92800 Puteaux",
+    "telephone" : "0683919143"
+  },
   "eventStatus" : {
-                  "@context" : "http://Schema.org/",
-                  "@type" : "EventStatusType",
-                  "name" : "Open"
-                  },
+    "@context" : "http://Schema.org/",
+    "@type" : "EventStatusType",
+    "name" : "Open"
+  },
   "attendee" : [{
-                  "@context" : "http://Schema.org/",
-                  "@type" : "Person",
-                  "email" : "eddie.madeva77@hotmail.fr",
-                  "familyName" : "Madeva",
-                  "givenName" : "Eddie",
-                  "birthDate" : "03/05/1995",
-                  "address" : "38 rue PAsteur, 77240 Vert-Saint-Denis",
-                  "telephone" : "0636950503"
-                  },
-                  {
-                  "@context" : "http://Schema.org/",
-                  "@type" : "Person",
-                  "email" : "florianbesnard@yahoo.com",
-                  "familyName" : "Besnard",
-                  "givenName" : "Florian",
-                  "birthDate" : "02/08/1995",
-                  "address" : "55 Rue du Faubourg Saint-Honoré, 75008 Paris",
-                  "telephone" : "0102030405"
-  }],
+    "@context" : "http://Schema.org/",
+    "@type" : "Person",
+    "email" : "eddie.madeva77@hotmail.fr",
+    "familyName" : "Madeva",
+    "givenName" : "Eddie",
+    "birthDate" : "03/05/1995",
+    "address" : "38 rue PAsteur, 77240 Vert-Saint-Denis",
+    "telephone" : "0636950503"
+  },
+    {
+      "@context" : "http://Schema.org/",
+      "@type" : "Person",
+      "email" : "florianbesnard@yahoo.com",
+      "familyName" : "Besnard",
+      "givenName" : "Florian",
+      "birthDate" : "02/08/1995",
+      "address" : "55 Rue du Faubourg Saint-Honoré, 75008 Paris",
+      "telephone" : "0102030405"
+    }],
   "visibility" : "public"
+},
+  {
+    "@context" : "http://Schema.org/",
+    "@type" : "Event",
+    "name": "Reunion Projet Stats",
+    "image" : "http://www.ecolemarcelcallo.com/wordpress/images/baguette_viennoise_fendue_spciale_gouter_avec_de_la_pate__tratiner_au_chocolat__039425200_1100_18122007.jpg",
+    "description" : "travailler le projet ",
+    "location" : "90 Rue de Tolbiac, 75013 Paris",
+    "startDate" : "08/11/2016 16H00",
+    "endDate" : "09/11/2016 18H00",
+    "organizer" : {
+      "@context" : "http://Schema.org/",
+      "@type" : "Person",
+      "email" : "emilie.pisu@gmail.com",
+      "familyName" : "Pisu",
+      "givenName" : "Emilie",
+      "birthDate" : "16/05/1995",
+      "address" : "15 rue des vignes",
+      "telephone" : "0611111111"
+    },
+    "eventStatus" : {
+      "@context" : "http://Schema.org/",
+      "@type" : "EventStatusType",
+      "name" : "Open"
+    },
+    "attendee" : [{
+      "@context" : "http://Schema.org/",
+      "@type" : "Person",
+      "email" : "eddie.madeva77@hotmail.fr",
+      "familyName" : "Madeva",
+      "givenName" : "Eddie",
+      "birthDate" : "03/05/1995",
+      "address" : "38 rue PAsteur, 77240 Vert-Saint-Denis",
+      "telephone" : "0636950503"
+    },
+      {
+        "@context" : "http://Schema.org/",
+        "@type" : "Person",
+        "email" : "florianbesnard@yahoo.com",
+        "familyName" : "Besnard",
+        "givenName" : "Florian",
+        "birthDate" : "02/08/1995",
+        "address" : "55 Rue du Faubourg Saint-Honoré, 75008 Paris",
+        "telephone" : "0102030405"
+      }],
+    "visibility" : "public"
   },
   {
     "@context" : "http://Schema.org/",
