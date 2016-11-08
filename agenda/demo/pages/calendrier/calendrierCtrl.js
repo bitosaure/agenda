@@ -32,6 +32,7 @@ angular.module('demoApp')
                 {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
                 {title: 'Birthday Party',start: new Date(2016, 11, 25+ 1, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
                 {title: 'Click for Google',start: new Date(2016, 11, 28),end: new Date(2016, 11, 29),url: 'http://google.com/'}
+
             ],
             //json       : {"hello" : "world"},
             callback   : undefined,
@@ -74,7 +75,7 @@ angular.module('demoApp')
             $scope.index          = index;
             $scope.refresh        = moment().valueOf();
             $scope.haveResult     = false;
-            console.log($scope.events);
+            console.log("toto "+$scope.events);
         };
 
         // --- Init
