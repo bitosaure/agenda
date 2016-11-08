@@ -19,7 +19,7 @@
   {
     "name"        : "Calendrier",
     "description" : "Voici notre calendrier",
-    "icon"        : "email",
+    "icon"        : "calendar",
     "state"       : "calendrier"
   },
   {
