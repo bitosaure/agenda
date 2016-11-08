@@ -1,30 +1,15 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.calendrier')
-    .directive('calendrier',function($log){
+    .directive('calendrier',function($log, uiCalendarConfig){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/calendrier/directives/calendrier/calendrierFormView.html',
             scope : {
                 eventSources : '=?',
                 callback    : '=?'
 
-            },link : function(scope, compile,uiCalendarConfig){
-                var date = new Date();
-                var d = date.getDate();
-                var m = date.getMonth();
-                var y = date.getFullYear();
-
-                scope.calEventsExt = {
-                    color: '#f00',
-                    textColor: 'yellow',
-                    events: [
-                        {type:'party',title: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-                        {type:'party',title: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-                        {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-                    ]
-                };
-
-
+            },link : function(scope){
+                console.log("ui config ",uiCalendarConfig);
                 /* Change View */
                 scope.changeView = function(view,calendar) {
                     uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
@@ -35,8 +20,6 @@ angular.module('eklabs.angularStarterPack.calendrier')
                         uiCalendarConfig.calendars[calendar].fullCalendar('render');
                     }
                 };
-
-
                 /* alert on eventClick */
                 scope.alertOnEventClick = function( date, jsEvent, view){
                     $scope.alertMessage = (date.title + ' was clicked ');
@@ -64,16 +47,16 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 };
                 /* add custom event*/
                 scope.addEvent = function() {
-                    $scope.events.push({
-                        title: 'Open Sesame',
+                    scope.events.push({
+                        title: 'Salut toto',
                         start: new Date(y, m, 28),
                         end: new Date(y, m, 29),
-                        className: ['openSesame']
+                        className: ['salut_toto']
                     });
                 };
                 /* remove event */
                 scope.remove = function(index) {
-                    $scope.events.splice(index,1);
+                    scope.events.splice(index,1);
                 };
                 /* Change View */
                 scope.changeView = function(view,calendar) {
@@ -125,41 +108,19 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     }
                 };
 
-                /*
-                scope.eventSources = [
-
-                    // your event source
-                    {
-                        events: [ // put the array in the `events` property
-                            {
-                                title  : 'event1',
-                                start  : '2016-1-01'
-                            },
-                            {
-                                title  : 'event2',
-                                start  : '2016-11-05',
-                                end    : '2016-11-07'
-                            },
-                            {
-                                title  : 'event3',
-                                start  : '2016-11-09T12:30:00',
-                            }
-                        ],
-                        color: 'black',     // an option!
-                        textColor: 'yellow' // an option!
-                    }
-
-                    // any other event sources...
-
-                ];
-                */
                 //scope.eventSources = [scope.events,scope.events];
                 console.log("test event sources "+scope.eventSources);
                 /**
                  * 
                  */
                 scope.$watch('eventSources', function(events){
-                    scope.eventSources = events;
+                    if(scope.eventSources){
+                    scope.$apply(function() {
+
+                        scope.eventSources = events;
+                    })
+                    }
+                    //scope.eventSources = events;
                 });
                 console.log("event dans directive "+scope.events);
 
