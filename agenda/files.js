@@ -18,9 +18,26 @@ modelFiles = {
         'src/modules/event/{,**/}*.js',
 
 
-        'src/module.js',
-        'src/services/{,**/}*.js'
 
+        'src/module.js',
+        'src/services/{,**/}*.js',
+
+        'src/services/event/services.js',
+        'src/services/event/{,**/}*.js',
+
+        'src/services/notifications/services.js',
+        'src/services/notifications/{,**/}*.js',
+
+        'src/services/calendrier/services.js',
+        'src/services/calendrier/{,**/}*.js',
+
+
+
+        'src/factories/event/model.js',
+        'src/factories/event/{,**/}*.js',
+
+        'src/factories/notifications/model.js',
+        'src/factories/notifications/{,**/}*.js'
 
 
     ]
