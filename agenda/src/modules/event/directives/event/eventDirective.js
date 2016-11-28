@@ -8,7 +8,7 @@ angular.module('eklabs.angularStarterPack.event')
                 user        : '=',
                 callback    : '=?'
             },link : function(scope){
-                scope.case = 1;
+                scope.case = 0;
                 scope.update_event = false;
                 scope.event = {
                     name : "BBQ chez Eddie",
