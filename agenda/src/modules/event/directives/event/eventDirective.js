@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .directive('event',function($log){
+    .directive('event', function($log){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/event/directives/event/eventView.html',
             scope : {
@@ -10,7 +10,9 @@ angular.module('eklabs.angularStarterPack.event')
             },link : function(scope){
                 scope.case = 0;
                 scope.update_event = false;
-                scope.event = {
+
+                //scope.event = eventService.getEvents();
+                /*{
                     name : "BBQ chez Eddie",
                     startDate : "30 Septembre 2016",
                     endDate : "1 Octobre 2016",
@@ -23,7 +25,7 @@ angular.module('eklabs.angularStarterPack.event')
                         "Emilie PISU",
                         "Florian BESNARD"
                     ]
-                }
+                }*/
 
                 scope.openEvent = function(event_id){
                     console.log(event_id);
