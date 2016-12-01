@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .service("eventService", function(params,$config){
+    .service("eventService", function($http, $config){
 
-        this.createEvent = function(params){
+        /*this.createEvent = function(params){
                 $http.post($config.get(), data, config).then(successCallback, errorCallback);
         };
         this.updateEvent = function(params){
@@ -32,6 +32,16 @@ angular.module('eklabs.angularStarterPack.event')
         };
         this.getEvent = function(params){
                 $http.post('/someUrl', data, config).then(successCallback, errorCallback);
+        };
+        */
+        this.getEvents = function(){
+            $http.get('http://91.134.241.60:3080/resources/event/', $config).then(
+                function(){
+
+                },
+                function(){
+
+                });
         };
 
 });
