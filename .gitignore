@@ -1,4 +1,4 @@
-/build/
+/agenda/demo/build/*
 /agenda/bower_components
 /agenda/demo/bower_components
 /agenda/node_modules
