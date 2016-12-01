@@ -2,7 +2,16 @@
 
 angular.module('eklabs.angularStarterPack.event')
     .service("eventService", function($http, $config){
-
+        this.getAttendees = function(){
+                return $http.get('http://91.134.241.60:3080/resources/person/', $config).then(
+                    function(response){
+                        console.log(response);
+                        return response.data;
+                    },
+                    function(){
+                        return {};
+                    });
+        }
         /*this.createEvent = function(params){
                 $http.post($config.get(), data, config).then(successCallback, errorCallback);
         };
