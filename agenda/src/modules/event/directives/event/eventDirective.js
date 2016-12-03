@@ -11,8 +11,7 @@ angular.module('eklabs.angularStarterPack.event')
                 scope.case = 0;
                 scope.update_event = false;
 
-                //scope.event = eventService.getEvents();
-                /*{
+                scope.event = {
                     name : "BBQ chez Eddie",
                     startDate : "30 Septembre 2016",
                     endDate : "1 Octobre 2016",
@@ -25,7 +24,7 @@ angular.module('eklabs.angularStarterPack.event')
                         "Emilie PISU",
                         "Florian BESNARD"
                     ]
-                }*/
+                }
 
                 scope.openEvent = function(event_id){
                     console.log(event_id);
