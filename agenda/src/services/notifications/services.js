@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('demoApp')
+angular.module('eklabs.angularStarterPack.notification')
     .service('notification', function() {
 
         this.getNotifications = function () {
