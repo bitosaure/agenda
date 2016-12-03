@@ -13,7 +13,10 @@ angular.module('demoApp')
         
             version : '0.2.1',
 
-
+            event : {
+                BaseUrl : 'http://91.134.241.60:3080/resources/',
+                BaseUrlDev : ''
+            },
             calendar : {
                  BaseUrl : ''
 

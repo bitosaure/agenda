@@ -3,6 +3,7 @@
 angular.module('eklabs.angularStarterPack.event')
     .factory('event', function(eventObj) {
     return {
+        "id": eventObj.id,
         "name": eventObj.name,
         "image" : eventObj.image,
         "description" : eventObj.description,
@@ -12,6 +13,8 @@ angular.module('eklabs.angularStarterPack.event')
         "organizer" : eventObj.organizer,
         "eventStatus" : eventObj.eventStatus,
         "attendee" : eventObj.attendee,
-        "visibility" : eventObj.visibility
+        "visibility" : eventObj.visibility,
+        "idEvent": eventObj.idEvent,
+        "idPersonne": eventObj.idPersonne
     }
 });

@@ -12,7 +12,11 @@ angular.module('eklabs.angularStarterPack')
             getCalendar : function() {
                 //return parameters[calendarDev]; // Config pour la dev
                 return parameters[calendar]; // Config de prod
-            }
+            },
+            getEventBaseUrl : function() {
+                //return parameters[event.BaseUrlDev]; // Config pour la dev
+                return parameters[event.BaseUrl]; // Config de prod
+            },
             
         }
     }]);
