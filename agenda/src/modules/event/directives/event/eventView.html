@@ -213,7 +213,7 @@
             <div layout-gt-sm="row">
                 <md-input-container flex-gt-sm>
                     <md-select multiple ng-model="event.attendees">
-                        <md-option ng-repeat="attendee in attendee_list" ng-value="attendee.id">{{attendee.familyName}}</md-option>
+                        <md-option ng-repeat="attendee in attendee_list" ng-value="attendee.id">{{attendee.givenName}} {{attendee.familyName}}</md-option>
                     </md-select>
                 </md-input-container>
             </div>
