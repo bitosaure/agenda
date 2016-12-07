@@ -14,12 +14,6 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 scope.changeView = function(view,calendar) {
                     uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
                 };
-                /* Change View */
-                scope.renderCalender = function(calendar) {
-                    if(uiCalendarConfig.calendars[calendar]){
-                        uiCalendarConfig.calendars[calendar].fullCalendar('render');
-                    }
-                };
                 /* alert on eventClick */
                 scope.alertOnEventClick = function( date, jsEvent, view){
                     $scope.alertMessage = (date.title + ' was clicked ');
