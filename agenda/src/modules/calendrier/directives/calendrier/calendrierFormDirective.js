@@ -108,12 +108,12 @@ angular.module('eklabs.angularStarterPack.calendrier')
                  * 
                  */
                 scope.$watch('eventSources', function(events){
-                    if(scope.eventSources){
-                    scope.$apply(function() {
+
+
 
                         scope.eventSources = events;
-                    })
-                    }
+
+                    
                     //scope.eventSources = events;
                 });
                 console.log("event dans directive "+scope.events);
