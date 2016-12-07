@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .factory('event', function(eventObj) {
+    .factory('eventFactory', function(eventObj) {
     return {
         "id": eventObj.id,
         "name": eventObj.name,

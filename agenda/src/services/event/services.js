@@ -1,29 +1,30 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .service("eventService", function($http, $config,event){
+    .service("eventService", function($http, $config/*, eventFactory*/){
+    console.log($config.getEventBaseUrl());
 
-        successCallback = function(response){
+        function successCallback (response){
             console.log(response);
             return response.data;
         };
 
-        errorCallback = function(response){
-            console.log(response);
+        function errorCallback(data){
+            console.log(data);
             return {};
         };
 
         this.getAttendees = function(){
                 return $http.get($config.getEventBaseUrl() + 'person/', $config).then(
                     function(response){
-                        successCallback(response);
+                        return successCallback(response);
                     },
-                    function(){
+                    function(response){
                         errorCallback(response);
                     });
         };
 
-        this.createEvent = function(params){
+        /*this.createEvent = function(params){
                 $http.post($config.getEventBaseUrl() + 'createEvent/', params, $config).then(function(response){
                         successCallback(response);
                     },
@@ -70,7 +71,7 @@ angular.module('eklabs.angularStarterPack.event')
         };
         this.refuseInvitation = function(params){
                 $http.post($config.getEventBaseUrl() + '/someUrl', data, config).then(successCallback, errorCallback);
-        };*/
+        };
         
         this.getEvent = function(params){
                 $http.get($config.getEventBaseUrl() + 'getEvent/' + params, config).then(function(response){
@@ -90,6 +91,6 @@ angular.module('eklabs.angularStarterPack.event')
                 function(){
 
                 });
-        };
+        };*/
 
 });
