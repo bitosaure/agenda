@@ -11,31 +11,36 @@ angular.module('eklabs.angularStarterPack.event')
                 scope.case = 0;
                 scope.update_event = false;
 
-                /*scope.event = {
-                    name : "BBQ chez Eddie",
-                    startDate : "30 Septembre 2016",
-                    endDate : "1 Octobre 2016",
-                    description : "Big Barbecue chez Eddie",
-                    organizer : "Eddie MADEVA",
-                    location : "38 rue Pasteur, 77240 Vert-Saint-Denis",
-                    attendees : [
-                        "Eddie MADEVA",
-                        "Thibault LE GRAND",
-                        "Emilie PISU",
-                        "Florian BESNARD"
-                    ]
-                }*/
+                eventService.getEvents().then(function(response){
+                    console.log(response);
+                    scope.events = response;
+                });
+                scope.loadEvents = function(){
+                    eventService.getEvents().then(function(response){
+                        console.log(response);
+                        scope.events = response;
+                    });
+                };
 
                 scope.openFormCreateEvent = function(){
                     eventService.getAttendees().then(function(response){
                         console.log(response);
                         scope.case = 2;
+                        scope.event = new eventFactory();
                         scope.attendee_list =  response;
+                    });
+                };
+
+                scope.createEvent = function(){
+                    console.log(scope.event);
+                    eventService.createEvent(scope.event).then(function(response){
+                       scope.case = 0;
                     });
                 };
 
                 scope.openEvent = function(event_id){
                     console.log(event_id);
+                    scope.event = scope.events[event_id];
                     scope.case = 1;
                 };
 

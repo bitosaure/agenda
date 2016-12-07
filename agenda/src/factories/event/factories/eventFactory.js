@@ -1,20 +1,21 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .factory('eventFactory', function(eventObj) {
-    return {
-        "id": eventObj.id,
-        "name": eventObj.name,
-        "image" : eventObj.image,
-        "description" : eventObj.description,
-        "location" : eventObj.location,
-        "startDate" : eventObj.startDate,
-        "endDate" : eventObj.endDate,
-        "organizer" : eventObj.organizer,
-        "eventStatus" : eventObj.eventStatus,
-        "attendee" : eventObj.attendee,
-        "visibility" : eventObj.visibility,
-        "idEvent": eventObj.idEvent,
-        "idPersonne": eventObj.idPersonne
-    }
+    .factory('eventFactory', function() {
+
+        function eventFactory(eventObj){
+            this.id = eventObj.id;
+            this.name = eventObj.name;
+            this.image = eventObj.image;
+            this.description = eventObj.description;
+            this.location = eventObj.location;
+            this.startDate = eventObj.startDate;
+            this.endDate = eventObj.endDate;
+            this.organizer = eventObj.organizer;
+            this.eventStatus = eventObj.eventStatus;
+            this.attendee = eventObj.attendee;
+            this.visibility = eventObj.visibility;
+        }
+
+        return eventFactory;
 });

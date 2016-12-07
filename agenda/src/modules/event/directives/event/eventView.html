@@ -12,7 +12,7 @@
         <md-list-item ng-repeat="event in events track by $index" ng-click="openEvent($index)" class="md-2-line" md-colors="isBlured === true ? {background: 'default-primary-500'} : {background: 'grey-A100'}" ng-style="myStyle" ng-mouseover="isBlured = false" ng-mouseleave="isBlured = true">
             <div class="md-list-item-text">
                 <h3>{{event.name}}</h3>
-                <p>30 Septembre 2016 15h50 - 2 Octobre 2016 12h00</p>
+                <p>{{event.startDate}} - {{event.endDate}}</p>
             </div>
         </md-list-item>
     </md-list>
@@ -85,72 +85,6 @@
     </div>
 </div>
 
-<div layout="column" ng-show="case == 1">
-    <div layout="row" layout-align="space-between center">
-        <div ng-click="case = 0">
-            <md-button class="md-primary" ng-click="case = 0">
-                <md-icon md-svg-src="material-design:arrow_back" class="ic_18px"></md-icon>
-                Retour à la liste
-            </md-button>
-        </div>
-        <div ng-show="!update_event">
-            <md-button class="md-primary">
-                Consulter événement
-            </md-button>
-        </div>
-        <div ng-show="update_event">
-            <md-button class="md-primary">
-                Modifier événement
-            </md-button>
-        </div>
-        <div ng-show="!update_event">
-            <md-button class="md-warn" ng-click="update_event = true">
-                <md-icon md-svg-src="material-design:create" class="ic_18px" ></md-icon>
-                Modifier
-            </md-button>
-        </div>
-        <div style="color: red" ng-show="update_event">
-            <md-button class="md-warn" ng-show="update_event" ng-click="update_event = false">
-                <md-icon md-svg-src="material-design:close" class="ic_18px" ></md-icon>
-                Annuler
-            </md-button>
-        </div>
-    </div>
-    <md-input-container style="margin-top:50px;">
-        <label>Event Name</label>
-        <input ng-model="event.name" ng-readonly="!update_event">
-    </md-input-container>
-    <div layout-gt-sm="row" layout-gt-md="row" class="layout-gt-md-row">
-        <md-input-container>
-            <label>Start Date</label>
-            <input ng-model="event.startDate" ng-readonly="!update_event">
-        </md-input-container>
-        <md-input-container>
-            <label>End Date</label>
-            <input ng-model="event.endDate" ng-readonly="!update_event">
-        </md-input-container>
-    </div>
-    <md-input-container>
-        <label>Organizer</label>
-        <input ng-model="event.organizer" ng-readonly="!update_event">
-    </md-input-container>
-    <md-input-container>
-        <label>Location</label>
-        <input ng-model="event.location" ng-readonly="!update_event">
-    </md-input-container>
-    <md-input-container>
-        <label>Description</label>
-        <textarea ng-model="event.description" ng-readonly="!update_event"></textarea>
-    </md-input-container>
-    <h4>Participants : </h4>
-    <ul>
-        <li ng-repeat="attendee in event.attendees">{{attendee}}</li>
-    </ul>
-    <div layout="row" layout-align="end">
-        <md-button class="md-warn" ng-show="update_event" ng-click="update_event = false">Annuler</md-button>
-        <md-button class="md-primary" ng-show="update_event" ng-click="update_event = false">Confirmer les modifications</md-button>
-    </div>
-</div>
 
 <!-- Div pour l'ajout d'un événement -->
 <div layout="column" ng-show="case == 2">
@@ -219,7 +153,7 @@
             </div>
             <div layout="row" layout-align="end">
                 <md-button class="md-warn" ng-click="case = 0">Annuler</md-button>
-                <md-button type="submit" class="md-primary">Confirmer les modifications</md-button>
+                <md-button type="submit" class="md-primary">Ajouter l'évènement</md-button>
             </div>
         </form>
     </md-content>

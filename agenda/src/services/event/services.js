@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .service("eventService", function($http, $config/*, eventFactory*/){
+    .service("eventService", function($http, $config, eventFactory){
     console.log($config.getEventBaseUrl());
 
         function successCallback (response){
             console.log(response);
-            return response.data;
+            return response;
         };
 
-        function errorCallback(data){
-            console.log(data);
+        function errorCallback(response){
+            console.log(response);
             return {};
         };
 
@@ -20,20 +20,34 @@ angular.module('eklabs.angularStarterPack.event')
                         return successCallback(response);
                     },
                     function(response){
-                        errorCallback(response);
+                        return errorCallback(response);
                     });
         };
 
-        /*this.createEvent = function(params){
-                $http.post($config.getEventBaseUrl() + 'createEvent/', params, $config).then(function(response){
-                        successCallback(response);
+        this.createEvent = function(params){
+                return $http.post($config.getEventBaseUrl() + 'event/', params, $config).then(
+                    function(response){
+                        return successCallback(response);
                     },
-                    function(){
-                        errorCallback(response);
+                    function(response){
+                        return errorCallback(response);
                     });
         };
 
-        this.updateEvent = function(params){
+        this.getEvents = function(){
+            return $http.get($config.getEventBaseUrl() + 'event/', $config).then(
+                function(response){
+                    var events = [];
+                    angular.forEach(response.data, function(value){
+                        events.push(new eventFactory(value));
+                    });
+                    return events;
+                },
+                function(response){
+                    return errorCallback(response);
+                });
+        };
+        /*this.updateEvent = function(params){
                 $http.put($config.getEventBaseUrl() + '/updateEvent/' + params.id, data, $config).then(function(response){
                         successCallback(response);
                     },
@@ -49,7 +63,7 @@ angular.module('eklabs.angularStarterPack.event')
                         errorCallback(response);
                     });
         };
-        /*this.addParticipant = function(params){
+        this.addParticipant = function(params){
                 $http.put($config.getEventBaseUrl() + '/addParticipant/' + idEvent, params.idPersonne, config).then(function(response){
                         successCallback(response);
                     },
