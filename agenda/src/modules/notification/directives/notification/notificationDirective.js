@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.notification')
-    .directive('notification',function($log){
+    .directive('notification',function($log, notificationService){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/notification/directives/notification/notificationView.html',
             scope : {
-
-            },link : function(scope, notification){
+                user        : '=',
+                callback    : '=?'
+            },link : function(scope){
 
                 scope.showUnreaded = true;
                 scope.showReaded = false;
@@ -28,8 +29,14 @@ angular.module('eklabs.angularStarterPack.notification')
 
                 };
 
-                scope.notifications = notification.getNotifications();
+                notificationService.getNotifications().then(function(response){
+                    console.log(response);
+                    scope.notifications = response;
+                });
 
+                //scope.notifications = notification.getNotifications;
+
+                //console.log(notification.test);
 
             }
         }
