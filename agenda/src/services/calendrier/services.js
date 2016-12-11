@@ -2,7 +2,7 @@
  * Created by emilie on 08/11/2016.
  */
 angular.module('eklabs.angularStarterPack.calendrier')
-    .service("calendrierService", function($http, $config, eventFactory){
+    .service("calendrierService", function($http, $config, calendrierFactory){
         console.log($config.getEventBaseUrl());
 
         function successCallback (response){
@@ -14,14 +14,14 @@ angular.module('eklabs.angularStarterPack.calendrier')
             console.log(response);
             return {};
         };
-        this.getEvents = function(){
+        this.getEventsCalendar = function(){
             return $http.get($config.getEventBaseUrl() + 'event/', $config).then(
                 function(response){
-                    var events = [];
+                    var eventsCalendar = [];
                     angular.forEach(response.data, function(value){
-                        events.push(new eventFactory(value));
+                        eventsCalendar.push(new calendrierFactory(value));
                     });
-                    return events;
+                    return eventsCalendar;
                 },
                 function(response){
                     return errorCallback(response);

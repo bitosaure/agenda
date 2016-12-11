@@ -1,20 +1,21 @@
 'use strict';
 
-angular.module('eklabs.angularStarterPack.event')
+angular.module('eklabs.angularStarterPack.calendrier')
     .factory('calendrierFactory', function() {
 
         function calendrierFactory(eventObj){
             this.id = eventObj.id;
-            this.name = eventObj.name;
+            this.title = eventObj.name;
             this.image = eventObj.image;
             this.description = eventObj.description;
             this.location = eventObj.location;
-            this.startDate = eventObj.startDate;
-            this.endDate = eventObj.endDate;
+            this.start = eventObj.startDate;
+            this.end = eventObj.endDate;
             this.organizer = eventObj.organizer;
             this.eventStatus = eventObj.eventStatus;
             this.attendee = eventObj.attendee;
             this.visibility = eventObj.visibility;
+            this.allDay=false;
         }
 
         return calendrierFactory;
