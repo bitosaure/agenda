@@ -61,14 +61,17 @@ angular.module('demoApp')
             options    : undefined,
             json       : undefined,
             eventSources: [
+                {events: [
 
-                    [
                         {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
                         {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
                         {title: 'Birthday Party',start: new Date(2016, 11, 25, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
                         {title: 'Click for Google',start: new Date(2016, 11, 28,15,0),end: new Date(2016, 11, 29,15,0),url: 'http://google.com/'}
-                    ]
-                
+
+                ],
+                    color: 'black',
+                    textColor: 'yellow'
+                }
             ],
             callback   : {
                 valid : function(json){
