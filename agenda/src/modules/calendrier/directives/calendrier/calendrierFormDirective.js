@@ -6,10 +6,11 @@ angular.module('eklabs.angularStarterPack.calendrier')
             templateUrl : 'eklabs.angularStarterPack/modules/calendrier/directives/calendrier/calendrierFormView.html',
             scope : {
                 eventSources : '=?',
-                callback    : '=?'
+                callback    : '=?',
+                render : '=?'
 
             },link : function(scope){
-                console.log("ui config ",uiCalendarConfig);
+
                 /* Change View */
                 scope.changeView = function(view,calendar) {
                     uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
@@ -69,25 +70,17 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     }
                 };
 
-
-
-
-
-
                 /* Render Tooltip */
                 scope.eventRender = function( event, element, view ) {
+
+                    console.log('plop plop')
+
                     element.attr({'tooltip': event.title,
                         'tooltip-append-to-body': true});
                     compile(element)(scope);
                 };
                 //scope.uiConfig.calendar.dayNames = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
                 //scope.uiConfig.calendar.dayNamesShort = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
-
-
-
-                //scope.eventSources = [scope.calEvents,scope.calEvents2];
-                console.log("Bonjour");
-                console.log(scope.events);
 
                 scope.uiConfig = {
                     calendar:{
@@ -146,7 +139,10 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     }
                 });
 
-
+                scope.$watch('render', function(render){
+                    console.log(render);
+                    scope.renderCalender();
+                })
 
             }
         }
