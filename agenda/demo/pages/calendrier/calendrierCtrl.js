@@ -81,7 +81,7 @@ angular.module('demoApp')
                 }
             }
         }];
-        console.log($scope);
+
         $scope.chooseParams = function(index){
             // --- Define current status
 
@@ -92,10 +92,8 @@ angular.module('demoApp')
             $scope.myListener   = $scope.params[index].listeners;
 
             $scope.index          = index;
-            $scope.refresh        = moment().valueOf();
+            $scope.triggerRender  = moment().valueOf();
             $scope.haveResult     = false;
-
-            console.log("toto "+$scope.events);
         };
 
         // --- Init

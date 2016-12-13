@@ -19,13 +19,13 @@
   {
     "name"        : "Calendrier",
     "description" : "Voici notre calendrier",
-    "icon"        : "calendar",
+    "icon"        : "agenda",
     "state"       : "calendrier"
   },
   {
     "name"        : "Event",
     "description" : "Evenements",
-    "icon"        : "event",
+    "icon"        : "label",
     "state"       : "event"
   }
 ]
