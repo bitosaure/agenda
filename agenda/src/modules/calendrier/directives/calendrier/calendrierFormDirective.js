@@ -1,25 +1,33 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.calendrier')
-    .directive('calendrier',function($log, uiCalendarConfig){
+    .directive('calendrier',function($log, uiCalendarConfig, calendrierService){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/calendrier/directives/calendrier/calendrierFormView.html',
             scope : {
                 eventSources : '=?',
-                callback    : '=?',
-                render : '=?'
+                callback    : '=?'
 
             },link : function(scope){
+                console.log("ui config ",uiCalendarConfig);
+
+/** recuperation des evenements grace au service 
+                calendrierService.getEventsCalendar().then(function(response){
+                    console.log(response);
+                    scope.events = response;
+                });
+                scope.loadEvents = function(){
+                    calendrierService.getEventsCalendar().then(function(response){
+                        console.log(response);
+                        scope.events = response;
+                    });
+                };
+ */
+
 
                 /* Change View */
                 scope.changeView = function(view,calendar) {
                     uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
-                };
-                /* Change View */
-                scope.renderCalender = function(calendar) {
-                    if(uiCalendarConfig.calendars[calendar]){
-                        uiCalendarConfig.calendars[calendar].fullCalendar('render');
-                    }
                 };
                 /* alert on eventClick */
                 scope.alertOnEventClick = function( date, jsEvent, view){
@@ -70,17 +78,25 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     }
                 };
 
+
+
+
+
+
                 /* Render Tooltip */
                 scope.eventRender = function( event, element, view ) {
-
-                    console.log('plop plop')
-
                     element.attr({'tooltip': event.title,
                         'tooltip-append-to-body': true});
                     compile(element)(scope);
                 };
                 //scope.uiConfig.calendar.dayNames = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
                 //scope.uiConfig.calendar.dayNamesShort = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
+
+
+
+                //scope.eventSources = [scope.calEvents,scope.calEvents2];
+                console.log("Bonjour");
+                console.log(scope.events);
 
                 scope.uiConfig = {
                     calendar:{
@@ -107,12 +123,12 @@ angular.module('eklabs.angularStarterPack.calendrier')
                  * 
                  */
                 scope.$watch('eventSources', function(events){
-                    if(scope.eventSources){
-                    scope.$apply(function() {
+
+
 
                         scope.eventSources = events;
-                    })
-                    }
+
+                    
                     //scope.eventSources = events;
                 });
                 console.log("event dans directive "+scope.events);
@@ -139,10 +155,7 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     }
                 });
 
-                scope.$watch('render', function(render){
-                    console.log(render);
-                    scope.renderCalender();
-                })
+
 
             }
         }

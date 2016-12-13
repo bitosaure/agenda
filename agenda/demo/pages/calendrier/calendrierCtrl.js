@@ -47,7 +47,7 @@ angular.module('demoApp')
                         {title: 'Birthday Party',start: new Date(2016, 11, 25, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
                         {title: 'Click for Google',start: new Date(2016, 11, 28,15,0),end: new Date(2016, 11, 29,15,0),url: 'http://google.com/'}
                     ]
-                
+
             ],
             //json       : {"hello" : "world"},
             callback   : undefined,
@@ -61,13 +61,16 @@ angular.module('demoApp')
             options    : undefined,
             json       : undefined,
             eventSources: [
-                { events :
-                    [
+                {events: [
+
                         {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
                         {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
                         {title: 'Birthday Party',start: new Date(2016, 11, 25, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
                         {title: 'Click for Google',start: new Date(2016, 11, 28,15,0),end: new Date(2016, 11, 29,15,0),url: 'http://google.com/'}
-                    ]
+
+                ],
+                    color: 'black',
+                    textColor: 'yellow'
                 }
             ],
             callback   : {
@@ -81,7 +84,7 @@ angular.module('demoApp')
                 }
             }
         }];
-
+        console.log($scope);
         $scope.chooseParams = function(index){
             // --- Define current status
 
@@ -92,8 +95,10 @@ angular.module('demoApp')
             $scope.myListener   = $scope.params[index].listeners;
 
             $scope.index          = index;
-            $scope.triggerRender  = moment().valueOf();
+            $scope.refresh        = moment().valueOf();
             $scope.haveResult     = false;
+
+            console.log($scope.events);
         };
 
         // --- Init
