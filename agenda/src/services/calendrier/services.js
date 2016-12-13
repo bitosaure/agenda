@@ -2,6 +2,7 @@
  * Created by emilie on 08/11/2016.
  */
 angular.module('eklabs.angularStarterPack.calendrier')
+<<<<<<< HEAD
     .service("calendrierService", function($http, $config, calendrierFactory){
         console.log($config.getEventBaseUrl());
 
@@ -27,6 +28,10 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     return errorCallback(response);
                 });
         };
+=======
+    .service("calendrierService", function(params){
+>>>>>>> parent of 079a365... ajout de la factory, modification du service et du controleur
 
+        this.getEvents = function(params){};
     });
     
