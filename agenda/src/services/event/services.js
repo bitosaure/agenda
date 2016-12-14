@@ -57,15 +57,15 @@ angular.module('eklabs.angularStarterPack.event')
                 });
         };
 
-        /*this.updateEvent = function(params){
-                $http.put($config.getEventBaseUrl() + '/updateEvent/' + params.id, data, $config).then(function(response){
+        this.updateEvent = function(params){
+                $http.put($config.getEventBaseUrl() + params.id, params, $config).then(function(response){
                         successCallback(response);
                     },
                     function(){
                         errorCallback(response);
                     });
         };
-        this.deleteEvent = function(params){
+        /*this.deleteEvent = function(params){
                 $http.post($config.getEventBaseUrl() + '/deleteEvent/', params.id , $config).then(function(response){
                         successCallback(response);
                     },
