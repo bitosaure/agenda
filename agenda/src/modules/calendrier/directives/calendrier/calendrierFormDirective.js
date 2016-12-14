@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.calendrier')
-    .directive('calendrier',function($log, uiCalendarConfig,$compile){
+    .directive('calendrier',function($log, uiCalendarConfig,$compile,$timeout){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/calendrier/directives/calendrier/calendrierFormView.html',
             scope : {
@@ -78,7 +78,7 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 /* Render Tooltip */
                 scope.eventRender = function( event, element, view ) {
 
-
+console.log('plop');
 
                     element.attr({'tooltip': event.title,
                         'tooltip-append-to-body': true});
@@ -112,34 +112,14 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 /**
                  *
                  */
-                scope.$watch('eventSources', function(events,calendar){
+                scope.$watch('eventSources', function(eventSources){
 
-
-
-                    if(scope.eventSources){
-                        //angular.element('.calendar').fullCalendar('refetchEvents');
-
-                        //scope.eventSources = [];
-                        //scope.$apply(function() {
-
-                        //scope.eventSources = events;
-                        //console.log("test "+events);
-                        //scope.eventSources.splice(0);
-                        angular.element('.calendar').fullCalendar('renderCalender',angular.element('.calendar'));
-
-                        
-                        //angular.element('.calendar').fullCalendar('renderEvents');
-                        //uiCalendarConfig.calendars['calendar'].fullCalendar('addEventSource', events);
-                        //})
-                    }else{
-
-                        angular.element('.calendar').fullCalendar('removeEvents');
-                    }
-                    //scope.eventSources = [];
-                    //scope.eventSources = events;
-                    console.log("eventSources "+scope.eventSources);
-                    console.log("events "+events);
-                    //scope.renderCalender();
+                        scope.isAvailable = false;
+                        $timeout(function(){
+                           scope.$apply(function(){
+                            scope.isAvailable = true;
+                           })  
+                        },0)
                 });
                 
                 console.log("event dans directive "+scope.eventSources);

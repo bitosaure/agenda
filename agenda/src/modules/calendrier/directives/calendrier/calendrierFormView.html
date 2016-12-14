@@ -1,4 +1,4 @@
-<div id="toto" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="calendar"></div>
+<div id="toto" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="calendar" ng-if='isAvailable'></div>
 <tab select="renderCalendar('toto');"></tab>
 <li ng-repeat="e in eventSources">
 
