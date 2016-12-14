@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .service("eventService", function($http, $config, eventFactory){
+    .service("eventService", function($http, /*$config,*/ eventFactory){
     console.log($config.getEventBaseUrl());
 
         function successCallback (response){
