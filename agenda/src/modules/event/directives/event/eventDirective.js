@@ -15,6 +15,14 @@ angular.module('eklabs.angularStarterPack.event')
                     console.log(response);
                     scope.events = response;
                 });
+
+                scope.loadEvent = function(event_id){
+                    eventService.getEvent(event_id).then(function(response){
+                        scope.event = response();
+                        scope.case = 1;
+                    });
+                };
+
                 scope.loadEvents = function(){
                     eventService.getEvents().then(function(response){
                         console.log(response);
@@ -24,7 +32,6 @@ angular.module('eklabs.angularStarterPack.event')
 
                 scope.openFormCreateEvent = function(){
                     eventService.getAttendees().then(function(response){
-                        console.log(response);
                         scope.case = 2;
                         scope.event = new eventFactory();
                         scope.attendee_list =  response;
