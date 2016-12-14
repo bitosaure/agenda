@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.calendrier')
-    .directive('calendrier',function($log, uiCalendarConfig,$compile){
+    .directive('calendrier',function($log, uiCalendarConfig,$compile,$timeout){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/calendrier/directives/calendrier/calendrierFormView.html',
             scope : {
@@ -85,9 +85,10 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     $compile(element)(scope);
 
                 };
-                //scope.uiConfig.calendar.dayNames = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
-                //scope.uiConfig.calendar.dayNamesShort = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
 
+                /**
+                 * Configuration du calendrier
+                 */
                 scope.uiConfig = {
                     calendar:{
                         monthNames:["Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"],
@@ -110,41 +111,17 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 //scope.eventSources = [scope.events,scope.events];
                 //console.log("test event sources "+scope.eventSources);
                 /**
-                 *
+                 * Watch permet de detecter des changements de données sur la variable eventSources
                  */
-                scope.$watch('eventSources', function(events,calendar){
-
-
-
-                    if(scope.eventSources){
-                        //angular.element('.calendar').fullCalendar('refetchEvents');
-
-                        //scope.eventSources = [];
-                        //scope.$apply(function() {
-
-                        //scope.eventSources = events;
-                        //console.log("test "+events);
-                        //scope.eventSources.splice(0);
-                        angular.element('.calendar').fullCalendar('renderCalender',angular.element('.calendar'));
-
-                        
-                        //angular.element('.calendar').fullCalendar('renderEvents');
-                        //uiCalendarConfig.calendars['calendar'].fullCalendar('addEventSource', events);
-                        //})
-                    }else{
-
-                        angular.element('.calendar').fullCalendar('removeEvents');
-                    }
-                    //scope.eventSources = [];
-                    //scope.eventSources = events;
-                    console.log("eventSources "+scope.eventSources);
-                    console.log("events "+events);
-                    //scope.renderCalender();
+                scope.$watch('eventSources', function(events){
+                    scope.isAvailable = false;
+                    $timeout(function(){
+                        scope.$apply(function(){
+                            scope.isAvailable = true;
+                        })
+                    },0)
                 });
                 
-                console.log("event dans directive "+scope.eventSources);
-
-
                 /**
                  * Default Actions
                  * @type {{onValid: default_actions.onValid}}
