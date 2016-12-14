@@ -288,7 +288,8 @@ angular.module('eklabs.angularStarterPack.forms')
 
 angular.module('eklabs.angularStarterPack',[
     'eklabs.angularStarterPack.jsonEditor',
-    'eklabs.angularStarterPack.forms'
+    'eklabs.angularStarterPack.forms',
+    'eklabs.angularStarterPack.event'
 ]);
 'use strict';
 

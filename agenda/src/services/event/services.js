@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .service("eventService", function($http, /*$config,*/ eventFactory){
+    .service("eventService", function($http, $config, eventFactory){
     console.log($config.getEventBaseUrl());
 
         function successCallback (response){
@@ -15,7 +15,7 @@ angular.module('eklabs.angularStarterPack.event')
         };
 
         this.getAttendees = function(){
-                return $http.get($config.getEventBaseUrl() + 'person/', $config).then(
+                return $http.get($config.getPersonBaseUrl(), $config).then(
                     function(response){
                         return successCallback(response);
                     },
@@ -35,7 +35,7 @@ angular.module('eklabs.angularStarterPack.event')
         };
 
         this.getEvents = function(){
-            return $http.get($config.getEventBaseUrl() + 'event/', $config).then(
+            return $http.get($config.getEventBaseUrl(), $config).then(
                 function(response){
                     var events = [];
                     angular.forEach(response.data, function(value){
