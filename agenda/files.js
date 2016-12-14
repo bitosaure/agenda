@@ -37,10 +37,10 @@ modelFiles = {
         'src/factories/event/{,**/}*.js',
 
         'src/factories/notifications/model.js',
-        'src/factories/notifications/{,**/}*.js'
+        'src/factories/notifications/{,**/}*.js',
 
-        //'src/factories/calendrier/model.js',
-        //'src/factories/calendrier/{,**/}*.js'
+        'src/factories/calendrier/model.js',
+        'src/factories/calendrier/{,**/}*.js'
 
 
     ]
