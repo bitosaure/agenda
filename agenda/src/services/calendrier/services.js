@@ -19,6 +19,7 @@ angular.module('eklabs.angularStarterPack.calendrier')
             return $http.get($config.getEventBaseUrl() , $config).then(
                 function (response) {
                     var eventsCalendar = [];
+                    
                     angular.forEach(response.data, function (value) {
                         var obj=new calendrierFactory(value);
                         eventsCalendar.push(new calendrierFactory(value));

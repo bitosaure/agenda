@@ -11,6 +11,7 @@ angular.module('eklabs.angularStarterPack.calendrier')
             this.location = eventObj.location;
             this.start = new Date(eventObj.startDate);
             this.end =new Date(eventObj.endDate);
+             
             this.organizer = eventObj.organizer;
             this.eventStatus = eventObj.eventStatus;
             this.attendee = eventObj.attendee;
