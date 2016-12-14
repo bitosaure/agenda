@@ -3,7 +3,7 @@
  */
 angular.module('eklabs.angularStarterPack.calendrier')
 
-    .service("calendrierService", function($http,/*, $config*/ calendrierFactory) {
+    .service("calendrierService", function($http, $config, calendrierFactory) {
       //  console.log($config.getEventBaseUrl());
 
         function successCallback(response) {
@@ -16,11 +16,14 @@ angular.module('eklabs.angularStarterPack.calendrier')
             return {};
         };
         this.getEventsCalendar = function () {
-            return $http.get(/*$config.getEventBaseUrl() +*/ 'http://91.134.241.60:3080/resources/event/' /*, $config*/).then(
+            return $http.get($config.getEventBaseUrl() , $config).then(
                 function (response) {
                     var eventsCalendar = [];
+                    
                     angular.forEach(response.data, function (value) {
+                        var obj=new calendrierFactory(value);
                         eventsCalendar.push(new calendrierFactory(value));
+
                     });
                     return eventsCalendar;
                 },

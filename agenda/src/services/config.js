@@ -27,7 +27,7 @@ angular.module('eklabs.angularStarterPack')
 
             getPersonBaseUrl : function() {
                 return resource + WEBAPP_CONFIG.person_url
-            },
+            }
             
         }
     }]);

@@ -2,7 +2,6 @@
 
 angular.module('eklabs.angularStarterPack.event')
     .service("eventService", function($http, $config, eventFactory){
-    console.log($config.getEventBaseUrl());
 
         function successCallback (response){
             console.log(response);
@@ -22,6 +21,16 @@ angular.module('eklabs.angularStarterPack.event')
                     function(response){
                         return errorCallback(response);
                     });
+        };
+
+        this.getAttendee = function(person_id){
+            return $http.get($config.getPersonBaseUrl() + person_id, $config).then(
+                function(response){
+                    return successCallback(response);
+                },
+                function(response){
+                    return errorCallback(response);
+                });
         };
 
         this.createEvent = function(params){
@@ -47,15 +56,26 @@ angular.module('eklabs.angularStarterPack.event')
                     return errorCallback(response);
                 });
         };
-        /*this.updateEvent = function(params){
-                $http.put($config.getEventBaseUrl() + '/updateEvent/' + params.id, data, $config).then(function(response){
+
+        this.getEvent = function(event_id){
+            return $http.get($config.getEventBaseUrl()+event_id, $config).then(
+                function(response){
+                        return new eventFactory(response.data);
+                },
+                function(response){
+                    return errorCallback(response);
+                });
+        };
+
+        this.updateEvent = function(params){
+                $http.put($config.getEventBaseUrl() + params.id, params, $config).then(function(response){
                         successCallback(response);
                     },
                     function(){
                         errorCallback(response);
                     });
         };
-        this.deleteEvent = function(params){
+        /*this.deleteEvent = function(params){
                 $http.post($config.getEventBaseUrl() + '/deleteEvent/', params.id , $config).then(function(response){
                         successCallback(response);
                     },

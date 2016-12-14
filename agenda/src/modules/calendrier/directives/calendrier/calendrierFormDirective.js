@@ -23,15 +23,16 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 };
                 /* alert on eventClick */
                 scope.alertOnEventClick = function( date, jsEvent, view){
-                    $scope.alertMessage = (date.title + ' was clicked ');
+                    console.log("Titre "+date.title);
+                    scope.alertMessage = (date.title + ' was clicked ');
                 };
                 /* alert on Drop */
                 scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-                    $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
+                    scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
                 };
                 /* alert on Resize */
                 scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
-                    $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
+                    scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
                 };
                 /* add and removes an event source of choice */
                 scope.addRemoveEventSource = function(sources,source) {
@@ -73,12 +74,12 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 /* Render Tooltip */
                 scope.eventRender = function( event, element, view ) {
 
-                    console.log('plop plop')
+
 
                     element.attr({'tooltip': event.title,
                         'tooltip-append-to-body': true});
                     $compile(element)(scope);
-                    console.log('plo');
+
                 };
                 //scope.uiConfig.calendar.dayNames = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
                 //scope.uiConfig.calendar.dayNamesShort = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
@@ -103,20 +104,42 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 };
 
                 //scope.eventSources = [scope.events,scope.events];
-                console.log("test event sources "+scope.eventSources);
+                //console.log("test event sources "+scope.eventSources);
                 /**
                  *
                  */
                 scope.$watch('eventSources', function(events){
+
+                    //uiCalendarConfig.calendars['calendar'].fullCalendar('refetchEvents');
+
                     if(scope.eventSources){
+                        //scope.eventSources = [];
                         //scope.$apply(function() {
 
-                            scope.eventSources = events;
+                        //scope.eventSources = events;
+                        //console.log("test "+events);
+                        /*
+                        angular.forEach(events,function(ev){
+                            scope.eventSources.push(ev);
+
+                        });
+                        */
+                        
+                        angular.element('.calendar').fullCalendar('renderCalender',angular.element('.calendar'));
+                        //angular.element('.calendar').fullCalendar('renderEvents');
+                        //uiCalendarConfig.calendars['calendar'].fullCalendar('addEventSource', events);
                         //})
+                    }else{
+
+                        angular.element('.calendar').fullCalendar('removeEvents');
                     }
-                    scope.eventSources = events;
-                    scope.renderCalender();
+                    //scope.eventSources = [];
+                    //scope.eventSources = events;
+                    console.log("eventSources "+scope.eventSources);
+                    console.log("events "+events);
+                    //scope.renderCalender();
                 });
+                
                 console.log("event dans directive "+scope.eventSources);
 
 
