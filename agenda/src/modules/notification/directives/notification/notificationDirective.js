@@ -6,8 +6,16 @@ angular.module('eklabs.angularStarterPack.notification')
             templateUrl : 'eklabs.angularStarterPack/modules/notification/directives/notification/notificationView.html',
             scope : {
                 user        : '=',
-                callback    : '=?'
+                callback    : '=?',
+                myJson : '=?'
             },link : function(scope){
+
+
+                scope.$watch('myJson', function(myJson){
+                    scope.myJson = myJson;
+                    console.log(myJson);
+                });
+
 
                 scope.showUnreaded = true;
                 scope.showReaded = false;
