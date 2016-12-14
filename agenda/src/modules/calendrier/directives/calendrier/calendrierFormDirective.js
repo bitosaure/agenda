@@ -1,33 +1,25 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.calendrier')
-    .directive('calendrier',function($log, uiCalendarConfig, calendrierService){
+    .directive('calendrier',function($log, uiCalendarConfig,$compile){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/calendrier/directives/calendrier/calendrierFormView.html',
             scope : {
                 eventSources : '=?',
-                callback    : '=?'
+                callback    : '=?',
+                render : '=?'
 
             },link : function(scope){
-                console.log("ui config ",uiCalendarConfig);
-
-/** recuperation des evenements grace au service 
-                calendrierService.getEventsCalendar().then(function(response){
-                    console.log(response);
-                    scope.events = response;
-                });
-                scope.loadEvents = function(){
-                    calendrierService.getEventsCalendar().then(function(response){
-                        console.log(response);
-                        scope.events = response;
-                    });
-                };
- */
-
 
                 /* Change View */
                 scope.changeView = function(view,calendar) {
                     uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
+                };
+                /* Change View */
+                scope.renderCalender = function(calendar) {
+                    if(uiCalendarConfig.calendars[calendar]){
+                        uiCalendarConfig.calendars[calendar].fullCalendar('render');
+                    }
                 };
                 /* alert on eventClick */
                 scope.alertOnEventClick = function( date, jsEvent, view){
@@ -78,25 +70,18 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     }
                 };
 
-
-
-
-
-
                 /* Render Tooltip */
                 scope.eventRender = function( event, element, view ) {
+
+                    console.log('plop plop')
+
                     element.attr({'tooltip': event.title,
                         'tooltip-append-to-body': true});
-                    compile(element)(scope);
+                    $compile(element)(scope);
+                    console.log('plo');
                 };
                 //scope.uiConfig.calendar.dayNames = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
                 //scope.uiConfig.calendar.dayNamesShort = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
-
-
-
-                //scope.eventSources = [scope.calEvents,scope.calEvents2];
-                console.log("Bonjour");
-                console.log(scope.events);
 
                 scope.uiConfig = {
                     calendar:{
@@ -120,18 +105,19 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 //scope.eventSources = [scope.events,scope.events];
                 console.log("test event sources "+scope.eventSources);
                 /**
-                 * 
+                 *
                  */
                 scope.$watch('eventSources', function(events){
+                    if(scope.eventSources){
+                        //scope.$apply(function() {
 
-
-
-                        scope.eventSources = events;
-
-                    
-                    //scope.eventSources = events;
+                            scope.eventSources = events;
+                        //})
+                    }
+                    scope.eventSources = events;
+                    scope.renderCalender();
                 });
-                console.log("event dans directive "+scope.events);
+                console.log("event dans directive "+scope.eventSources);
 
 
                 /**
@@ -139,8 +125,8 @@ angular.module('eklabs.angularStarterPack.calendrier')
                  * @type {{onValid: default_actions.onValid}}
                  */
                 var default_actions = {
-                  onValid : function(user){
-                      $log.info('my user is : ',user)
+                    onValid : function(user){
+                        $log.info('my user is : ',user)
                     }
                 };
 
@@ -155,7 +141,10 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     }
                 });
 
-
+                scope.$watch('render', function(render){
+                    console.log(render);
+                    scope.renderCalender();
+                })
 
             }
         }

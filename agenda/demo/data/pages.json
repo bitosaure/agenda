@@ -4,18 +4,18 @@
   "icon"        : "code",
   "state"       : "jsonEditor"
 },
-{
-  "name"        : "Form Example",
-  "description" : "Example how to use a form",
-  "icon"        : "bug_report",
-  "state"       : "myForm"
-},
-{
-  "name"        : "Notification",
-  "description" : "Route Notification. Show all user's notifications",
-  "icon"        : "email",
-  "state"       : "notification"
-},
+  {
+    "name"        : "Form Example",
+    "description" : "Example how to use a form",
+    "icon"        : "bug_report",
+    "state"       : "myForm"
+  },
+  {
+    "name"        : "Notification",
+    "description" : "Route Notification. Show all user's notifications",
+    "icon"        : "email",
+    "state"       : "notification"
+  },
   {
     "name"        : "Calendrier",
     "description" : "Voici notre calendrier",

@@ -5,8 +5,8 @@
 
 angular.module('demoApp')
     .controller('calendrierCtrl', function($scope,$filter,$http,$q){
-        
-        
+
+
         // ----------------------------------------------------------------------------------------------------
         // ---- PARAMS CATALOGUE
         // ----------------------------------------------------------------------------------------------------
@@ -27,7 +27,6 @@ angular.module('demoApp')
              */
             case       : 'Case inject Json',
             options    : undefined,
-            /*
             eventSources: [
                 { events :
                     [
@@ -37,17 +36,6 @@ angular.module('demoApp')
                         {title: 'Click for Google',start: new Date(2016, 11, 28,15,0),end: new Date(2016, 11, 29,15,0),url: 'http://google.com/'}
                     ]
                 }
-            ],
-            */
-            eventSources: [
-
-                    [
-                        {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
-                        {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
-                        {title: 'Birthday Party',start: new Date(2016, 11, 25, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
-                        {title: 'Click for Google',start: new Date(2016, 11, 28,15,0),end: new Date(2016, 11, 29,15,0),url: 'http://google.com/'}
-                    ]
-
             ],
             //json       : {"hello" : "world"},
             callback   : undefined,
@@ -61,16 +49,13 @@ angular.module('demoApp')
             options    : undefined,
             json       : undefined,
             eventSources: [
-                {events: [
-
+                { events :
+                    [
                         {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
                         {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
                         {title: 'Birthday Party',start: new Date(2016, 11, 25, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
                         {title: 'Click for Google',start: new Date(2016, 11, 28,15,0),end: new Date(2016, 11, 29,15,0),url: 'http://google.com/'}
-
-                ],
-                    color: 'black',
-                    textColor: 'yellow'
+                    ]
                 }
             ],
             callback   : {
@@ -84,25 +69,33 @@ angular.module('demoApp')
                 }
             }
         }];
-        console.log($scope);
+
         $scope.chooseParams = function(index){
             // --- Define current status
+            $scope.events = [{events:[]}];
 
-            $scope.events       = $scope.params[index].eventSources;
+            if(index == 0){
+                $scope.events.push([{events:[]}]);
+            }else{
+                $scope.events.slice(0, $scope.params[index].eventSources.length);
+                for(var i = 0; i < $scope.params[index].eventSources.length; ++i) {
+                    $scope.events.push($scope.params[index].eventSources[i]);
+                }
+            }
+
+            //$scope.events       = $scope.params[index].eventSources;
             $scope.myOptions    = $scope.params[index].options;
             $scope.myJson       = $scope.params[index].json;
             $scope.myCallback   = $scope.params[index].callback;
             $scope.myListener   = $scope.params[index].listeners;
 
             $scope.index          = index;
-            $scope.refresh        = moment().valueOf();
+            $scope.triggerRender  = moment().valueOf();
             $scope.haveResult     = false;
-
-            console.log($scope.events);
         };
 
         // --- Init
-        $scope.chooseParams(0);
+        $scope.chooseParams(1);
 
         // --- Update result viewer
         var displayCode = function(from,code,isError){
