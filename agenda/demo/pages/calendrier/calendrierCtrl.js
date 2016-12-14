@@ -17,7 +17,7 @@ angular.module('demoApp')
              */
             case       : 'Default Case',
             options    : undefined,
-            eventSources : undefined,
+            eventSources :undefined,
             json       : undefined,
             callback   : undefined,
             listeners  : undefined
@@ -72,8 +72,15 @@ angular.module('demoApp')
 
         $scope.chooseParams = function(index){
             // --- Define current status
-            $scope.events = [{events:[]}];
 
+            $scope.events = $scope.params[index].eventSources;
+
+            /*
+            $scope.events = [];
+            $scope.events.splice(0, $scope.events.length);
+            $scope.events.push($scope.params[index].eventSources);
+            */
+            /*
             if(index == 0){
                 $scope.events.push([{events:[]}]);
             }else{
@@ -82,6 +89,7 @@ angular.module('demoApp')
                     $scope.events.push($scope.params[index].eventSources[i]);
                 }
             }
+            */
 
             //$scope.events       = $scope.params[index].eventSources;
             $scope.myOptions    = $scope.params[index].options;
@@ -92,6 +100,8 @@ angular.module('demoApp')
             $scope.index          = index;
             $scope.triggerRender  = moment().valueOf();
             $scope.haveResult     = false;
+
+            //$('#calendar').fullCalendar('refetchEvents');
         };
 
         // --- Init

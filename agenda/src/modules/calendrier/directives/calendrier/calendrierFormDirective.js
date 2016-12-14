@@ -67,7 +67,11 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 /* Change View */
                 scope.renderCalender = function(calendar) {
                     if(uiCalendarConfig.calendars[calendar]){
-                        uiCalendarConfig.calendars[calendar].fullCalendar('render');
+
+                            uiCalendarConfig.calendars[calendar].fullCalendar('render');
+
+
+
                     }
                 };
 
@@ -108,24 +112,22 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 /**
                  *
                  */
-                scope.$watch('eventSources', function(events){
+                scope.$watch('eventSources', function(events,calendar){
 
-                    //uiCalendarConfig.calendars['calendar'].fullCalendar('refetchEvents');
+
 
                     if(scope.eventSources){
+                        //angular.element('.calendar').fullCalendar('refetchEvents');
+
                         //scope.eventSources = [];
                         //scope.$apply(function() {
 
                         //scope.eventSources = events;
                         //console.log("test "+events);
-                        /*
-                        angular.forEach(events,function(ev){
-                            scope.eventSources.push(ev);
-
-                        });
-                        */
-                        
+                        //scope.eventSources.splice(0);
                         angular.element('.calendar').fullCalendar('renderCalender',angular.element('.calendar'));
+
+                        
                         //angular.element('.calendar').fullCalendar('renderEvents');
                         //uiCalendarConfig.calendars['calendar'].fullCalendar('addEventSource', events);
                         //})
