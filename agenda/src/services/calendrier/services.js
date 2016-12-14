@@ -28,5 +28,5 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     return errorCallback(response);
                 });
         };
-    }
+    });
     
