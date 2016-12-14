@@ -23,6 +23,16 @@ angular.module('eklabs.angularStarterPack.event')
                     });
         };
 
+        this.getAttendee = function(person_id){
+            return $http.get($config.getPersonBaseUrl() + person_id, $config).then(
+                function(response){
+                    return successCallback(response);
+                },
+                function(response){
+                    return errorCallback(response);
+                });
+        };
+
         this.createEvent = function(params){
                 return $http.post($config.getEventBaseUrl() + 'event/', params, $config).then(
                     function(response){
