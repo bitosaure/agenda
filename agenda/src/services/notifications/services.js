@@ -15,7 +15,7 @@ angular.module('eklabs.angularStarterPack.notification')
 
         this.getNotifications = function () {
 
-            console.log($config.getNotificationBaseUrl());
+            //console.log($config.getNotificationBaseUrl());
 
             return $http.get('http://91.134.241.60:3080/resources/notifications/'/*, $config*/).then(
                 function(response){
@@ -25,7 +25,7 @@ angular.module('eklabs.angularStarterPack.notification')
                         notifications.push(new notificationFactory(value));
                     });
 
-                    console.log(notifications);
+                    //console.log(notifications);
                     return notifications;
                 },
                 function(response){

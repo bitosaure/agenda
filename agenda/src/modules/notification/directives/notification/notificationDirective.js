@@ -7,13 +7,53 @@ angular.module('eklabs.angularStarterPack.notification')
             scope : {
                 user        : '=',
                 callback    : '=?',
-                myJson : '=?'
+                json      : '=?'
             },link : function(scope){
 
+                var bjson = false;
+                var bcallback = false;
 
-                scope.$watch('myJson', function(myJson){
-                    scope.myJson = myJson;
-                    console.log(myJson);
+                var notification_actions = {
+                    erase : function(){
+                        if(scope.notifications)
+                                if(!bcallback && !bjson)
+                                    scope.notifications = undefined;
+                    },
+
+                    remote : function(){
+                        notificationService.getNotifications().then(function(response){
+                            scope.notifications = response;
+                        });
+                    },
+
+                    local : function(json){
+                        scope.notifications = json;
+                    }
+
+
+                };
+
+                scope.$watch('json', function(json){
+                        if(json){
+                            bjson = true;
+                            notification_actions.local(json);
+                        }else{
+                            bjson = false;
+                            notification_actions.erase();
+                        }
+                });
+
+                /**
+                 * Check if callback in params
+                 */
+                scope.$watch('callback', function(callback){
+                    if(callback){
+                        bcallback = true;
+                        notification_actions.remote();
+                    }else{
+                        bcallback = false;
+                        notification_actions.erase();
+                    }
                 });
 
 
@@ -38,8 +78,8 @@ angular.module('eklabs.angularStarterPack.notification')
                 };
 
                 notificationService.getNotifications().then(function(response){
-                    console.log(response);
-                    scope.notifications = response;
+                    //console.log(response);
+                    //scope.notifications = response;
                 });
 
                 //scope.notifications = notification.getNotifications;
