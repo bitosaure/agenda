@@ -2,7 +2,6 @@
 
 angular.module('eklabs.angularStarterPack.event')
     .service("eventService", function($http, $config, eventFactory){
-    console.log($config.getEventBaseUrl());
 
         function successCallback (response){
             console.log(response);
@@ -47,6 +46,17 @@ angular.module('eklabs.angularStarterPack.event')
                     return errorCallback(response);
                 });
         };
+
+        this.getEvent = function(event_id){
+            return $http.get($config.getEventBaseUrl()+event_id, $config).then(
+                function(response){
+                        return new eventFactory(response.data);
+                },
+                function(response){
+                    return errorCallback(response);
+                });
+        };
+
         /*this.updateEvent = function(params){
                 $http.put($config.getEventBaseUrl() + '/updateEvent/' + params.id, data, $config).then(function(response){
                         successCallback(response);
