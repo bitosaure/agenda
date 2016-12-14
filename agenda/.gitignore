@@ -54,7 +54,7 @@ demo/bower_components
 !/.bowerrc
 
 # Config
-demo/config.js
+#demo/config.js
 
 # CSS
 *.css.map
