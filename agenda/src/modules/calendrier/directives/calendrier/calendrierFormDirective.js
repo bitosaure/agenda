@@ -8,7 +8,10 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 eventSources : '=?',
                 callback    : '=?',
                 render : '=?',
-                json      : '=?'
+                json      : '=?',
+                dateDeb : '=?',
+                dateFin : '=?'
+
 
             },link : function(scope){
 
@@ -24,12 +27,10 @@ angular.module('eklabs.angularStarterPack.calendrier')
 
                     remote : function(){
                             console.log("remote");
-                        calendrierService.getEventsCalendarParametrableDateDebut(new Date()).then(function(response){
-
-
+                            calendrierService.getEventsCalendarParametrableDateDebut(scope.dateDeb,scope.dateFin).then(function(response){
                             scope.eventSources =  [
                                 { events :response}];
-                        });
+                            });
                     },
 
                     local : function(json){
@@ -66,6 +67,14 @@ angular.module('eklabs.angularStarterPack.calendrier')
                         bcallback = false;
                         calendar_actions.erase();
                     }
+                });
+                scope.$watch('dateDeb',function(dateDebut){
+                    scope.dateDeb = dateDebut;
+                    calendar_actions.remote();
+                });
+                scope.$watch('dateFin',function(dateFin){
+                    scope.dateFin = dateFin;
+                    calendar_actions.remote();
                 });
 
                 /* Change View */

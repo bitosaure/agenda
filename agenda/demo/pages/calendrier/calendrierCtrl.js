@@ -104,6 +104,8 @@ angular.module('demoApp')
             $scope.index          = index;
             $scope.triggerRender  = moment().valueOf();
             $scope.haveResult     = false;
+            $scope.dateDeb = new Date('2016-12-15');
+            $scope.dateFin = new Date('2017-01-15');
 
             //$('#calendar').fullCalendar('refetchEvents');
         };

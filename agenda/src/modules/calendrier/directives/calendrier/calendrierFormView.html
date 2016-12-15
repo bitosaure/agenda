@@ -1,3 +1,14 @@
+<div layout-gt-sm="row">
+    <md-input-container flex-gt-sm>
+        <label>Depuis</label>
+        <md-datepicker required ng-model="dateDeb"></md-datepicker>
+    </md-input-container>
+    <md-input-container flex-gt-sm>
+        <label>Jusqu'à</label>
+        <md-datepicker required ng-model="dateFin"></md-datepicker>
+    </md-input-container>
+</div>
+
 <div id="toto" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="calendar" ng-if="isAvailable"></div>
 
 

@@ -31,18 +31,43 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     return errorCallback(response);
                 });
         };
-        this.getEventsCalendarParametrableDateDebut = function (date) {
+        this.getEventsCalendarParametrableDateDebut = function (dateDeb,dateFin) {
             return $http.get($config.getEventBaseUrl() , $config).then(
                 function (response) {
                     var eventsCalendar = [];
 
                     angular.forEach(response.data, function (value) {
-                        var obj=new calendrierFactory(value);
-
-                        if(new Date(obj.start)>new Date(date)){
-                            eventsCalendar.push(obj);
-
+                        if (dateDeb) {
+                            if(dateFin){
+                                var obj = new calendrierFactory(value);
+                                var dateObj = new Date(obj.start);
+                                var dtDeb = new Date(dateDeb);
+                                var dtFin = new Date(dateFin);
+                                if (dateObj > dtDeb && dateObj < dtFin) {
+                                    eventsCalendar.push(obj);
+                                }
+                            }else{
+                                var obj = new calendrierFactory(value);
+                                var dateObj = new Date(obj.start);
+                                var dtDeb = new Date(dateDeb);
+                                if (dateObj > dtDeb) {
+                                    eventsCalendar.push(obj);
+                                }
+                            }
+                        }else{
+                            if(dateFin){
+                                var obj = new calendrierFactory(value);
+                                var dateObj = new Date(obj.start);
+                                var dtFin = new Date(dateFin);
+                                if (dateObj < dtFin) {
+                                    eventsCalendar.push(obj);
+                                }
+                            }else{
+                                var obj = new calendrierFactory(value);
+                                eventsCalendar.push(obj);
+                            }
                         }
+
 
 
                     });
