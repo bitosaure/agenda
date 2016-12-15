@@ -1,6 +1,10 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack')
+    .config(['$qProvider', function ($qProvider) {
+        $qProvider.errorOnUnhandledRejections(false);
+    }])
+
     .constant('WEBAPP_CONFIG', {
         api         : 'http://91.134.241.60:3080/',
         resources  : 'resources/',
