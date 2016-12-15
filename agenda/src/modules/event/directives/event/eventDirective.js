@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .directive('event', function($log, eventService){
+    .directive('event', function($log, eventService, listEventFactory){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/event/directives/event/eventView.html',
             scope : {
@@ -11,24 +11,25 @@ angular.module('eklabs.angularStarterPack.event')
                 scope.case = 0;
                 scope.update_event = false;
 
-                eventService.getEvents().then(function(response){
+                /*eventService.getEvents().then(function(response){
                     console.log(response);
                     scope.events = response;
-                });
-
-                scope.loadEvent = function(event_id){
+                });*/
+                scope.events = listEventFactory.eventList();
+                console.log(scope.events);
+                /*scope.loadEvent = function(event_id){
                     eventService.getEvent(event_id).then(function(response){
-                        scope.event = response();
+                        scope.event = response;
                         scope.case = 1;
                     });
-                };
+                };*:
 
-                scope.loadEvents = function(){
+                /*scope.loadEvents = function(){
                     eventService.getEvents().then(function(response){
                         console.log(response);
                         scope.events = response;
                     });
-                };
+                };*/
 
                 scope.openFormCreateEvent = function(){
                     eventService.getAttendees().then(function(response){

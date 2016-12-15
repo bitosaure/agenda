@@ -1,36 +1,15 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .service("eventService", function($http, $config, eventFactory){
+    .service("eventService", function($http, $config){
 
         function successCallback (response){
-            console.log(response);
-            return response;
+            return response.data;
         };
 
         function errorCallback(response){
             console.log(response);
             return {};
-        };
-
-        this.getAttendees = function(){
-                return $http.get($config.getPersonBaseUrl(), $config).then(
-                    function(response){
-                        return successCallback(response);
-                    },
-                    function(response){
-                        return errorCallback(response);
-                    });
-        };
-
-        this.getAttendee = function(person_id){
-            return $http.get($config.getPersonBaseUrl() + person_id, $config).then(
-                function(response){
-                    return successCallback(response);
-                },
-                function(response){
-                    return errorCallback(response);
-                });
         };
 
         this.createEvent = function(params){
@@ -46,21 +25,17 @@ angular.module('eklabs.angularStarterPack.event')
         this.getEvents = function(){
             return $http.get($config.getEventBaseUrl(), $config).then(
                 function(response){
-                    var events = [];
-                    angular.forEach(response.data, function(value){
-                        events.push(new eventFactory(value));
-                    });
-                    return events;
+                    return successCallback(response);
                 },
-                function(response){
-                    return errorCallback(response);
+                function(){
+                    return [];
                 });
         };
 
         this.getEvent = function(event_id){
             return $http.get($config.getEventBaseUrl()+event_id, $config).then(
                 function(response){
-                        return new eventFactory(response.data);
+                    return successCallback(response);
                 },
                 function(response){
                     return errorCallback(response);
@@ -127,4 +102,35 @@ angular.module('eklabs.angularStarterPack.event')
                 });
         };*/
 
-});
+    })
+
+    .service("personService", function($http, $config) {
+
+        function successCallback (response){
+            return response.data;
+        };
+
+        function errorCallback(response){
+            return {};
+        };
+
+        this.getAttendee = function(person_id){
+            return $http.get($config.getPersonBaseUrl()+person_id, $config).then(
+                function(response){
+                    return successCallback(response);
+                },
+                function(){
+                    return []//errorCallback(response);
+                });
+        };
+
+        this.getAttendees = function(){
+            return $http.get($config.getPersonBaseUrl(), $config).then(
+                function(response){
+                    return successCallback(response);
+                },
+                function(response){
+                    return errorCallback(response);
+                });
+        };
+    });
