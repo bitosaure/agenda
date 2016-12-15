@@ -1,20 +1,92 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.calendrier')
-    .directive('calendrier',function($log, uiCalendarConfig,$compile){
+    .directive('calendrier',function($log, uiCalendarConfig,$compile,$timeout,calendrierService){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/calendrier/directives/calendrier/calendrierFormView.html',
             scope : {
                 eventSources : '=?',
                 callback    : '=?',
-                render : '=?'
+                render : '=?',
+                json      : '=?',
+                dateDeb : '=?',
+                dateFin : '=?',
+                index : '=?'
+
 
             },link : function(scope){
+
+                var bjson = false;
+                var bcallback = false;
+
+                var calendar_actions = {
+                    erase : function(){
+                        if(scope.eventSources)
+                            if(!bcallback && !bjson)
+                                scope.eventSources = undefined;
+                    },
+
+                    remote : function(){
+                            console.log("remote");
+                            calendrierService.getEventsCalendarParametrableDateDebut(scope.dateDeb,scope.dateFin).then(function(response){
+                            scope.eventSources =  [
+                                { events :response}];
+                            });
+                    },
+
+                    local : function(json){
+
+                        scope.eventSources = json;
+                    }
+
+
+                };
+                scope.$watch('json', function(json){
+                    if(json){
+
+                        bjson = true;
+                        calendar_actions.local(json);
+                    }else{
+
+                        bjson = false;
+                        calendar_actions.erase();
+                    }
+                });
+
+                /**
+                 * Check if callback in params
+                 */
+                scope.$watch('callback', function(callback){
+                    console.log("call");
+
+                    if(callback){
+                        console.log("call2");
+
+                        bcallback = true;
+                        calendar_actions.remote();
+                    }else{
+                        bcallback = false;
+                        calendar_actions.erase();
+                    }
+                });
+                scope.$watch('dateDeb',function(dateDebut){
+                    scope.dateDeb = dateDebut;
+                    calendar_actions.remote();
+                });
+                scope.$watch('dateFin',function(dateFin){
+                    scope.dateFin = dateFin;
+                    calendar_actions.remote();
+                });
+                scope.$watch('index',function(index){
+                    scope.index = index;
+                });
 
                 /* Change View */
                 scope.changeView = function(view,calendar) {
                     uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
                 };
+
+
                 /* Change View */
                 scope.renderCalender = function(calendar) {
                     if(uiCalendarConfig.calendars[calendar]){
@@ -67,7 +139,11 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 /* Change View */
                 scope.renderCalender = function(calendar) {
                     if(uiCalendarConfig.calendars[calendar]){
-                        uiCalendarConfig.calendars[calendar].fullCalendar('render');
+
+                            uiCalendarConfig.calendars[calendar].fullCalendar('render');
+
+
+
                     }
                 };
 
@@ -81,9 +157,10 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     $compile(element)(scope);
 
                 };
-                //scope.uiConfig.calendar.dayNames = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
-                //scope.uiConfig.calendar.dayNamesShort = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
 
+                /**
+                 * Configuration du calendrier
+                 */
                 scope.uiConfig = {
                     calendar:{
                         monthNames:["Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"],
@@ -106,43 +183,17 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 //scope.eventSources = [scope.events,scope.events];
                 //console.log("test event sources "+scope.eventSources);
                 /**
-                 *
+                 * Watch permet de detecter des changements de données sur la variable eventSources
                  */
                 scope.$watch('eventSources', function(events){
-
-                    //uiCalendarConfig.calendars['calendar'].fullCalendar('refetchEvents');
-
-                    if(scope.eventSources){
-                        //scope.eventSources = [];
-                        //scope.$apply(function() {
-
-                        //scope.eventSources = events;
-                        //console.log("test "+events);
-                        /*
-                        angular.forEach(events,function(ev){
-                            scope.eventSources.push(ev);
-
-                        });
-                        */
-                        
-                        angular.element('.calendar').fullCalendar('renderCalender',angular.element('.calendar'));
-                        //angular.element('.calendar').fullCalendar('renderEvents');
-                        //uiCalendarConfig.calendars['calendar'].fullCalendar('addEventSource', events);
-                        //})
-                    }else{
-
-                        angular.element('.calendar').fullCalendar('removeEvents');
-                    }
-                    //scope.eventSources = [];
-                    //scope.eventSources = events;
-                    console.log("eventSources "+scope.eventSources);
-                    console.log("events "+events);
-                    //scope.renderCalender();
+                    scope.isAvailable = false;
+                    $timeout(function(){
+                        scope.$apply(function(){
+                            scope.isAvailable = true;
+                        })
+                    },0)
                 });
                 
-                console.log("event dans directive "+scope.eventSources);
-
-
                 /**
                  * Default Actions
                  * @type {{onValid: default_actions.onValid}}
@@ -153,21 +204,50 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     }
                 };
 
+               /*
+
                 /**
                  * Catch Callback
                  */
+
+                /*
                 scope.$watch('callback', function(callback){
                     if(callback instanceof Object){
                         scope.actions = angular.extend({},default_actions,callback);
                     }else{
                         scope.actions = default_actions;
                     }
+
+
                 });
 
+                */
                 scope.$watch('render', function(render){
                     console.log(render);
                     scope.renderCalender();
                 })
+
+
+
+                scope.showUnreaded = true;
+                scope.showReaded = false;
+
+                scope.changeVisibility = function(b) {
+
+                    //Si b est égal à true, on se focalise sur les notifications non vue
+                    if(b){
+                        if(scope.showUnreaded)
+                            scope.showUnreaded = false;
+                        else
+                            scope.showUnreaded = true;
+                    }else{
+                        if(scope.showReaded)
+                            scope.showReaded = false;
+                        else
+                            scope.showReaded = true;
+                    }
+
+                };
 
             }
         }

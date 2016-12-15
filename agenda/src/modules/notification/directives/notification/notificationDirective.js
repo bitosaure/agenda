@@ -5,9 +5,57 @@ angular.module('eklabs.angularStarterPack.notification')
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/notification/directives/notification/notificationView.html',
             scope : {
-                user        : '=',
-                callback    : '=?'
+                callback    : '=?',
+                json      : '=?'
             },link : function(scope){
+
+                var bjson = false;
+                var bcallback = false;
+
+                var notification_actions = {
+                    erase : function(){
+                        if(scope.notifications)
+                                if(!bcallback && !bjson)
+                                    scope.notifications = undefined;
+                    },
+
+                    remote : function(){
+                        notificationService.getNotifications().then(function(response){
+                            scope.notifications = response;
+                        });
+                    },
+
+                    local : function(json){
+                        scope.notifications = json;
+                    }
+
+
+                };
+
+                scope.$watch('json', function(json){
+                        if(json){
+                            bjson = true;
+                            notification_actions.local(json);
+                        }else{
+                            bjson = false;
+                            notification_actions.erase();
+                        }
+                });
+
+                /**
+                 * Check if callback in params
+                 */
+                scope.$watch('callback', function(callback){
+                    if(callback){
+                        callback.valid();
+                        bcallback = true;
+                        notification_actions.remote();
+                    }else{
+                        bcallback = false;
+                        notification_actions.erase();
+                    }
+                });
+
 
                 scope.showUnreaded = true;
                 scope.showReaded = false;
@@ -29,14 +77,7 @@ angular.module('eklabs.angularStarterPack.notification')
 
                 };
 
-                notificationService.getNotifications().then(function(response){
-                    console.log(response);
-                    scope.notifications = response;
-                });
 
-                //scope.notifications = notification.getNotifications;
-
-                //console.log(notification.test);
 
             }
         }

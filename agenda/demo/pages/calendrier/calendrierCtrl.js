@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('demoApp')
-    .controller('calendrierCtrl', function($scope,$filter,$http,$q){
+    .controller('calendrierCtrl', function($scope,$filter,$http,$q,calendrierService){
 
 
         // ----------------------------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ angular.module('demoApp')
              */
             case       : 'Default Case',
             options    : undefined,
-            eventSources : undefined,
+            eventSources :undefined,
             json       : undefined,
             callback   : undefined,
             listeners  : undefined
@@ -27,7 +27,7 @@ angular.module('demoApp')
              */
             case       : 'Case inject Json',
             options    : undefined,
-            eventSources: [
+            json: [
                 { events :
                     [
                         {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
@@ -45,19 +45,10 @@ angular.module('demoApp')
             /**
              * Callback active
              */
-            case       : 'Case Callback and Function',
+            case       : 'Case call api',
             options    : undefined,
             json       : undefined,
-            eventSources: [
-                { events :
-                    [
-                        {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
-                        {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
-                        {title: 'Birthday Party',start: new Date(2016, 11, 25, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
-                        {title: 'Click for Google',start: new Date(2016, 11, 28,15,0),end: new Date(2016, 11, 29,15,0),url: 'http://google.com/'}
-                    ]
-                }
-            ],
+            eventSources: undefined,
             callback   : {
                 valid : function(json){
                     displayCode('Callback : valid',json);
@@ -72,30 +63,21 @@ angular.module('demoApp')
 
         $scope.chooseParams = function(index){
             // --- Define current status
-            $scope.events = [{events:[]}];
 
-            if(index == 0){
-                $scope.events.push([{events:[]}]);
-            }else{
-                $scope.events.slice(0, $scope.params[index].eventSources.length);
-                for(var i = 0; i < $scope.params[index].eventSources.length; ++i) {
-                    $scope.events.push($scope.params[index].eventSources[i]);
-                }
-            }
-
-            //$scope.events       = $scope.params[index].eventSources;
+            $scope.events = $scope.params[index].eventSources;
             $scope.myOptions    = $scope.params[index].options;
             $scope.myJson       = $scope.params[index].json;
             $scope.myCallback   = $scope.params[index].callback;
             $scope.myListener   = $scope.params[index].listeners;
-
             $scope.index          = index;
             $scope.triggerRender  = moment().valueOf();
             $scope.haveResult     = false;
+            $scope.dateDeb = new Date();
+            $scope.dateFin = new Date('2017-01-15');
         };
 
         // --- Init
-        $scope.chooseParams(1);
+        $scope.chooseParams(0);
 
         // --- Update result viewer
         var displayCode = function(from,code,isError){

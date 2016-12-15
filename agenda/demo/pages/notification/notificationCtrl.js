@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('demoApp')
-    .controller('notificationCtrl', function($scope,$mdDialog){
+    .controller('notificationCtrl', function($scope,$mdDialog, $mdToast){
 
         // ----------------------------------------------------------------------------------------------------
         // ---- PARAMS CATALOGUE
@@ -22,7 +22,22 @@ angular.module('demoApp')
              */
             case       : 'Case inject Json',
             options    : undefined,
-            json       : {"hello" : "world"},
+            json       : [
+                {
+                    "sender" : "Mickhou",
+                    "dateRead" : "",
+                    "dateSend" : "06/12/2016 12:53",
+                    "recipient" : "Florian",
+                    "text" : "Mickhou vous invite à rejoindre l'évènement 'Rendu du module Notification'"
+                },
+                {
+                    "sender" : "Emipisu",
+                    "dateRead" : "28/10/2016 12:22",
+                    "dateSend" : "28/10/2016 11:56",
+                    "recipient" : "Maxime",
+                    "text" : "Emipisu s'est désinscrit(e) à votre évènement 'Crémaillère payante'"
+                }
+            ],
             callback   : undefined,
             listeners  : undefined
 
@@ -34,18 +49,19 @@ angular.module('demoApp')
             options    : undefined,
             json       : undefined,
             callback   : {
-                valid : function(json){
-                    displayCode('Callback : valid',json);
+                valid : function(){
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Case Callback and Function called. Results have been retrieved from the API')
+                            .hideDelay(3000)
+                    );
                 }
             },
-            listeners  : {
-                onError : function(errors){
-                    displayCode('Listeners : onError',errors,true);
-                }
-            }
+            listeners  : undefined
         }];
 
         $scope.chooseParams = function(index){
+
             // --- Define current status
             $scope.myOptions    = $scope.params[index].options;
             $scope.myJson       = $scope.params[index].json;
@@ -60,17 +76,6 @@ angular.module('demoApp')
         // --- Init
         $scope.chooseParams(0);
 
-        // --- Update result viewer
-        var displayCode = function(from,code,isError){
-
-            $scope.haveResult   = true;
-
-            $scope.result       = {
-                code : code,
-                isError : isError,
-                title : from
-            };
-        };
         
         // ----------------------------------------------------------------------------------------------------
         // ---- DISPLAY CODE MODE
@@ -91,13 +96,13 @@ angular.module('demoApp')
             title : 'directive notification',
             haveCodeSource : true,
             code : [{
-                link : 'pages/demoform/code/directive.html',
+                link : 'pages/notification/code/directive.html',
                 language : 'html',
-                title : 'Code HTML de la directive demo-json-editor'
+                title : 'Code HTML de la directive notification'
             },{
-                link : 'pages/demoform/code/contract.json',
+                link : 'pages/notification/code/contract.json',
                 language : 'json',
-                title : 'Params available for the directive demo-json-editor'
+                title : 'Params available for the directive notification'
             }]
         };
 
@@ -109,11 +114,6 @@ angular.module('demoApp')
         $scope.fullScreen = function(){
             $scope.hideParams = !$scope.hideParams;
         };
-
-
-        /**
-         *
-         *
-         */
+        
 
     });

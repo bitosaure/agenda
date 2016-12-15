@@ -1,9 +1,16 @@
-<div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="calendar"></div>
-<li ng-repeat="e in eventSources">
+<div ng-show="index==2" layout-gt-sm="row">
+    <md-input-container flex-gt-sm>
+        <label>Depuis</label>
+        <md-datepicker required ng-model="dateDeb"></md-datepicker>
+    </md-input-container>
+    <md-input-container flex-gt-sm>
+        <label>Jusqu'à</label>
+        <md-datepicker required ng-model="dateFin"></md-datepicker>
+    </md-input-container>
+</div>
 
-    {{e.title}} {{e.start}}
+<div id="toto" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="calendar" ng-if="isAvailable"></div>
 
-</li>
 
 <script>
 

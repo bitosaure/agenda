@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .factory('eventFactory', function() {
+    .factory('eventFactory', function(personFactory, eventService)  {
 
         function eventFactory(eventObj){
             this.id = eventObj.id;
@@ -9,13 +9,85 @@ angular.module('eklabs.angularStarterPack.event')
             this.image = eventObj.image;
             this.description = eventObj.description;
             this.location = eventObj.location;
-            this.startDate = eventObj.startDate;
-            this.endDate = eventObj.endDate;
+            this.startDate = new Date(eventObj.startDate);
+            this.endDate = new Date(eventObj.endDate);
             this.organizer = eventObj.organizer;
             this.eventStatus = eventObj.eventStatus;
-            this.attendee = eventObj.attendee;
+            this.attendees = getAttendee(eventObj.attendees);
             this.visibility = eventObj.visibility;
         }
 
+        function getAttendee(attendee_array){
+            var attendees = [];
+            angular.forEach(attendee_array, function(value){
+                personFactory.getById(value).then(function(person)
+                {
+                    var attendee = person;
+                    attendees.push(attendee);
+                });
+            });
+            return attendees;
+        }
+
+        function create(){
+            console.log(this);
+        }
+
         return eventFactory;
-});
+    })
+
+    .factory('listEventFactory', function(personService, eventService, eventFactory, $q)  {
+
+        return {
+            eventList : function(){
+                var defer = $q.defer();
+                eventService.getEvents().then(function (response) {
+                    var events_db = response;
+                    var events = [];
+
+                    angular.forEach(events_db, function (event) {
+                        console.log("Création de l'event");
+                        var event_tmp = new eventFactory(event);
+                        events.push(event_tmp);
+                    });
+                    console.log(events);
+                    defer.resolve(events);
+                })
+                console.log(defer.promise.$$state);
+                return defer.promise;
+            },
+
+            getEventById : function(event_id){
+                var defer = $q.defer();
+                eventService.getEvent(event_id).then(function (response) {
+                    var event = new eventFactory(response);
+                    defer.resolve(event);
+                })
+                return defer.promise;
+            }
+        }
+
+    })
+
+    .factory('personFactory', function(personService, $q) {
+        return {
+
+            getAll  :  function(){
+                var defer = $q.defer();
+                personService.getAttendees().then(function (response) {
+                    defer.resolve(response);
+                })
+                return defer.promise;
+            },
+
+            getById : function(person_id){
+                var defer = $q.defer();
+                personService.getAttendee(person_id).then(function (response) {
+                    defer.resolve(response);
+                })
+                return defer.promise;
+            }
+        }
+
+    });
+
