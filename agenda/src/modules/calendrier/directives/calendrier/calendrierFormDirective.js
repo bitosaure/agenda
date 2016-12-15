@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.calendrier')
-    .directive('calendrier',function($log, uiCalendarConfig,$compile,$timeout){
+    .directive('calendrier',function($log, uiCalendarConfig,$compile,$timeout,calendrierService){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/calendrier/directives/calendrier/calendrierFormView.html',
             scope : {
@@ -15,6 +15,12 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 scope.changeView = function(view,calendar) {
                     uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
                 };
+                calendrierService.getEventsCalendar().then(function(response){
+
+                    scope.eventSources =  [
+                        { events :response}];
+                });
+
                 /* Change View */
                 scope.renderCalender = function(calendar) {
                     if(uiCalendarConfig.calendars[calendar]){

@@ -45,7 +45,7 @@ angular.module('demoApp')
             /**
              * Callback active
              */
-            case       : 'Case Callback and Function',
+            case       : 'Case call api',
             options    : undefined,
             json       : undefined,
             eventSources: [
