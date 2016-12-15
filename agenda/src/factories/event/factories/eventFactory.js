@@ -59,7 +59,7 @@ angular.module('eklabs.angularStarterPack.event')
         }*/
         return {
             eventList : function(){
-                return eventService.getEvents().then(function (response) {
+                eventService.getEvents().then(function (response) {
                     var events_db = response;
                     console.log(events_db);
                     var events = [];
