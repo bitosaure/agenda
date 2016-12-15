@@ -77,6 +77,7 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 scope.$watch('dateFin',function(dateFin){
                     scope.dateFin = dateFin;
                     if(callback) {
+                        
                         calendar_actions.remote();
                     }
                 });

@@ -77,6 +77,7 @@ angular.module('demoApp')
             $scope.haveResult     = false;
             $scope.dateDeb = new Date();
             $scope.dateFin =  new Date(y, m+2, d );
+            
         };
 
         // --- Init
