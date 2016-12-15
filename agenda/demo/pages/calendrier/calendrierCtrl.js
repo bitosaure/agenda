@@ -27,7 +27,7 @@ angular.module('demoApp')
              */
             case       : 'Case inject Json',
             options    : undefined,
-            eventSources: [
+            json: [
                 { events :
                     [
                         {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
@@ -64,8 +64,9 @@ angular.module('demoApp')
         $scope.chooseParams = function(index){
             // --- Define current status
 
+            $scope.events = $scope.params[index].eventSources;
 
-            if(index==2){
+            /*if(index==2){
                 calendrierService.getEventsCalendar().then(function(response){
 
                     $scope.events =  [
@@ -73,8 +74,11 @@ angular.module('demoApp')
                 });
             }
             else{
-                $scope.events = $scope.params[index].eventSources;
+
             }
+
+
+
             /*
             $scope.events = [];
             $scope.events.splice(0, $scope.events.length);
@@ -105,7 +109,7 @@ angular.module('demoApp')
         };
 
         // --- Init
-        $scope.chooseParams(2);
+        $scope.chooseParams(0);
 
         // --- Update result viewer
         var displayCode = function(from,code,isError){

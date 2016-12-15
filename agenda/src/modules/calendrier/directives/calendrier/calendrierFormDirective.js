@@ -1,15 +1,72 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.calendrier')
-    .directive('calendrier',function($log, uiCalendarConfig,$compile,$timeout){
+    .directive('calendrier',function($log, uiCalendarConfig,$compile,$timeout,calendrierService){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/calendrier/directives/calendrier/calendrierFormView.html',
             scope : {
                 eventSources : '=?',
                 callback    : '=?',
-                render : '=?'
+                render : '=?',
+                json      : '=?'
 
             },link : function(scope){
+
+                var bjson = false;
+                var bcallback = false;
+
+                var calendar_actions = {
+                    erase : function(){
+                        if(scope.eventSources)
+                            if(!bcallback && !bjson)
+                                scope.eventSources = undefined;
+                    },
+
+                    remote : function(){
+                            console.log("remote");
+                        calendrierService.getEventsCalendarParametrableDateDebut(new Date()).then(function(response){
+
+
+                            scope.eventSources =  [
+                                { events :response}];
+                        });
+                    },
+
+                    local : function(json){
+
+                        scope.eventSources = json;
+                    }
+
+
+                };
+                scope.$watch('json', function(json){
+                    if(json){
+
+                        bjson = true;
+                        calendar_actions.local(json);
+                    }else{
+
+                        bjson = false;
+                        calendar_actions.erase();
+                    }
+                });
+
+                /**
+                 * Check if callback in params
+                 */
+                scope.$watch('callback', function(callback){
+                    console.log("call");
+
+                    if(callback){
+                        console.log("call2");
+
+                        bcallback = true;
+                        calendar_actions.remote();
+                    }else{
+                        bcallback = false;
+                        calendar_actions.erase();
+                    }
+                });
 
                 /* Change View */
                 scope.changeView = function(view,calendar) {
@@ -134,21 +191,50 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     }
                 };
 
+               /*
+
                 /**
                  * Catch Callback
                  */
+
+                /*
                 scope.$watch('callback', function(callback){
                     if(callback instanceof Object){
                         scope.actions = angular.extend({},default_actions,callback);
                     }else{
                         scope.actions = default_actions;
                     }
+
+
                 });
 
+                */
                 scope.$watch('render', function(render){
                     console.log(render);
                     scope.renderCalender();
                 })
+
+
+
+                scope.showUnreaded = true;
+                scope.showReaded = false;
+
+                scope.changeVisibility = function(b) {
+
+                    //Si b est égal à true, on se focalise sur les notifications non vue
+                    if(b){
+                        if(scope.showUnreaded)
+                            scope.showUnreaded = false;
+                        else
+                            scope.showUnreaded = true;
+                    }else{
+                        if(scope.showReaded)
+                            scope.showReaded = false;
+                        else
+                            scope.showReaded = true;
+                    }
+
+                };
 
             }
         }
