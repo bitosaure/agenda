@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('demoApp')
-    .controller('calendrierCtrl', function($scope,$filter,$http,$q){
+    .controller('calendrierCtrl', function($scope,$filter,$http,$q,calendrierService){
 
 
         // ----------------------------------------------------------------------------------------------------
@@ -48,16 +48,7 @@ angular.module('demoApp')
             case       : 'Case call api',
             options    : undefined,
             json       : undefined,
-            eventSources: [
-                { events :
-                    [
-                        {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
-                        {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
-                        {title: 'Birthday Party',start: new Date(2016, 11, 25, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
-                        {title: 'Click for Google',start: new Date(2016, 11, 28,15,0),end: new Date(2016, 11, 29,15,0),url: 'http://google.com/'}
-                    ]
-                }
-            ],
+            eventSources: undefined,
             callback   : {
                 valid : function(json){
                     displayCode('Callback : valid',json);
@@ -73,8 +64,17 @@ angular.module('demoApp')
         $scope.chooseParams = function(index){
             // --- Define current status
 
-            $scope.events = $scope.params[index].eventSources;
 
+            if(index==2){
+                calendrierService.getEventsCalendar().then(function(response){
+
+                    $scope.events =  [
+                        { events :response}];
+                });
+            }
+            else{
+                $scope.events = $scope.params[index].eventSources;
+            }
             /*
             $scope.events = [];
             $scope.events.splice(0, $scope.events.length);
