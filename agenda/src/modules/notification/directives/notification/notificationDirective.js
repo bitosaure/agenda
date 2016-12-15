@@ -5,7 +5,6 @@ angular.module('eklabs.angularStarterPack.notification')
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/notification/directives/notification/notificationView.html',
             scope : {
-                user        : '=',
                 callback    : '=?',
                 json      : '=?'
             },link : function(scope){
@@ -48,6 +47,7 @@ angular.module('eklabs.angularStarterPack.notification')
                  */
                 scope.$watch('callback', function(callback){
                     if(callback){
+                        callback.valid();
                         bcallback = true;
                         notification_actions.remote();
                     }else{
@@ -77,14 +77,7 @@ angular.module('eklabs.angularStarterPack.notification')
 
                 };
 
-                notificationService.getNotifications().then(function(response){
-                    //console.log(response);
-                    //scope.notifications = response;
-                });
 
-                //scope.notifications = notification.getNotifications;
-
-                //console.log(notification.test);
 
             }
         }
