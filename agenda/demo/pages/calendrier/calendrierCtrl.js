@@ -65,49 +65,15 @@ angular.module('demoApp')
             // --- Define current status
 
             $scope.events = $scope.params[index].eventSources;
-
-            /*if(index==2){
-                calendrierService.getEventsCalendar().then(function(response){
-
-                    $scope.events =  [
-                        { events :response}];
-                });
-            }
-            else{
-
-            }
-
-
-
-            /*
-            $scope.events = [];
-            $scope.events.splice(0, $scope.events.length);
-            $scope.events.push($scope.params[index].eventSources);
-            */
-            /*
-            if(index == 0){
-                $scope.events.push([{events:[]}]);
-            }else{
-                $scope.events.slice(0, $scope.params[index].eventSources.length);
-                for(var i = 0; i < $scope.params[index].eventSources.length; ++i) {
-                    $scope.events.push($scope.params[index].eventSources[i]);
-                }
-            }
-            */
-
-            //$scope.events       = $scope.params[index].eventSources;
             $scope.myOptions    = $scope.params[index].options;
             $scope.myJson       = $scope.params[index].json;
             $scope.myCallback   = $scope.params[index].callback;
             $scope.myListener   = $scope.params[index].listeners;
-
             $scope.index          = index;
             $scope.triggerRender  = moment().valueOf();
             $scope.haveResult     = false;
-            $scope.dateDeb = new Date('2016-12-15');
+            $scope.dateDeb = new Date();
             $scope.dateFin = new Date('2017-01-15');
-
-            //$('#calendar').fullCalendar('refetchEvents');
         };
 
         // --- Init

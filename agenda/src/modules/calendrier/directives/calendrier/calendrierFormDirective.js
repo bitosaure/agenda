@@ -10,7 +10,8 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 render : '=?',
                 json      : '=?',
                 dateDeb : '=?',
-                dateFin : '=?'
+                dateFin : '=?',
+                index : '=?'
 
 
             },link : function(scope){
@@ -75,6 +76,9 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 scope.$watch('dateFin',function(dateFin){
                     scope.dateFin = dateFin;
                     calendar_actions.remote();
+                });
+                scope.$watch('index',function(index){
+                    scope.index = index;
                 });
 
                 /* Change View */
