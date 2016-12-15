@@ -50,40 +50,64 @@ angular.module('eklabs.angularStarterPack.event')
                         errorCallback(response);
                     });
         };
-        /*this.deleteEvent = function(params){
+        this.deleteEvent = function(params){
                 $http.post($config.getEventBaseUrl() + '/deleteEvent/', params.id , $config).then(function(response){
                         successCallback(response);
                     },
                     function(){
                         errorCallback(response);
                     });
-        };*/
+        };
 
-        this.addParticipant = function(params){
-                $http.put($config.getEventBaseUrl() + '/addParticipant/' + idEvent, params.idPersonne, config).then(function(response){
-                        successCallback(response);
+        this.addParticipant = function(event_id,person_id){
+            return $http.get($config.getEventBaseUrl()+event_id, $config).then(
+                function(response){
+                    return successCallback(response);
+                },
+                function(response){
+                    return errorCallback(response);
+                })
+                .then(function(response){
+                    var data = response;
+                    data.attendees.push(person_id);
+                    this.updateEvent(data);
+                },
+                function(response){
+                    return errorCallback(response);
+                });
+        };
+
+        this.deleteParticipant = function(event_id,person_id){
+            return $http.get($config.getEventBaseUrl()+event_id, $config).then(
+                function(response){
+                    return successCallback(response);
+                },
+                function(response){
+                    return errorCallback(response);
+                })
+                .then(function(response){
+                        var data = response;
+                        var index = data.attendees.indexOf(person_id);
+                        data.attendees.splice(index,1);
+                        this.updateEvent(data);
                     },
-                    function(){
-                        errorCallback(response);
+                    function(response){
+                        return errorCallback(response);
                     });
         };
-
-        /*this.deleteParticipant = function(params){
-                $http.post($config.getEventBaseUrl() + '/someUrl', data, config).then(successCallback, errorCallback);
+        this.joinEvent = function(event_id,person_id){
+                this.addParticipant(event_id,person_id);
         };
-        this.joinEvent = function(params){
-                $http.post($config.getEventBaseUrl() + '/someUrl', data, config).then(successCallback, errorCallback);
-        };
-        this.unsubscribe = function(params){
-                $http.post($config.getEventBaseUrl() + '/someUrl', data, config).then(successCallback, errorCallback);
+        this.unsubscribe = function(event_id,person_id){
+                this.deleteParticipant(event_id,person_id);
         };
         this.acceptInvitation = function(params){
-                $http.post($config.getEventBaseUrl() + '/someUrl', data, config).then(successCallback, errorCallback);
+            this.addParticipant(event_id,person_id);
         };
         this.refuseInvitation = function(params){
-                $http.post($config.getEventBaseUrl() + '/someUrl', data, config).then(successCallback, errorCallback);
+            this.deleteParticipant(event_id,person_id);
         };
-        
+
         this.getEvent = function(params){
                 $http.get($config.getEventBaseUrl() + 'getEvent/' + params, config).then(function(response){
                         console.log(response);
@@ -102,7 +126,7 @@ angular.module('eklabs.angularStarterPack.event')
                 function(){
 
                 });
-        };*/
+        };
 
     })
 
