@@ -70,14 +70,14 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 });
                 scope.$watch('dateDeb',function(dateDebut){
                     scope.dateDeb = dateDebut;
-                    if(callback) {
+                    if(bcallback) {
                         calendar_actions.remote();
                     }
                 });
                 scope.$watch('dateFin',function(dateFin){
                     scope.dateFin = dateFin;
-                    if(callback) {
-                        
+                    if(bcallback) {
+
                         calendar_actions.remote();
                     }
                 });
