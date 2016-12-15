@@ -60,7 +60,6 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     console.log("call");
 
                     if(callback){
-                        console.log("call2");
 
                         bcallback = true;
                         calendar_actions.remote();
@@ -71,11 +70,16 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 });
                 scope.$watch('dateDeb',function(dateDebut){
                     scope.dateDeb = dateDebut;
-                    calendar_actions.remote();
+                    if(bcallback) {
+                        calendar_actions.remote();
+                    }
                 });
                 scope.$watch('dateFin',function(dateFin){
                     scope.dateFin = dateFin;
-                    calendar_actions.remote();
+                    if(bcallback) {
+
+                        calendar_actions.remote();
+                    }
                 });
                 scope.$watch('index',function(index){
                     scope.index = index;

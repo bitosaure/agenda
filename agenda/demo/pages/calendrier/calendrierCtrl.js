@@ -6,7 +6,10 @@
 angular.module('demoApp')
     .controller('calendrierCtrl', function($scope,$filter,$http,$q,calendrierService){
 
-
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
         // ----------------------------------------------------------------------------------------------------
         // ---- PARAMS CATALOGUE
         // ----------------------------------------------------------------------------------------------------
@@ -73,7 +76,8 @@ angular.module('demoApp')
             $scope.triggerRender  = moment().valueOf();
             $scope.haveResult     = false;
             $scope.dateDeb = new Date();
-            $scope.dateFin = new Date('2017-01-15');
+            $scope.dateFin =  new Date(y, m+2, d );
+            
         };
 
         // --- Init
