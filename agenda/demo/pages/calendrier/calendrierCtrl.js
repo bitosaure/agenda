@@ -105,7 +105,7 @@ angular.module('demoApp')
         };
 
         // --- Init
-        $scope.chooseParams(1);
+        $scope.chooseParams(2);
 
         // --- Update result viewer
         var displayCode = function(from,code,isError){
