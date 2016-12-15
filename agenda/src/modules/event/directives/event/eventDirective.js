@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .directive('event', function($log, eventService, listEventFactory){
+    .directive('event', function($log, listEventFactory, personFactory){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/event/directives/event/eventView.html',
             scope : {
@@ -11,31 +11,31 @@ angular.module('eklabs.angularStarterPack.event')
                 scope.case = 0;
                 scope.update_event = false;
 
-                /*eventService.getEvents().then(function(response){
-                    console.log(response);
-                    scope.events = response;
-                });*/
-                scope.events = listEventFactory.eventList();
-                console.log(scope.events);
-                /*scope.loadEvent = function(event_id){
-                    eventService.getEvent(event_id).then(function(response){
-                        scope.event = response;
+                listEventFactory.eventList().then(function(events){
+                    scope.events = events;
+                });
+
+                scope.loadEvent = function(event_id){
+                    listEventFactory.getEventById(event_id).then(function(event){
+                        scope.event = event;
                         scope.case = 1;
                     });
-                };*:
+                };
 
-                /*scope.loadEvents = function(){
-                    eventService.getEvents().then(function(response){
-                        console.log(response);
-                        scope.events = response;
+                scope.loadEvents = function(){
+                    listEventFactory.eventList().then(function(events){
+                        scope.events = events;
                     });
-                };*/
+                };
+
+                scope.createEvent = function(){
+                    event.create();
+                }
 
                 scope.openFormCreateEvent = function(){
-                    eventService.getAttendees().then(function(response){
+                    personFactory.getAll().then(function(persons){
+                        scope.attendee_list = persons;
                         scope.case = 2;
-                        scope.event = new eventFactory();
-                        scope.attendee_list =  response;
                     });
                 };
 
