@@ -3,21 +3,17 @@
 angular.module('eklabs.angularStarterPack.notification')
     .service('notificationService', function($http, $config, notificationFactory) {
 
-        function successCallback (response){
-            console.log(response);
+        function successCallback(response){
             return response;
         };
 
         function errorCallback(response){
-            console.log(response);
             return {};
         };
 
         this.getNotifications = function () {
 
-            //console.log($config.getNotificationBaseUrl());
-
-            return $http.get('http://91.134.241.60:3080/resources/notifications/'/*, $config*/).then(
+            return $http.get('http://91.134.241.60:3080/resources/notifications/').then(
                 function(response){
 
                     var notifications = [];
@@ -32,7 +28,7 @@ angular.module('eklabs.angularStarterPack.notification')
                 }
             )
         };
-        
+
 
 
     });
