@@ -31,5 +31,29 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     return errorCallback(response);
                 });
         };
+        this.getEventsCalendarParametrableDateDebut = function (date) {
+            return $http.get($config.getEventBaseUrl() , $config).then(
+                function (response) {
+                    var eventsCalendar = [];
+
+                    angular.forEach(response.data, function (value) {
+                        var obj=new calendrierFactory(value);
+
+                        if(new Date(obj.start)>new Date(date)){
+                            eventsCalendar.push(obj);
+
+                        }
+
+
+                    });
+
+
+                    return eventsCalendar;
+                },
+                function (response) {
+
+                    return errorCallback(response);
+                });
+        };
     });
     

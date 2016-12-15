@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('demoApp')
-    .controller('notificationCtrl', function($scope,$mdDialog){
+    .controller('notificationCtrl', function($scope,$mdDialog, $mdToast){
 
         // ----------------------------------------------------------------------------------------------------
         // ---- PARAMS CATALOGUE
@@ -49,15 +49,15 @@ angular.module('demoApp')
             options    : undefined,
             json       : undefined,
             callback   : {
-                valid : function(json){
-                    displayCode('Callback : valid',json);
+                valid : function(){
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Case Callback and Function called. Results have been retrieved from the API')
+                            .hideDelay(3000)
+                    );
                 }
             },
-            listeners  : {
-                onError : function(errors){
-                    displayCode('Listeners : onError',errors,true);
-                }
-            }
+            listeners  : undefined
         }];
 
         $scope.chooseParams = function(index){
@@ -76,17 +76,6 @@ angular.module('demoApp')
         // --- Init
         $scope.chooseParams(0);
 
-        // --- Update result viewer
-        var displayCode = function(from,code,isError){
-
-            $scope.haveResult   = true;
-
-            $scope.result       = {
-                code : code,
-                isError : isError,
-                title : from
-            };
-        };
         
         // ----------------------------------------------------------------------------------------------------
         // ---- DISPLAY CODE MODE
@@ -125,11 +114,6 @@ angular.module('demoApp')
         $scope.fullScreen = function(){
             $scope.hideParams = !$scope.hideParams;
         };
-
-
-        /**
-         *
-         *
-         */
+        
 
     });

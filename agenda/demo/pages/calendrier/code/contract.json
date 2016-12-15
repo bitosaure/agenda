@@ -2,7 +2,7 @@
   "height" : "number, maximun hieght of our directive [optional]",
 
   "json"   : "JSON [optional]",
-  "events" : "Les évènements",
+  "eventSources" : "Les évènements",
 
   "listeners" : {
     "onError" : "function(array of errors){} // --- Catch all errors from the editors"
