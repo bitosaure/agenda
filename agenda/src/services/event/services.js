@@ -57,7 +57,8 @@ angular.module('eklabs.angularStarterPack.event')
                     function(){
                         errorCallback(response);
                     });
-        };
+        };*/
+
         this.addParticipant = function(params){
                 $http.put($config.getEventBaseUrl() + '/addParticipant/' + idEvent, params.idPersonne, config).then(function(response){
                         successCallback(response);
@@ -66,7 +67,8 @@ angular.module('eklabs.angularStarterPack.event')
                         errorCallback(response);
                     });
         };
-        this.deleteParticipant = function(params){
+
+        /*this.deleteParticipant = function(params){
                 $http.post($config.getEventBaseUrl() + '/someUrl', data, config).then(successCallback, errorCallback);
         };
         this.joinEvent = function(params){
