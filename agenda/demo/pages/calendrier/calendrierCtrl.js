@@ -1,5 +1,5 @@
 /**
- * Created by darty les halles on 03/10/2016.
+ * Created by Thibault et Emilie on 03/10/2016.
  */
 'use strict';
 

@@ -20,24 +20,45 @@ angular.module('eklabs.angularStarterPack.calendrier')
             // la fonction est appelée lorsque le lien est fait entre l element et la scope
             link : function(scope){
 
+                /***
+                 * propriété permettant de savoir si le case json est coché
+                 * @type {boolean}
+                 */
                 var bjson = false;
+                /**
+                 * propriété permettant de savoir si le case callback est coché
+                 * @type {boolean}
+                 */
                 var bcallback = false;
 
+                /**
+                 * fonctions permettant d afficher les evenements dans le calendrier suivant le case qui est coché
+                 *
+                 * @type {{erase: calendar_actions.erase, remote: calendar_actions.remote, local: calendar_actions.local}}
+                 */
                 var calendar_actions = {
+
+                    /**
+                     * fonction appelé lorsqu on coche le case defaut case, on enleve les evenements du calendrier
+                     */
                     erase : function(){
                         if(scope.eventSources)
                             if(!bcallback && !bjson)
                                 scope.eventSources = undefined;
                     },
-
+                    /**
+                     * fonction appelée lorsqu on coche le case call api , on va recuperer les evenements sur l'api suivant si la date de fin et date de debut sont renseignés
+                     */
                     remote : function(){
-                            console.log("remote");
                             calendrierService.getEventsCalendarParametrableDateDebut(scope.dateDeb,scope.dateFin).then(function(response){
                             scope.eventSources =  [
                                 { events :response}];
                             });
                     },
-
+                    /**
+                     * fonction appelée lorsqu on coche le case json, on affiche les evenements de la variable json
+                     * @param json
+                     */
                     local : function(json){
 
                         scope.eventSources = json;
@@ -45,6 +66,11 @@ angular.module('eklabs.angularStarterPack.calendrier')
 
 
                 };
+                /**
+                 * Check if json in params
+                 * on appelle la fonction local de calendar actions si le case json est coché
+                 * on appelle la fonction erase de calendar actions si on decoche le case json
+                 */
                 scope.$watch('json', function(json){
                     if(json){
 
@@ -59,6 +85,8 @@ angular.module('eklabs.angularStarterPack.calendrier')
 
                 /**
                  * Check if callback in params
+                 *  on appelle la fonction remote de calendar actions si le case call api est coché
+                 * on appelle la fonction erase de calendar actions si on decoche le case callback
                  */
                 scope.$watch('callback', function(callback){
                     console.log("call");
@@ -72,12 +100,23 @@ angular.module('eklabs.angularStarterPack.calendrier')
                         calendar_actions.erase();
                     }
                 });
+                /**
+                 * Check if datedeb in params
+                 *  on appelle la fonction remote de calendar actions si le case call api est coché
+                 *  cela va permettre d actualiser les evenements selon la date de debut qui a changé
+                 *
+                 */
                 scope.$watch('dateDeb',function(dateDebut){
                     scope.dateDeb = dateDebut;
                     if(bcallback) {
                         calendar_actions.remote();
                     }
                 });
+                /**
+                 * Check if datefin in params
+                 *  on appelle la fonction remote de calendar actions si le case call api est coché
+                 *  cela va permettre d actualiser les evenements selon la date de fin qui a changé
+                 */
                 scope.$watch('dateFin',function(dateFin){
                     scope.dateFin = dateFin;
                     if(bcallback) {
@@ -85,6 +124,9 @@ angular.module('eklabs.angularStarterPack.calendrier')
                         calendar_actions.remote();
                     }
                 });
+                /**
+                 * Watch permet de detecter des changements de données sur la variable index
+                 */
                 scope.$watch('index',function(index){
                     scope.index = index;
                 });
@@ -95,7 +137,7 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 };
 
 
-                /* Change View */
+                /* render calendar */
                 scope.renderCalender = function(calendar) {
                     if(uiCalendarConfig.calendars[calendar]){
                         uiCalendarConfig.calendars[calendar].fullCalendar('render');
@@ -188,8 +230,7 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     }
                 };
 
-                //scope.eventSources = [scope.events,scope.events];
-                //console.log("test event sources "+scope.eventSources);
+
                 /**
                  * Watch permet de detecter des changements de données sur la variable eventSources
                  */
@@ -211,6 +252,9 @@ angular.module('eklabs.angularStarterPack.calendrier')
                         $log.info('my user is : ',user)
                     }
                 };
+                /**
+                 * Watch permet de detecter des changements de données sur la variable render
+                 */
                 scope.$watch('render', function(render){
                     console.log(render);
                     scope.renderCalender();
