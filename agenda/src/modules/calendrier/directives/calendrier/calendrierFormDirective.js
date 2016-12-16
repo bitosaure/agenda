@@ -14,8 +14,6 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 dateDeb : '=?',
                 dateFin : '=?',
                 index : '=?'
-
-
             },
             // la fonction est appelée lorsque le lien est fait entre l element et la scope
             link : function(scope){
@@ -60,11 +58,8 @@ angular.module('eklabs.angularStarterPack.calendrier')
                      * @param json
                      */
                     local : function(json){
-
                         scope.eventSources = json;
                     }
-
-
                 };
                 /**
                  * Check if json in params
@@ -73,11 +68,9 @@ angular.module('eklabs.angularStarterPack.calendrier')
                  */
                 scope.$watch('json', function(json){
                     if(json){
-
                         bjson = true;
                         calendar_actions.local(json);
                     }else{
-
                         bjson = false;
                         calendar_actions.erase();
                     }
@@ -89,10 +82,7 @@ angular.module('eklabs.angularStarterPack.calendrier')
                  * on appelle la fonction erase de calendar actions si on decoche le case callback
                  */
                 scope.$watch('callback', function(callback){
-                    console.log("call");
-
                     if(callback){
-
                         bcallback = true;
                         calendar_actions.remote();
                     }else{
@@ -120,7 +110,6 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 scope.$watch('dateFin',function(dateFin){
                     scope.dateFin = dateFin;
                     if(bcallback) {
-
                         calendar_actions.remote();
                     }
                 });
@@ -189,19 +178,12 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 /* Change View */
                 scope.renderCalender = function(calendar) {
                     if(uiCalendarConfig.calendars[calendar]){
-
-                            uiCalendarConfig.calendars[calendar].fullCalendar('render');
-
-
-
+                        uiCalendarConfig.calendars[calendar].fullCalendar('render');
                     }
                 };
 
                 /* Render Tooltip */
                 scope.eventRender = function( event, element, view ) {
-
-
-
                     element.attr({'tooltip': event.title,
                         'tooltip-append-to-body': true});
                     $compile(element)(scope);
