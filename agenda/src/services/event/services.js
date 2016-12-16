@@ -74,7 +74,7 @@ angular.module('eklabs.angularStarterPack.event')
                     data.attendees.push(person_id);
                     console.log(data.attendees);
                     console.log(this);
-                    this.updateEvent(data);
+                    updateEvent(data);
                 },
                 function(response){
                     return errorCallback(response);
@@ -93,7 +93,7 @@ angular.module('eklabs.angularStarterPack.event')
                         var data = response;
                         var index = data.attendees.indexOf(person_id);
                         data.attendees.splice(index,1);
-                        this.updateEvent(data);
+                        updateEvent(data);
                     },
                     function(response){
                         return errorCallback(response);
@@ -101,16 +101,16 @@ angular.module('eklabs.angularStarterPack.event')
         };
 
         this.joinEvent = function(event_id,person_id){
-                this.addParticipant(event_id,person_id);
+                addParticipant(event_id,person_id);
         };
         this.unsubscribe = function(event_id,person_id){
-                this.deleteParticipant(event_id,person_id);
+                deleteParticipant(event_id,person_id);
         };
         this.acceptInvitation = function(params){
-            this.addParticipant(event_id,person_id);
+            addParticipant(event_id,person_id);
         };
         this.refuseInvitation = function(params){
-            this.deleteParticipant(event_id,person_id);
+            deleteParticipant(event_id,person_id);
         };
 
     })
