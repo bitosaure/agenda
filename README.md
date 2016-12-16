@@ -4,8 +4,9 @@ Repo du groupe Agenda Besnard Krief Le Grand Madeva Pisu Ravoisier
 Processus d'installation
 
 node modules : npm install
+
 bower components : bower install
-      - Choisir version 1.6 d'Angular Js
+- Choisir version 1.6 d'Angular Js
       - 
 Modules externes utilisés : 
 - ui.calendar
