@@ -75,7 +75,7 @@ angular.module('demoApp')
             $scope.index          = index;
             $scope.triggerRender  = moment().valueOf();
             $scope.haveResult     = false;
-            $scope.dateDeb = new Date();
+            $scope.dateDeb = new Date(y,m-1,d);
             $scope.dateFin =  new Date(y, m+2, d );
             
         };
