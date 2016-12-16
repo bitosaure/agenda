@@ -5,8 +5,7 @@ angular.module('eklabs.angularStarterPack.event')
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/event/directives/event/eventView.html',
             scope : {
-                user        : '=',
-                callback    : '=?'
+                event       : '=?'
             },link : function(scope){
                 scope.case = 0;
                 scope.update_event = false;
