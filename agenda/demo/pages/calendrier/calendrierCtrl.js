@@ -16,7 +16,7 @@ angular.module('demoApp')
 
         $scope.params = [{
             /**
-             * Default
+             * Default aucun évènement ne doit appraitre dans le calendrier
              */
             case       : 'Default Case',
             options    : undefined,
@@ -26,7 +26,7 @@ angular.module('demoApp')
             listeners  : undefined
         },{
             /**
-             * Case JSON
+             * Case JSON, injecte dans le calendrier les évènements présents dans json
              */
             case       : 'Case inject Json',
             options    : undefined,
@@ -40,13 +40,13 @@ angular.module('demoApp')
                     ]
                 }
             ],
-            //json       : {"hello" : "world"},
             callback   : undefined,
             listeners  : undefined
 
         },{
             /**
-             * Callback active
+             * Case appel de l'api
+             * eventSources sera défini lors de l'appel du service (qui va appeler notre factory calendrierFactory)
              */
             case       : 'Case call api',
             options    : undefined,
@@ -67,7 +67,7 @@ angular.module('demoApp')
         $scope.chooseParams = function(index){
             // --- Define current status
 
-            $scope.events = $scope.params[index].eventSources;
+            $scope.events       = $scope.params[index].eventSources;
             $scope.myOptions    = $scope.params[index].options;
             $scope.myJson       = $scope.params[index].json;
             $scope.myCallback   = $scope.params[index].callback;
@@ -95,8 +95,6 @@ angular.module('demoApp')
             };
         };
 
-        //console.log($scope.events);
-        //console.log($scope.params);
         // ----------------------------------------------------------------------------------------------------
         // ---- DISPLAY CODE MODE
         // ----------------------------------------------------------------------------------------------------

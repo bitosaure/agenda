@@ -3,6 +3,8 @@
 
   "json"   : "JSON [optional]",
   "eventSources" : "Les évènements",
+  "dateDeb" : "Date inférieure de recherche d'évènements [optional]",
+  "dateFin" : "Date supérieure de recherche d'évènement [optional]",
 
   "listeners" : {
     "onError" : "function(array of errors){} // --- Catch all errors from the editors"
