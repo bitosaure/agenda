@@ -1,3 +1,3 @@
 /**
- * Created by maximer on 06/11/16.
+ * Created by Thibault et Emilie.
  */

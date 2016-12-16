@@ -1,5 +1,7 @@
 'use strict';
-
+/**
+ * directive calendrier
+ */
 angular.module('eklabs.angularStarterPack.calendrier')
     .directive('calendrier',function($log, uiCalendarConfig,$compile,$timeout,calendrierService){
         return {
@@ -14,7 +16,9 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 index : '=?'
 
 
-            },link : function(scope){
+            },
+            // la fonction est appelée lorsque le lien est fait entre l element et la scope
+            link : function(scope){
 
                 var bjson = false;
                 var bcallback = false;
@@ -207,25 +211,6 @@ angular.module('eklabs.angularStarterPack.calendrier')
                         $log.info('my user is : ',user)
                     }
                 };
-
-               /*
-
-                /**
-                 * Catch Callback
-                 */
-
-                /*
-                scope.$watch('callback', function(callback){
-                    if(callback instanceof Object){
-                        scope.actions = angular.extend({},default_actions,callback);
-                    }else{
-                        scope.actions = default_actions;
-                    }
-
-
-                });
-
-                */
                 scope.$watch('render', function(render){
                     console.log(render);
                     scope.renderCalender();
@@ -233,25 +218,7 @@ angular.module('eklabs.angularStarterPack.calendrier')
 
 
 
-                scope.showUnreaded = true;
-                scope.showReaded = false;
 
-                scope.changeVisibility = function(b) {
-
-                    //Si b est égal à true, on se focalise sur les notifications non vue
-                    if(b){
-                        if(scope.showUnreaded)
-                            scope.showUnreaded = false;
-                        else
-                            scope.showUnreaded = true;
-                    }else{
-                        if(scope.showReaded)
-                            scope.showReaded = false;
-                        else
-                            scope.showReaded = true;
-                    }
-
-                };
 
             }
         }
