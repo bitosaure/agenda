@@ -33,10 +33,10 @@ angular.module('demoApp')
             json: [
                 { events :
                     [
-                        {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
-                        {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
-                        {title: 'Birthday Party',start: new Date(2016, 11, 25, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
-                        {title: 'Click for Google',start: new Date(2016, 11, 28,15,0),end: new Date(2016, 11, 29,15,0),url: 'http://google.com/'}
+                        {id: 999,title: 'Repeating Event',start: new Date(y, m, 17 - 3, 16, 0),allDay: false},
+                        {id: 999,title: 'Repeating Event',start: new Date(y,m+1, 24, 16, 0),allDay: false},
+                        {title: 'Birthday Party',start: new Date(y, m,d+4, 19, 0),end: new Date(y, m, d+4, 22, 30),allDay: false},
+                        {title: 'Click for Google',start: new Date(y, m,d+2,15,0),end: new Date(y, m, d+5,15,0,0),url: 'http://google.com/'}
                     ]
                 }
             ],
