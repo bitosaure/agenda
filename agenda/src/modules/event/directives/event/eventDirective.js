@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eklabs.angularStarterPack.event')
-    .directive('event', function($log, listEventFactory, personFactory){
+    .directive('event', function($log, listEventFactory, personFactory, eventFactory){
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/event/directives/event/eventView.html',
             scope : {
@@ -10,6 +10,15 @@ angular.module('eklabs.angularStarterPack.event')
             },link : function(scope){
                 scope.case = 0;
                 scope.update_event = false;
+
+                scope.event = {
+                    "name" : "PPPP",
+                    "organizer" : "DDDDD",
+                    "description" : "CECEC",
+                    "location" : "EEEE",
+                    "endDate" : new Date(),
+                    "startDate" : new Date()
+                };
 
                 listEventFactory.eventList().then(function(events){
                     scope.events = events;
@@ -29,22 +38,24 @@ angular.module('eklabs.angularStarterPack.event')
                 };
 
                 scope.createEvent = function(){
-                    event.create();
+                    scope.event.eventStatus = "Open";
+                    scope.event.visibility = "Public";
+                    scope.event.image = null;
+                    console.log(scope.event.attendees);
+                    var event_tmp = new eventFactory(scope.event);
+                    event_tmp.create();
                 }
 
                 scope.openFormCreateEvent = function(){
                     personFactory.getAll().then(function(persons){
                         scope.attendee_list = persons;
                         scope.case = 2;
+                        //scope.event = {};
                     });
                 };
 
-                scope.createEvent = function(){
-                    console.log(scope.event);
-                    eventService.createEvent(scope.event).then(function(response){
-                       scope.case = 0;
-                    });
-                };
+
+                scope.openFormCreateEvent();
 
                 scope.openEvent = function(event_id){
                     console.log(event_id);
@@ -80,6 +91,7 @@ angular.module('eklabs.angularStarterPack.event')
                         scope.actions = default_actions;
                     }
                 });
+
 
             }
         }

@@ -29,8 +29,18 @@ angular.module('eklabs.angularStarterPack.event')
             return attendees;
         }
 
-        function create(){
-            console.log(this);
+        eventFactory.prototype.create = function(){
+            var attendees_tmp = this.attendees;
+            console.log(attendees_tmp);
+            this.attendees = [];
+            eventService.createEvent(this).then(function(response){
+                angular.forEach(attendees_tmp, function(attendee){
+                    console.log(attendee);
+                    eventService.addParticipant(response, attendee.id).then(function(response_attendee){
+                       console.log(response_attendee);
+                    });
+                });
+            });
         }
 
         return eventFactory;
