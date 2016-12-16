@@ -7,8 +7,7 @@ node modules : npm install
 
 bower components : bower install
 - Choisir version 1.6 d'Angular Js
-
-      - 
+     
 Modules externes utilisés : 
 - ui.calendar
 - angularjs-datepicker
