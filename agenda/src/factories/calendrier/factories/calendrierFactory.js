@@ -1,8 +1,14 @@
 'use strict';
-
+/*
+Factory calendrierFactory
+ */
 angular.module('eklabs.angularStarterPack.calendrier')
     .factory('calendrierFactory', function() {
 
+        /**
+         * definition de notre objet métier = event
+         * @param eventObj
+         */
          function calendrierFactory(eventObj){
             this.id = eventObj.id;
             this.title = eventObj.name;

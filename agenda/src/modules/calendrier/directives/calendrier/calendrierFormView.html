@@ -1,11 +1,15 @@
 <div ng-show="index==2" layout-gt-sm="row">
     <md-input-container flex-gt-sm>
         <label>Depuis</label>
-        <md-datepicker required ng-model="dateDeb"></md-datepicker>
+        <datepicker>
+            <input ng-model="dateDeb"/>
+        </datepicker>
     </md-input-container>
     <md-input-container flex-gt-sm>
         <label>Jusqu'à</label>
-        <md-datepicker required ng-model="dateFin"></md-datepicker>
+        <datepicker>
+            <input ng-model="dateFin"/>
+        </datepicker>
     </md-input-container>
 </div>
 

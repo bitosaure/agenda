@@ -1,5 +1,5 @@
 /**
- * Created by darty les halles on 03/10/2016.
+ * Created by Thibault et Emilie on 03/10/2016.
  */
 'use strict';
 
@@ -16,7 +16,7 @@ angular.module('demoApp')
 
         $scope.params = [{
             /**
-             * Default
+             * Default aucun évènement ne doit appraitre dans le calendrier
              */
             case       : 'Default Case',
             options    : undefined,
@@ -26,27 +26,27 @@ angular.module('demoApp')
             listeners  : undefined
         },{
             /**
-             * Case JSON
+             * Case JSON, injecte dans le calendrier les évènements présents dans json
              */
             case       : 'Case inject Json',
             options    : undefined,
             json: [
                 { events :
                     [
-                        {id: 999,title: 'Repeating Event',start: new Date(2016, 11, 17 - 3, 16, 0),allDay: false},
-                        {id: 999,title: 'Repeating Event',start: new Date(2016,11, 24, 16, 0),allDay: false},
-                        {title: 'Birthday Party',start: new Date(2016, 11, 25, 19, 0),end: new Date(2016, 11, 25, 22, 30),allDay: false},
-                        {title: 'Click for Google',start: new Date(2016, 11, 28,15,0),end: new Date(2016, 11, 29,15,0),url: 'http://google.com/'}
+                        {id: 999,title: 'Repeating Event',start: new Date(y, m, 17 - 3, 16, 0),allDay: false},
+                        {id: 999,title: 'Repeating Event',start: new Date(y,m+1, 24, 16, 0),allDay: false},
+                        {title: 'Birthday Party',start: new Date(y, m,d+4, 19, 0),end: new Date(y, m, d+4, 22, 30),allDay: false},
+                        {title: 'Click for Google',start: new Date(y, m,d+2,15,0),end: new Date(y, m, d+5,15,0,0),url: 'http://google.com/'}
                     ]
                 }
             ],
-            //json       : {"hello" : "world"},
             callback   : undefined,
             listeners  : undefined
 
         },{
             /**
-             * Callback active
+             * Case appel de l'api
+             * eventSources sera défini lors de l'appel du service (qui va appeler notre factory calendrierFactory)
              */
             case       : 'Case call api',
             options    : undefined,
@@ -67,7 +67,7 @@ angular.module('demoApp')
         $scope.chooseParams = function(index){
             // --- Define current status
 
-            $scope.events = $scope.params[index].eventSources;
+            $scope.events       = $scope.params[index].eventSources;
             $scope.myOptions    = $scope.params[index].options;
             $scope.myJson       = $scope.params[index].json;
             $scope.myCallback   = $scope.params[index].callback;
@@ -95,8 +95,6 @@ angular.module('demoApp')
             };
         };
 
-        //console.log($scope.events);
-        //console.log($scope.params);
         // ----------------------------------------------------------------------------------------------------
         // ---- DISPLAY CODE MODE
         // ----------------------------------------------------------------------------------------------------

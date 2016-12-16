@@ -42,9 +42,7 @@ angular.module('eklabs.angularStarterPack.notification')
                         }
                 });
 
-                /**
-                 * Check if callback in params
-                 */
+                
                 scope.$watch('callback', function(callback){
                     if(callback){
                         callback.valid();
