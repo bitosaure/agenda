@@ -70,9 +70,10 @@ angular.module('eklabs.angularStarterPack.event')
                 scope.updateEvent = function(){
                     console.log(scope.update_attendees);
                     scope.event.setAttendees(scope.update_attendees);
-                    scope.event.update();
-                    console.log(scope.event);
-                    scope.loadEvent(scope.event.id);
+                    console.log(scope.update_attendees);
+                    scope.event.update().then(function(response){
+                        scope.loadEvent(scope.event.id);
+                    });
                 }
 
                 /**

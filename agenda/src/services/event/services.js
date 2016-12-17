@@ -73,6 +73,7 @@ angular.module('eklabs.angularStarterPack.event')
          * Mise à jour d'un event. Prend en paramètre l'event à mettre à jour. L'id ne doit pas être modifié.
          */
         this.updateEvent = function(params){
+            console.log(params);
             return $http.put($config.getEventBaseUrl() + params.id, params, $config).then(
                 function(response){
                     return successCallback(response);

@@ -52,9 +52,9 @@ angular.module('eklabs.angularStarterPack.event')
         }
 
         eventFactory.prototype.update = function(){
-            eventService.updateEvent(this).then(
+            return eventService.updateEvent(this).then(
                 function(response){
-
+                    return response;
                 }
             );
         }
