@@ -19,6 +19,7 @@ angular.module('eklabs.angularStarterPack.event')
         };
 
 
+        
         function updateEventInside(params){
             console.log("ici");
             console.log($config.getEventBaseUrl() + params.id);
