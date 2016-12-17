@@ -5,6 +5,9 @@ angular.module('eklabs.angularStarterPack')
         $qProvider.errorOnUnhandledRejections(false);
     }])
 
+    /*
+     * Constantes utilisés pour la configuration
+     */
     .constant('WEBAPP_CONFIG', {
         api         : 'http://91.134.241.60:3080/',
         resources  : 'resources/',
@@ -13,6 +16,9 @@ angular.module('eklabs.angularStarterPack')
         notification_url : 'notifications/'
     })
 
+    /*
+     * Factory pour la configuration. Permet de générer les url des services.
+     */
     .factory('$config', ['WEBAPP_CONFIG',function(WEBAPP_CONFIG){
 
         var parameters = angular.extend({}, WEBAPP_CONFIG);
