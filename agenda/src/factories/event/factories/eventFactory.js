@@ -4,6 +4,7 @@ angular.module('eklabs.angularStarterPack.event')
     .factory('eventFactory', function(personFactory, eventService)  {
 
         function eventFactory(eventObj){
+            console.log(eventObj.attendees);
             this.id = eventObj.id;
             this.name = eventObj.name;
             this.image = eventObj.image;
@@ -13,7 +14,7 @@ angular.module('eklabs.angularStarterPack.event')
             this.endDate = new Date(eventObj.endDate);
             this.organizer = eventObj.organizer;
             this.eventStatus = eventObj.eventStatus;
-            this.attendees = getAttendee(eventObj.attendees);
+            this.attendees = eventObj.attendees;
             this.visibility = eventObj.visibility;
         }
 
@@ -26,21 +27,58 @@ angular.module('eklabs.angularStarterPack.event')
                     attendees.push(attendee);
                 });
             });
-            return attendees;
+            console.log(attendees);
+            this.attendees = attendees;
+        }
+
+        function privateGetIdAttendees(attendees){
+            var res = [];
+            angular.forEach(attendees, function(attendee){
+                res.push(attendee);
+            });
+            return res;
+        }
+
+        eventFactory.prototype.setAttendees = function(array_attendees){
+            this.attendees = array_attendees;
+        }
+
+        eventFactory.prototype.getIdAttendees = function(){
+            var res = [];
+            angular.forEach(this.attendees, function(attendee){
+                res.push(attendee.id);
+            });
+            return res;
+        }
+
+        eventFactory.prototype.update = function(){
+            eventService.updateEvent(this).then(
+                function(response){
+
+                }
+            );
         }
 
         eventFactory.prototype.create = function(){
-            var attendees_tmp = this.attendees;
-            console.log(attendees_tmp);
-            this.attendees = [];
+            var attendees_array = privateGetIdAttendees(this.attendees);
+            console.log(attendees_array);
             eventService.createEvent(this).then(function(response){
-                angular.forEach(attendees_tmp, function(attendee){
-                    console.log(attendee);
-                    eventService.addParticipant(response, attendee.id).then(function(response_attendee){
-                       console.log(response_attendee);
-                    });
+                eventService.addParticipant(response, attendees_array).then(function(response_attendee){
+
                 });
             });
+        }
+
+        eventFactory.prototype.setAttendeesProperties = function(){
+            var attendees = [];
+            angular.forEach(this.attendees, function(value){
+                personFactory.getById(value).then(function(person)
+                {
+                    var attendee = person;
+                    attendees.push(attendee);
+                });
+            });
+            this.attendees = attendees;
         }
 
         return eventFactory;
@@ -60,10 +98,8 @@ angular.module('eklabs.angularStarterPack.event')
                         var event_tmp = new eventFactory(event);
                         events.push(event_tmp);
                     });
-                    console.log(events);
                     defer.resolve(events);
                 })
-                console.log(defer.promise.$$state);
                 return defer.promise;
             },
 

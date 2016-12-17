@@ -39,7 +39,7 @@
             </md-button>
         </div>
         <div ng-show="!update_event">
-            <md-button class="md-warn" ng-click="update_event = true">
+            <md-button class="md-warn" ng-click="openFormUpdateEvent()">
                 <md-icon md-svg-src="material-design:create" class="ic_18px" ></md-icon>
                 Modifier
             </md-button>
@@ -51,40 +51,47 @@
             </md-button>
         </div>
     </div>
-    <md-input-container style="margin-top:50px;">
-            <label>Event Name</label>
-            <input ng-model="event.name" ng-readonly="!update_event">
-    </md-input-container>
-    <div layout-gt-sm="row" layout-gt-md="row" class="layout-gt-md-row">
+    <form ng-submit="updateEvent()">
+        <md-input-container style="margin-top:50px;">
+                <label>Event Name</label>
+                <input ng-model="event.name" ng-readonly="!update_event">
+        </md-input-container>
+        <div layout-gt-sm="row" layout-gt-md="row" class="layout-gt-md-row">
+            <md-input-container>
+                <label>Start Date</label>
+                <input ng-model="event.startDate" ng-readonly="!update_event">
+            </md-input-container>
+            <md-input-container>
+                <label>End Date</label>
+                <input ng-model="event.endDate" ng-readonly="!update_event">
+            </md-input-container>
+        </div>
         <md-input-container>
-            <label>Start Date</label>
-            <input ng-model="event.startDate" ng-readonly="!update_event">
+            <label>Organizer</label>
+            <input ng-model="event.organizer" ng-readonly="!update_event">
         </md-input-container>
         <md-input-container>
-            <label>End Date</label>
-            <input ng-model="event.endDate" ng-readonly="!update_event">
+            <label>Location</label>
+            <input ng-model="event.location" ng-readonly="!update_event">
         </md-input-container>
-    </div>
-    <md-input-container>
-        <label>Organizer</label>
-        <input ng-model="event.organizer" ng-readonly="!update_event">
-    </md-input-container>
-    <md-input-container>
-        <label>Location</label>
-        <input ng-model="event.location" ng-readonly="!update_event">
-    </md-input-container>
-    <md-input-container>
-        <label>Description</label>
-        <textarea ng-model="event.description" ng-readonly="!update_event"></textarea>
-    </md-input-container>
-    <h4>Participants : </h4>
-    <ul>
-        <li ng-repeat="attendee in event.attendees">{{attendee.givenName}} {{attendee.familyName}}</li>
-    </ul>
-    <div layout="row" layout-align="end">
-        <md-button class="md-warn" ng-show="update_event" ng-click="update_event = false">Annuler</md-button>
-        <md-button class="md-primary" ng-show="update_event" ng-click="update_event = false">Confirmer les modifications</md-button>
-    </div>
+        <md-input-container>
+            <label>Description</label>
+            <textarea ng-model="event.description" ng-readonly="!update_event"></textarea>
+        </md-input-container>
+        <h4>Participants : </h4>
+        <ul ng-show="!update_event">
+            <li ng-repeat="attendee in event.attendees">{{attendee.givenName}} {{attendee.familyName}}</li>
+        </ul>
+        <md-input-container ng-show="update_event" flex-gt-sm>
+            <md-select ng-model="update_attendees" multiple>
+                <md-option ng-repeat="attendee in attendee_list" ng-value="attendee.id">{{attendee.givenName}} {{attendee.familyName}}</md-option>
+            </md-select>
+        </md-input-container>
+        <div layout="row" layout-align="end">
+            <md-button class="md-warn" ng-show="update_event" ng-click="update_event = false">Annuler</md-button>
+            <md-button type="submit" class="md-primary" ng-show="update_event">Confirmer les modifications</md-button>
+        </div>
+    </form>
 </div>
 
 

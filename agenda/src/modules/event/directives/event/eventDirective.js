@@ -26,23 +26,27 @@ angular.module('eklabs.angularStarterPack.event')
                 scope.loadEvent = function(event_id){
                     listEventFactory.getEventById(event_id).then(function(event){
                         scope.event = event;
+                        scope.event.setAttendeesProperties();
                         scope.case = 1;
+                        scope.update_event = false;
+                    });
+                    personFactory.getAll().then(function(persons){
+                        scope.attendee_list = persons;
                     });
                 };
 
                 scope.loadEvents = function(){
                     listEventFactory.eventList().then(function(events){
                         scope.events = events;
+                        scope.case = 0;
                     });
                 };
 
-                scope.createEvent = function(){
-                    scope.event.eventStatus = "Open";
-                    scope.event.visibility = "Public";
-                    scope.event.image = null;
-                    console.log(scope.event.attendees);
-                    var event_tmp = new eventFactory(scope.event);
-                    event_tmp.create();
+                scope.openFormUpdateEvent = function(){
+                    scope.update_attendees = scope.event.getIdAttendees();
+                    console.log("ici");
+                    console.log(scope.update_attendees);
+                    scope.update_event = true;
                 }
 
                 scope.openFormCreateEvent = function(){
@@ -53,14 +57,23 @@ angular.module('eklabs.angularStarterPack.event')
                     });
                 };
 
+                scope.createEvent = function(){
+                    scope.event.eventStatus = "Open";
+                    scope.event.visibility = "Public";
+                    scope.event.image = null;
+                    console.log(scope.event.attendees);
+                    var event_tmp = new eventFactory(scope.event);
+                    event_tmp.create();
+                    //scope.loadEvent(scope.event.id);
+                }
 
-                scope.openFormCreateEvent();
-
-                scope.openEvent = function(event_id){
-                    console.log(event_id);
-                    scope.event = scope.events[event_id];
-                    scope.case = 1;
-                };
+                scope.updateEvent = function(){
+                    console.log(scope.update_attendees);
+                    scope.event.setAttendees(scope.update_attendees);
+                    scope.event.update();
+                    console.log(scope.event);
+                    scope.loadEvent(scope.event.id);
+                }
 
                 /**
                  * 

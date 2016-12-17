@@ -8,8 +8,19 @@ angular.module('eklabs.angularStarterPack.event')
         };
 
         function errorCallback(response){
-            console.log(response);
+            console.log("Error");
             return {};
+        };
+
+        function updateEventInside(params){
+            console.log("ici");
+            console.log($config.getEventBaseUrl() + params.id);
+            return $http.put($config.getEventBaseUrl() + params.id, params, $config).then(function(response){
+                    return successCallback(response);
+                },
+                function(){
+                    return errorCallback(response);
+                });
         };
 
         this.createEvent = function(params){
@@ -43,12 +54,12 @@ angular.module('eklabs.angularStarterPack.event')
         };
 
         this.updateEvent = function(params){
-            console.log(params);
-            $http.put($config.getEventBaseUrl() + params.id, params, $config).then(function(response){
-                    successCallback(response);
+            return $http.put($config.getEventBaseUrl() + params.id, params, $config).then(
+                function(response){
+                    return successCallback(response);
                 },
-                function(){
-                    errorCallback(response);
+                function(response){
+                    return errorCallback(response);
                 });
         };
 
@@ -61,20 +72,13 @@ angular.module('eklabs.angularStarterPack.event')
                     });
         };
 
-        this.addParticipant = function(event_id,person_id){
+        this.addParticipant = function(event_id, array_person_id){
             return $http.get($config.getEventBaseUrl()+event_id, $config).then(
                 function(response){
-                    return successCallback(response);
-                },
-                function(response){
-                    return errorCallback(response);
-                })
-                .then(function(response){
-                    var data = response;
-                    data.attendees.push(person_id);
+                    var data = response.data;
                     console.log(data.attendees);
-                    console.log(this);
-                    this.updateEvent(data);
+                    data.attendees = array_person_id;
+                    return updateEventInside(data);
                 },
                 function(response){
                     return errorCallback(response);
