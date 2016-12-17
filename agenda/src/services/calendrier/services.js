@@ -6,13 +6,18 @@ angular.module('eklabs.angularStarterPack.calendrier')
 
     .service("calendrierService", function($http, $config, calendrierFactory) {
 
-        function successCallback(response) {
-            console.log(response);
-            return response;
+        /*
+         * Callback de succès générique
+         */
+        function successCallback (response){
+            return response.data;
         };
 
-        function errorCallback(response) {
-            console.log(response);
+        /*
+         * Callback d'erreur générique
+         */
+        function errorCallback(response){
+            console.log("Error");
             return {};
         };
 

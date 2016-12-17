@@ -3,17 +3,27 @@
 angular.module('eklabs.angularStarterPack.notification')
     .service('notificationService', function($http, $config, notificationFactory) {
 
-        function successCallback(response){
-            return response;
+        /*
+         * Callback de succès générique
+         */
+        function successCallback (response){
+            return response.data;
         };
 
+        /*
+         * Callback d'erreur générique
+         */
         function errorCallback(response){
+            console.log("Error");
             return {};
         };
 
+        /*
+         * Récupération de toutes les notifications.
+         */
         this.getNotifications = function () {
 
-            return $http.get('http://91.134.241.60:3080/resources/notifications/').then(
+            return $http.get($config.getNotificationBaseUrl()).then(
                 function(response){
 
                     var notifications = [];
@@ -29,6 +39,20 @@ angular.module('eklabs.angularStarterPack.notification')
             )
         };
 
+        /*
+         * Mise à jour d'une notification lue. Prend en paramètre la notification à mettre à jour. L'id ne doit pas être modifié.
+         */
+        this.readNotification = function(params){
+            var data = params;
+            data.dateRead = new Date("dd/mm/yyyy hh:MM");
+            return $http.put($config.getNotificationBaseUrl() + data.id, data, $config).then(
+                function(response){
+                    return successCallback(response);
+                },
+                function(response){
+                    return errorCallback(response);
+                });
+        };
 
 
     });
