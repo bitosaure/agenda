@@ -14,11 +14,23 @@ angular.module('eklabs.angularStarterPack.event')
          * Callback d'erreur générique
          */
         function errorCallback(response){
-            console.log(response);
+            console.log("Error");
             return {};
         };
 
-        /*
+
+        function updateEventInside(params){
+            console.log("ici");
+            console.log($config.getEventBaseUrl() + params.id);
+            return $http.put($config.getEventBaseUrl() + params.id, params, $config).then(function(response){
+                    return successCallback(response);
+                },
+                function(){
+                    return errorCallback(response);
+                });
+        };
+
+		/*
          * Création d'un event. Prend en paramètre un objet de type eventFactory
          */
         this.createEvent = function(params){
@@ -61,12 +73,12 @@ angular.module('eklabs.angularStarterPack.event')
          * Mise à jour d'un event. Prend en paramètre l'event à mettre à jour. L'id ne doit pas être modifié.
          */
         this.updateEvent = function(params){
-            console.log(params);
-            $http.put($config.getEventBaseUrl() + params.id, params, $config).then(function(response){
-                    successCallback(response);
+            return $http.put($config.getEventBaseUrl() + params.id, params, $config).then(
+                function(response){
+                    return successCallback(response);
                 },
-                function(){
-                    errorCallback(response);
+                function(response){
+                    return errorCallback(response);
                 });
         };
 
@@ -82,23 +94,18 @@ angular.module('eklabs.angularStarterPack.event')
                     });
         };
 
+
         /*
          * Ajout d'un participant à un event. Prend en paramètre l'id de l'event et l'id d'une personne.
          */
-        this.addParticipant = function(event_id,person_id){
+        this.addParticipant = function(event_id, array_person_id){
+
             return $http.get($config.getEventBaseUrl()+event_id, $config).then(
                 function(response){
-                    return successCallback(response);
-                },
-                function(response){
-                    return errorCallback(response);
-                })
-                .then(function(response){
-                    var data = response;
-                    data.attendees.push(person_id);
+                    var data = response.data;
                     console.log(data.attendees);
-                    console.log(this);
-                    updateEvent(data);
+                    data.attendees = array_person_id;
+                    return updateEventInside(data);
                 },
                 function(response){
                     return errorCallback(response);
@@ -120,7 +127,7 @@ angular.module('eklabs.angularStarterPack.event')
                         var data = response;
                         var index = data.attendees.indexOf(person_id);
                         data.attendees.splice(index,1);
-                        updateEvent(data);
+                        this.updateEvent(data);
                     },
                     function(response){
                         return errorCallback(response);
@@ -131,28 +138,28 @@ angular.module('eklabs.angularStarterPack.event')
          * Rejoindre un event. Pour le moment, identique à l'ajout d'un participant.
          */
         this.joinEvent = function(event_id,person_id){
-                addParticipant(event_id,person_id);
+                this.addParticipant(event_id,person_id);
         };
 
         /*
          * Ne plus participer à un event. Pour le moment, identique à la suppression d'un participant.
          */
         this.unsubscribe = function(event_id,person_id){
-                deleteParticipant(event_id,person_id);
+                this.deleteParticipant(event_id,person_id);
         };
 
         /*
          * Accepter une invitation. Pour le moment, identique à l'ajout d'un participant.
          */
         this.acceptInvitation = function(params){
-            addParticipant(event_id,person_id);
+            this.addParticipant(event_id,person_id);
         };
 
         /*
          * Refuser une invitation. Pour le moment, identique à la suppression d'un participant.
          */
         this.refuseInvitation = function(params){
-            deleteParticipant(event_id,person_id);
+            this.deleteParticipant(event_id,person_id);
         };
 
     })
