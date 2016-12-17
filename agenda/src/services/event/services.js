@@ -3,15 +3,24 @@
 angular.module('eklabs.angularStarterPack.event')
     .service("eventService", function($http, $config){
 
+        /*
+         * Callback de succès générique
+         */
         function successCallback (response){
             return response.data;
         };
 
+        /*
+         * Callback d'erreur générique
+         */
         function errorCallback(response){
             console.log(response);
             return {};
         };
 
+        /*
+         * Création d'un event. Prend en paramètre un objet de type eventFactory
+         */
         this.createEvent = function(params){
                 return $http.post($config.getEventBaseUrl(), params, $config).then(
                     function(response){
@@ -22,6 +31,9 @@ angular.module('eklabs.angularStarterPack.event')
                     });
         };
 
+        /*
+         * Récupération de tout les events.
+         */
         this.getEvents = function(){
             return $http.get($config.getEventBaseUrl(), $config).then(
                 function(response){
@@ -32,6 +44,9 @@ angular.module('eklabs.angularStarterPack.event')
                 });
         };
 
+        /*
+         * Récupération d'un Event. Prend en paramètre l'id d'un event.
+         */
         this.getEvent = function(event_id){
             return $http.get($config.getEventBaseUrl()+event_id, $config).then(
                 function(response){
@@ -42,6 +57,9 @@ angular.module('eklabs.angularStarterPack.event')
                 });
         };
 
+        /*
+         * Mise à jour d'un event. Prend en paramètre l'event à mettre à jour. L'id ne doit pas être modifié.
+         */
         this.updateEvent = function(params){
             console.log(params);
             $http.put($config.getEventBaseUrl() + params.id, params, $config).then(function(response){
@@ -52,6 +70,9 @@ angular.module('eklabs.angularStarterPack.event')
                 });
         };
 
+        /*
+         * Suppression d'un event. Prend en paramètre l'event à supprimer.
+         */
         this.deleteEvent = function(params){
                 $http.post($config.getEventBaseUrl() + '/deleteEvent/', params.id , $config).then(function(response){
                         successCallback(response);
@@ -61,6 +82,9 @@ angular.module('eklabs.angularStarterPack.event')
                     });
         };
 
+        /*
+         * Ajout d'un participant à un event. Prend en paramètre l'id de l'event et l'id d'une personne.
+         */
         this.addParticipant = function(event_id,person_id){
             return $http.get($config.getEventBaseUrl()+event_id, $config).then(
                 function(response){
@@ -81,6 +105,9 @@ angular.module('eklabs.angularStarterPack.event')
                 });
         };
 
+        /*
+         * Suppression d'un participant à un event. Prend en paramètre l'id d'un event et d'une personne.
+         */
         this.deleteParticipant = function(event_id,person_id){
             return $http.get($config.getEventBaseUrl()+event_id, $config).then(
                 function(response){
@@ -100,15 +127,30 @@ angular.module('eklabs.angularStarterPack.event')
                     });
         };
 
+        /*
+         * Rejoindre un event. Pour le moment, identique à l'ajout d'un participant.
+         */
         this.joinEvent = function(event_id,person_id){
                 addParticipant(event_id,person_id);
         };
+
+        /*
+         * Ne plus participer à un event. Pour le moment, identique à la suppression d'un participant.
+         */
         this.unsubscribe = function(event_id,person_id){
                 deleteParticipant(event_id,person_id);
         };
+
+        /*
+         * Accepter une invitation. Pour le moment, identique à l'ajout d'un participant.
+         */
         this.acceptInvitation = function(params){
             addParticipant(event_id,person_id);
         };
+
+        /*
+         * Refuser une invitation. Pour le moment, identique à la suppression d'un participant.
+         */
         this.refuseInvitation = function(params){
             deleteParticipant(event_id,person_id);
         };
@@ -125,6 +167,9 @@ angular.module('eklabs.angularStarterPack.event')
             return {};
         };
 
+        /*
+         * Permet de récupérer une personne. Prend en paramètre son id.
+         */
         this.getAttendee = function(person_id){
             return $http.get($config.getPersonBaseUrl()+person_id, $config).then(
                 function(response){
@@ -135,6 +180,9 @@ angular.module('eklabs.angularStarterPack.event')
                 });
         };
 
+        /*
+         * Permet de récupérer la liste de toutes les personnes.
+         */
         this.getAttendees = function(){
             return $http.get($config.getPersonBaseUrl(), $config).then(
                 function(response){
