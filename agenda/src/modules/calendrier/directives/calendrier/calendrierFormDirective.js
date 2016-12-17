@@ -134,7 +134,7 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 };
                 /* alert on eventClick */
                 scope.alertOnEventClick = function( date, jsEvent, view){
-                    console.log("Titre "+date.title);
+                    scope.currentEvent = date;
                     scope.alertMessage = (date.title + ' was clicked ');
                 };
                 /* alert on Drop */

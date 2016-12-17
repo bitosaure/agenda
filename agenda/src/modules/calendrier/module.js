@@ -2,6 +2,7 @@
 
 angular.module('eklabs.angularStarterPack.calendrier',[
     'ui.calendar',
-    '720kb.datepicker'
+    '720kb.datepicker',
+    'eklabs.angularStarterPack.event'
 
 ]);
