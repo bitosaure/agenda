@@ -16,7 +16,7 @@
 <div id="toto" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="calendar" ng-if="isAvailable"></div>
 
 <!-- Test d'incorporation de la directive event-->
-<div ng-if="currentEvent" layout-gt-sm="row">
+<div ng-if="currentEvent && index==2" layout-gt-sm="row">
     <event eventid="currentEvent.id"></event>
 </div>
 <script>
