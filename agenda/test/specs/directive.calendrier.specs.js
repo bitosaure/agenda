@@ -19,7 +19,7 @@ describe('Testing directive',function(){
      * @returns {*}
      */
     function getCompiledElement(){
-        var element = angular.element('<event-sources</event-sources>');
+        var element = angular.element('<calendrier></calendrier>');
         var compiledElement = compile(element)(scope);
         scope.$digest();
         return compiledElement;

@@ -135,6 +135,7 @@ angular.module('eklabs.angularStarterPack.calendrier')
                 /* alert on eventClick */
                 scope.alertOnEventClick = function( date, jsEvent, view){
                     scope.currentEvent = date;
+                    console.log(scope.currentEvent.id);
                     scope.alertMessage = (date.title + ' was clicked ');
                 };
                 /* alert on Drop */
