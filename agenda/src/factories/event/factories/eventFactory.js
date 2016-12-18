@@ -59,6 +59,14 @@ angular.module('eklabs.angularStarterPack.event')
             );
         }
 
+        eventFactory.prototype.delete = function(){
+            return eventService.deleteEvent(this).then(
+                function(response){
+                    return response;
+                }
+            );
+        }
+
         eventFactory.prototype.create = function(){
             var attendees_array = privateGetIdAttendees(this.attendees);
             console.log(attendees_array);

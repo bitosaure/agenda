@@ -76,6 +76,13 @@ angular.module('eklabs.angularStarterPack.event')
                     });
                 }
 
+                scope.delete_event = function(event_id){
+                    console.log(event_id);
+                    scope.event.delete(event_id).then(function(response){
+                        scope.loadEvents();
+                    });
+                }
+
                 /**
                  * 
                  */

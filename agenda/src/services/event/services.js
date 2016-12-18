@@ -87,8 +87,8 @@ angular.module('eklabs.angularStarterPack.event')
         /*
          * Suppression d'un event. Prend en paramètre l'event à supprimer.
          */
-        this.deleteEvent = function(params){
-                $http.post($config.getEventBaseUrl() + '/deleteEvent/', params.id , $config).then(function(response){
+        this.deleteEvent = function(event_id){
+                $http.delete($config.getEventBaseUrl() + event_id , $config).then(function(response){
                         successCallback(response);
                     },
                     function(){
