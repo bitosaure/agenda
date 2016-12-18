@@ -133,6 +133,10 @@ angular.module('eklabs.angularStarterPack.event')
                     }
                 });
 
+                scope.$watch("eventid",function(newValue,oldValue) {
+                    scope.loadEvent(newValue);
+                });
+
 
             }
         }
