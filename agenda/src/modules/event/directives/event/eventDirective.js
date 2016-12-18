@@ -8,6 +8,7 @@ angular.module('eklabs.angularStarterPack.event')
                 eventid       : '=?'
             },link : function(scope){
 
+                console.log(scope.eventid);
                 /**
                  * Load one event from the database
                  */

@@ -10,7 +10,7 @@
         </div>
     </md-toolbar>
     <md-list ng-if="events.length != 0" ng-init="myStyle={'margin-bottom': '20px'}; isBlured = true">
-        <md-list-item ng-repeat="event in events track by $index" ng-click="loadEvent(event.id)" class="md-2-line" md-colors="isBlured === true ? {background: 'default-primary-500'} : {background: 'grey-A100'}" ng-style="myStyle" ng-mouseover="isBlured = false" ng-mouseleave="isBlured = true">
+        <md-list-item ng-repeat="event in events" ng-click="loadEvent(event.id)" class="md-2-line" md-colors="isBlured === true ? {background: 'default-primary-500'} : {background: 'grey-A100'}" ng-style="myStyle" ng-mouseover="isBlured = false" ng-mouseleave="isBlured = true">
             <div class="md-list-item-text">
                 <h3>{{event.name}}</h3>
                 <p>{{event.startDate}} - {{event.endDate}}</p>
