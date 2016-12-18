@@ -37,8 +37,9 @@ angular.module('eklabs.angularStarterPack.calendrier')
                     });
                     return eventsCalendar;
                 },
-                errorCallback(response)
-                );
+                function (response) {
+                    return errorCallback(response);
+                });
         };
         /**
          * fonction permettant de récuperer tous les évenements si dateDeb et dateFin is undefined
@@ -93,8 +94,10 @@ angular.module('eklabs.angularStarterPack.calendrier')
 
                     return eventsCalendar;
                 },
-                    errorCallback(response)
-                );
+                function (response) {
+
+                    return errorCallback(response);
+                });
         };
     });
     
