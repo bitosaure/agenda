@@ -7,6 +7,11 @@ node modules : npm install
 
 bower components : bower install
 - Choisir version 1.6 d'Angular Js
+
+Trois modules sont présents dans le projet :
+- Calendrier : affiche les évènements disponibles
+- Event : création, modification, affichage de/des évènements
+- Notification : un utilisateur peut recevoir des notifications
      
 Modules externes utilisés : 
 - ui.calendar
