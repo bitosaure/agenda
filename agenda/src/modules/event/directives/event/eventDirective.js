@@ -8,7 +8,6 @@ angular.module('eklabs.angularStarterPack.event')
                 eventid       : '=?'
             },link : function(scope){
 
-                console.log(scope.eventid);
                 /**
                  * Load one event from the database
                  */
@@ -79,7 +78,6 @@ angular.module('eklabs.angularStarterPack.event')
                     scope.event.eventStatus = "Open";
                     scope.event.visibility = "Public";
                     scope.event.image = null;
-                    console.log(scope.event.attendees);
                     var event_tmp = new eventFactory(scope.event);
                     event_tmp.create().then(function(response){
                         scope.loadEvents();
@@ -90,9 +88,7 @@ angular.module('eklabs.angularStarterPack.event')
                  * Update an event on database
                  */
                 scope.updateEvent = function(){
-                    console.log(scope.update_attendees);
                     scope.event.setAttendees(scope.update_attendees);
-                    console.log(scope.update_attendees);
                     scope.event.update().then(function(response){
                         scope.loadEvent(scope.event.id);
                     });

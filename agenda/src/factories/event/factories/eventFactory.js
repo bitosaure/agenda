@@ -4,7 +4,6 @@ angular.module('eklabs.angularStarterPack.event')
     .factory('eventFactory', function(personFactory, eventService)  {
 
         function eventFactory(eventObj){
-            console.log(eventObj.attendees);
             this.id = eventObj.id;
             this.name = eventObj.name;
             this.image = eventObj.image;
@@ -32,7 +31,6 @@ angular.module('eklabs.angularStarterPack.event')
                     attendees.push(attendee);
                 });
             });
-            console.log(attendees);
             this.attendees = attendees;
         }
 
@@ -59,9 +57,6 @@ angular.module('eklabs.angularStarterPack.event')
         eventFactory.prototype.update = function(){
             var start = new Date(this.startDate);
             var end = new Date(this.endDate);
-            console.log(start);
-            console.log(end);
-            console.log(start > end);
             if(start > end){
                 var tmp = end;
                 end = start;
@@ -86,7 +81,6 @@ angular.module('eklabs.angularStarterPack.event')
 
         eventFactory.prototype.create = function(){
             var attendees_array = privateGetIdAttendees(this.attendees);
-            console.log(attendees_array);
             return eventService.createEvent(this).then(function(response){
                 return eventService.addParticipant(response, attendees_array).then(function(response_attendee){
                     return response_attendee;
@@ -119,7 +113,6 @@ angular.module('eklabs.angularStarterPack.event')
                     var events = [];
 
                     angular.forEach(events_db, function (event) {
-                        console.log("Création de l'event");
                         var event_tmp = new eventFactory(event);
                         events.push(event_tmp);
                     });

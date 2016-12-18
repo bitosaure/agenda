@@ -14,7 +14,6 @@ angular.module('eklabs.angularStarterPack.event')
          * Callback d'erreur générique
          */
         function errorCallback(response){
-            console.log("Error");
             return {};
         };
 
