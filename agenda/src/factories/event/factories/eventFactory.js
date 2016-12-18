@@ -10,8 +10,13 @@ angular.module('eklabs.angularStarterPack.event')
             this.image = eventObj.image;
             this.description = eventObj.description;
             this.location = eventObj.location;
-            this.startDate = new Date(eventObj.startDate);
-            this.endDate = new Date(eventObj.endDate);
+            if(eventObj.startDate > eventObj.endDate){
+                var tmp = eventObj.endDate;
+                eventObj.endDate = eventObj.startDate;
+                eventObj.startDate = tmp;
+            }
+            this.startDate = new Date(eventObj.startDate).toDateString();
+            this.endDate = new Date(eventObj.endDate).toDateString();
             this.organizer = eventObj.organizer;
             this.eventStatus = eventObj.eventStatus;
             this.attendees = eventObj.attendees;
@@ -52,6 +57,18 @@ angular.module('eklabs.angularStarterPack.event')
         }
 
         eventFactory.prototype.update = function(){
+            var start = new Date(this.startDate);
+            var end = new Date(this.endDate);
+            console.log(start);
+            console.log(end);
+            console.log(start > end);
+            if(start > end){
+                var tmp = end;
+                end = start;
+                start = tmp;
+            }
+            this.startDate = start;
+            this.endDate = end;
             return eventService.updateEvent(this).then(
                 function(response){
                     return response;
@@ -70,9 +87,9 @@ angular.module('eklabs.angularStarterPack.event')
         eventFactory.prototype.create = function(){
             var attendees_array = privateGetIdAttendees(this.attendees);
             console.log(attendees_array);
-            eventService.createEvent(this).then(function(response){
-                eventService.addParticipant(response, attendees_array).then(function(response_attendee){
-
+            return eventService.createEvent(this).then(function(response){
+                return eventService.addParticipant(response, attendees_array).then(function(response_attendee){
+                    return response_attendee;
                 });
             });
         }

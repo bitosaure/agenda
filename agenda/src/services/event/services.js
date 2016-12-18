@@ -21,8 +21,6 @@ angular.module('eklabs.angularStarterPack.event')
 
         
         function updateEventInside(params){
-            console.log("ici");
-            console.log($config.getEventBaseUrl() + params.id);
             return $http.put($config.getEventBaseUrl() + params.id, params, $config).then(function(response){
                     return successCallback(response);
                 },
@@ -74,7 +72,6 @@ angular.module('eklabs.angularStarterPack.event')
          * Mise à jour d'un event. Prend en paramètre l'event à mettre à jour. L'id ne doit pas être modifié.
          */
         this.updateEvent = function(params){
-            console.log(params);
             return $http.put($config.getEventBaseUrl() + params.id, params, $config).then(
                 function(response){
                     return successCallback(response);
@@ -87,15 +84,14 @@ angular.module('eklabs.angularStarterPack.event')
         /*
          * Suppression d'un event. Prend en paramètre l'event à supprimer.
          */
-        this.deleteEvent = function(event_id){
-                $http.delete($config.getEventBaseUrl() + event_id , $config).then(function(response){
-                        successCallback(response);
+        this.deleteEvent = function(params){
+                return $http.delete($config.getEventBaseUrl() + params.id , $config).then(function(response){
+                        return successCallback(response);
                     },
                     function(){
-                        errorCallback(response);
+                        return errorCallback(response);
                     });
         };
-
 
         /*
          * Ajout d'un participant à un event. Prend en paramètre l'id de l'event et l'id d'une personne.
@@ -105,7 +101,6 @@ angular.module('eklabs.angularStarterPack.event')
             return $http.get($config.getEventBaseUrl()+event_id, $config).then(
                 function(response){
                     var data = response.data;
-                    console.log(data.attendees);
                     data.attendees = array_person_id;
                     return updateEventInside(data);
                 },
@@ -185,7 +180,7 @@ angular.module('eklabs.angularStarterPack.event')
                     return successCallback(response);
                 },
                 function(){
-                    return []//errorCallback(response);
+                    return []
                 });
         };
 

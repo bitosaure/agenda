@@ -44,8 +44,6 @@ angular.module('eklabs.angularStarterPack.event')
 
                 scope.openFormUpdateEvent = function(){
                     scope.update_attendees = scope.event.getIdAttendees();
-                    console.log("ici");
-                    console.log(scope.update_attendees);
                     scope.update_event = true;
                 }
 
@@ -53,7 +51,7 @@ angular.module('eklabs.angularStarterPack.event')
                     personFactory.getAll().then(function(persons){
                         scope.attendee_list = persons;
                         scope.case = 2;
-                        //scope.event = {};
+                        scope.event = {};
                     });
                 };
 
@@ -63,7 +61,9 @@ angular.module('eklabs.angularStarterPack.event')
                     scope.event.image = null;
                     console.log(scope.event.attendees);
                     var event_tmp = new eventFactory(scope.event);
-                    event_tmp.create();
+                    event_tmp.create().then(function(response){
+                        scope.loadEvents();
+                    })
                     //scope.loadEvent(scope.event.id);
                 }
 
@@ -76,9 +76,8 @@ angular.module('eklabs.angularStarterPack.event')
                     });
                 }
 
-                scope.delete_event = function(event_id){
-                    console.log(event_id);
-                    scope.event.delete(event_id).then(function(response){
+                scope.delete_event = function(){
+                    scope.event.delete().then(function(response){
                         scope.loadEvents();
                     });
                 }

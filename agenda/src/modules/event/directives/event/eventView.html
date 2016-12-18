@@ -57,15 +57,14 @@
                 <input ng-model="event.name" ng-readonly="!update_event">
         </md-input-container>
         <div layout-gt-sm="row" layout-gt-md="row" class="layout-gt-md-row">
-            <md-input-container>
-                <label>Start Date</label>
-                <input ng-model="event.startDate" ng-readonly="!update_event">
-            </md-input-container>
-            <md-input-container>
-                <label>End Date</label>
-                <input ng-model="event.endDate" ng-readonly="!update_event">
-            </md-input-container>
+            <datepicker>
+                <input ng-model="event.startDate" ng-readonly="!update_event"/>
+            </datepicker>
+            <datepicker>
+                <input ng-model="event.endDate" ng-readonly="!update_event"/>
+            </datepicker>
         </div>
+        <br>
         <md-input-container>
             <label>Organizer</label>
             <input ng-model="event.organizer" ng-readonly="!update_event">
@@ -89,7 +88,7 @@
         </md-input-container>
         <div layout="row" layout-align="end">
             <md-button class="md-warn" ng-show="update_event" ng-click="update_event = false">Annuler</md-button>
-            <md-button class="md-warn" ng-show="update_event" ng-click="delete_event(event.id)">Supprimer l'event</md-button>
+            <md-button class="md-warn" ng-show="update_event" ng-click="delete_event()">Supprimer l'event</md-button>
             <md-button type="submit" class="md-primary" ng-show="update_event">Confirmer les modifications</md-button>
         </div>
     </form>
@@ -125,17 +124,15 @@
                     <input required ng-model="event.name">
                 </md-input-container>
             </div>
-            <div layout-gt-sm="row">
-                <md-input-container flex-gt-sm>
-                    <label>Start Date</label>
-                    <md-datepicker required ng-model="event.startDate"></md-datepicker>
-                </md-input-container>
-                <md-input-container flex-gt-sm>
-                    <label>End Date</label>
-                    <md-datepicker required ng-model="event.endDate"></md-datepicker>
-                    <div date-picker></div>
-                </md-input-container>
+            <div layout-gt-sm="row" layout-gt-md="row" class="layout-gt-md-row">
+                <datepicker>
+                    <input ng-model="event.startDate"/>
+                </datepicker>
+                <datepicker>
+                    <input ng-model="event.endDate"/>
+                </datepicker>
             </div>
+            <br>
             <div layout-gt-sm="row">
                 <md-input-container flex-gt-sm>
                     <label>Organizer</label>
