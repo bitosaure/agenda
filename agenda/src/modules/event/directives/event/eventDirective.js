@@ -5,48 +5,65 @@ angular.module('eklabs.angularStarterPack.event')
         return {
             templateUrl : 'eklabs.angularStarterPack/modules/event/directives/event/eventView.html',
             scope : {
-                event       : '=?'
+                eventid       : '=?'
             },link : function(scope){
-                scope.case = 0;
-                scope.update_event = false;
 
-                scope.event = {
-                    "name" : "PPPP",
-                    "organizer" : "DDDDD",
-                    "description" : "CECEC",
-                    "location" : "EEEE",
-                    "endDate" : new Date(),
-                    "startDate" : new Date()
-                };
-
-                listEventFactory.eventList().then(function(events){
-                    scope.events = events;
-                });
-
+                console.log(scope.eventid);
+                /**
+                 * Load one event from the database
+                 */
                 scope.loadEvent = function(event_id){
                     listEventFactory.getEventById(event_id).then(function(event){
-                        scope.event = event;
-                        scope.event.setAttendeesProperties();
-                        scope.case = 1;
-                        scope.update_event = false;
+                        if(event.id != undefined){
+                            scope.event = event;
+                            scope.event.setAttendeesProperties();
+                            scope.case = 1;
+                            scope.update_event = false;
+                            personFactory.getAll().then(function(persons){
+                                scope.attendee_list = persons;
+                            });
+                        }else{
+                            scope.loadEvents();
+                        }
                     });
-                    personFactory.getAll().then(function(persons){
-                        scope.attendee_list = persons;
-                    });
+
                 };
 
+                /**
+                 * Load all the events from the database
+                 */
                 scope.loadEvents = function(){
                     listEventFactory.eventList().then(function(events){
                         scope.events = events;
                         scope.case = 0;
+                        scope.update_event = false;
                     });
                 };
 
+                /**
+                 * Initialisation of the directive
+                 */
+                scope._init = function(){
+                    if(scope.eventid == undefined){
+                        scope.loadEvents();
+                    }else{
+                        scope.loadEvent(scope.eventid);
+                    }
+                }
+
+                scope._init();
+
+                /**
+                 * Load the form to update an event
+                 */
                 scope.openFormUpdateEvent = function(){
                     scope.update_attendees = scope.event.getIdAttendees();
                     scope.update_event = true;
                 }
 
+                /**
+                 * Load the form to create an event
+                 */
                 scope.openFormCreateEvent = function(){
                     personFactory.getAll().then(function(persons){
                         scope.attendee_list = persons;
@@ -55,6 +72,9 @@ angular.module('eklabs.angularStarterPack.event')
                     });
                 };
 
+                /**
+                 * Create an event on database
+                 */
                 scope.createEvent = function(){
                     scope.event.eventStatus = "Open";
                     scope.event.visibility = "Public";
@@ -63,10 +83,12 @@ angular.module('eklabs.angularStarterPack.event')
                     var event_tmp = new eventFactory(scope.event);
                     event_tmp.create().then(function(response){
                         scope.loadEvents();
-                    })
-                    //scope.loadEvent(scope.event.id);
+                    });
                 }
 
+                /**
+                 * Update an event on database
+                 */
                 scope.updateEvent = function(){
                     console.log(scope.update_attendees);
                     scope.event.setAttendees(scope.update_attendees);
@@ -76,6 +98,9 @@ angular.module('eklabs.angularStarterPack.event')
                     });
                 }
 
+                /**
+                 * Delete an event on database
+                 */
                 scope.delete_event = function(){
                     scope.event.delete().then(function(response){
                         scope.loadEvents();
